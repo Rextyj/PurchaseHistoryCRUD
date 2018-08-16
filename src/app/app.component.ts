@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { CommonService } from './common.service';
+import { Store } from '../../node_modules/@ngrx/store';
+import { AppState } from './store/state';
+import { AppActionUpd } from './store/action';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +22,8 @@ export class AppComponent implements OnInit {
   fileUrl;
   dataFromStore;
 
-  constructor(private fb: FormBuilder, private domSan: DomSanitizer, private newService: CommonService){
+  constructor(private fb: FormBuilder, private domSan: DomSanitizer, 
+    private newService: CommonService, private store: Store<AppState>){
     this.form = this.fb.group({
       itemName: ['', [Validators.required]],
       quantity: ['', [Validators.required]],
@@ -31,12 +35,16 @@ export class AppComponent implements OnInit {
 
   //reading all the records from the database
   ngOnInit() {
+    // this.newService.GetPurchase().subscribe(items => {
+    //   this.dataFromStore = items; 
+    //   console.log(items);
+    //   //construct the csv string
+    //   this.toCSV();
+    // });
     this.newService.GetPurchase().subscribe(items => {
-      this.dataFromStore = items; 
-      console.log(items);
-      //construct the csv string
-      this.toCSV();
-    });
+      this.dataFromStore = items;
+      this.store.dispatch(new AppActionUpd(items));
+    })
   }
 
 
@@ -97,7 +105,8 @@ export class AppComponent implements OnInit {
   }
 
   onDownload(){
-    console.log(this.res);
+    // console.log(this.res);
+    this.toCSV();
     var blob = new Blob([this.res], { type: 'application/history' });
     this.fileUrl = window.URL.createObjectURL(blob);
     var aTag = document.createElement('a');

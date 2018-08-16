@@ -1,0 +1,5 @@
+#list{
+    padding: 5px;
+    max-height: 450px;
+    overflow-y: auto;
+}

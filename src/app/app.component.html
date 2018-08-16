@@ -33,24 +33,14 @@
           </div>
           <div class="buttonGroup">
             <button [disabled]='!form.valid' type="submit" class="btn btn-primary">Add</button>
-            <button [disabled]='savedData.length == 0' type='button' (click)='onDownload()' class="btn btn-primary">Download</button>
+            <button [disabled]='dataFromStore === undefined || dataFromStore.length == 0' type='button' (click)='onDownload()' class="btn btn-primary">Download</button>
           </div>
 
         </form>
       </div>
     </div>
 
-    <div class="card col-md-6 shadow">
-      <h5 class="card-header text-center">Records</h5>
-      <ul id = 'list' class="card-body list-group">
-        <li *ngFor='let item of dataFromStore' style="list-style: none" class="list-group-item">
-          <b>Name:</b> {{item.itemName}}
-          <b>Quantity:</b> {{item.quantity}}
-          <b>Price:</b> {{item.price}}
-          <b>Purchase Date:</b> {{item.purchaseDate}}
-          <b>Company Name:</b> {{item.companyName}}
-        </li>
-      </ul>
-    </div>
+    <app-display class="card col-md-6 shadow"></app-display>
+    
   </div>
 </div>

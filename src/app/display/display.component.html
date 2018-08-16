@@ -1,0 +1,12 @@
+<div>
+  <h5 class="card-header text-center">Records</h5>
+  <ul id='list' class="card-body list-group">
+    <li *ngFor='let item of dataToDisplay' style="list-style: none" class="list-group-item">
+      <b>Name:</b> {{item.itemName}}
+      <b>Quantity:</b> {{item.quantity}}
+      <b>Price:</b> {{item.price}}
+      <b>Purchase Date:</b> {{item.purchaseDate}}
+      <b>Company Name:</b> {{item.companyName}}
+    </li>
+  </ul>
+</div>
