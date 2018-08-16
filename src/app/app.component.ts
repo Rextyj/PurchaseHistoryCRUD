@@ -72,8 +72,11 @@ export class AppComponent implements OnInit {
 
     this.newService.savePurchase(formData).subscribe(data => {
       alert(data.data);
-      
+      //update has to be inside the callback
+      this.ngOnInit();
     }, error => console.error(error));
+
+    
     // var blob = new Blob([this.res], { type: 'application/history' });
     // this.fileUrl = this.domSan.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(blob));
   }
