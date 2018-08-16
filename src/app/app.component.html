@@ -1,45 +1,56 @@
-<div>
-  <h1 class="jumbotron">Purchase History</h1>
+<div class="container-fluid">
+  <h1 class="jumbotron shadow">Purchase History</h1>
 
-  <form [formGroup]='form' (ngSubmit)='onAdd(form.value)' class='formFields'>
-    <div class="form-group">
-      <label>Item Name:</label>
-      <input type="text" #refName class='form-control' formControlName='itemName' placeholder="Iphone">
-      <div *ngIf="form.controls.itemName.touched && form.controls['itemName'].hasError('required')" class="alert alert-danger">Please enter the item name</div>
-    </div>
-    <div class="form-group">
-      <label>Quantity:</label>
-      <input type="number" class='form-control' formControlName='quantity' placeholder="1">
-      <div *ngIf="form.controls['quantity'].touched && form.controls['quantity'].hasError('required')" class="alert alert-danger">Please enter the Quantity</div>
-    </div>
-    <div class="form-group">
-      <label>Price:</label>
-      <input type="text" class='form-control' formControlName='price' placeholder="$1000">
-      <div *ngIf="form.controls['price'].touched && form.controls['price'].hasError('required')" class="alert alert-danger">Please enter the item price</div>
-    </div>
-    <div class="form-group">
-      <label>Purchase Date:</label>
-      <input type="date" class='form-control' formControlName='purchaseDate'>
-      <div *ngIf="form.controls['purchaseDate'].touched && form.controls['purchaseDate'].hasError('required')" class="alert alert-danger">Please enter the purchase date</div>
-    </div>
-    <div class="form-group">
-      <label>Company Name:</label>
-      <input type="text" class='form-control' formControlName='companyName' placeholder="Apple lnc.">
+  <div class="card-deck">
+    <div class="card col-md-6 border-primary text-center shadow-lg">
+      <h5 class="card-header border-primary">Add a new item</h5>
+      <div class="card-body">
+        <form [formGroup]='form' (ngSubmit)='onAdd(form.value)' class='formFields'>
+          <div class="form-group">
+            <label>Item Name:</label>
+            <input type="text" #refName class='form-control' formControlName='itemName' placeholder="Iphone">
+            <div *ngIf="form.controls.itemName.touched && form.controls['itemName'].hasError('required')" class="alert alert-danger">Please enter the item name</div>
+          </div>
+          <div class="form-group">
+            <label>Quantity:</label>
+            <input type="number" class='form-control' formControlName='quantity' placeholder="1">
+            <div *ngIf="form.controls['quantity'].touched && form.controls['quantity'].hasError('required')" class="alert alert-danger">Please enter the Quantity</div>
+          </div>
+          <div class="form-group">
+            <label>Price:</label>
+            <input type="text" class='form-control' formControlName='price' placeholder="$1000">
+            <div *ngIf="form.controls['price'].touched && form.controls['price'].hasError('required')" class="alert alert-danger">Please enter the item price</div>
+          </div>
+          <div class="form-group">
+            <label>Purchase Date:</label>
+            <input type="date" class='form-control' formControlName='purchaseDate'>
+            <div *ngIf="form.controls['purchaseDate'].touched && form.controls['purchaseDate'].hasError('required')" class="alert alert-danger">Please enter the purchase date</div>
+          </div>
+          <div class="form-group">
+            <label>Company Name:</label>
+            <input type="text" class='form-control' formControlName='companyName' placeholder="Apple lnc.">
 
-    </div>
-    <div class="buttonGroup">
-    <button [disabled] = '!form.valid' type="submit" class="btn btn-primary">Add</button>
-    <button [disabled] = 'savedData.length == 0' type='button' (click)='onDownload()' class="btn btn-primary">Download</button>
-    </div>
-    
-  </form>
-</div>
+          </div>
+          <div class="buttonGroup">
+            <button [disabled]='!form.valid' type="submit" class="btn btn-primary">Add</button>
+            <button [disabled]='savedData.length == 0' type='button' (click)='onDownload()' class="btn btn-primary">Download</button>
+          </div>
 
-<div>
-  <ul *ngFor = 'let item of dataFromStore'>
-    <li>
-      <b>Name:</b> {{item.itemName}} <b>Quantity:</b> {{item.quantity}}  <b>Price:</b> {{item.price}}
-      <b>Purchase Date:</b> {{item.purchaseDate}}  <b>Company Name:</b> {{item.companyName}} 
-    </li>
-  </ul>
+        </form>
+      </div>
+    </div>
+
+    <div class="card col-md-6 shadow">
+      <h5 class="card-header text-center">Records</h5>
+      <ul id = 'list' class="card-body list-group">
+        <li *ngFor='let item of dataFromStore' style="list-style: none" class="list-group-item">
+          <b>Name:</b> {{item.itemName}}
+          <b>Quantity:</b> {{item.quantity}}
+          <b>Price:</b> {{item.price}}
+          <b>Purchase Date:</b> {{item.purchaseDate}}
+          <b>Company Name:</b> {{item.companyName}}
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
