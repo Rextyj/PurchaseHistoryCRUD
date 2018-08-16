@@ -25,6 +25,7 @@ app.use(function (req, res, next) {
   
  var Schema = mongo.Schema;  
   
+ //define the structure of saved data
 var UsersSchema = new Schema({      
  itemName: { type: String },       
  quantity: { type: String },

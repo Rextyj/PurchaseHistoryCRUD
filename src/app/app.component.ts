@@ -31,13 +31,38 @@ export class AppComponent implements OnInit {
 
   //reading all the records from the database
   ngOnInit() {
-    this.newService.GetPurchase().subscribe(item => this.dataFromStore = item);
+    this.newService.GetPurchase().subscribe(items => {
+      this.dataFromStore = items; 
+      console.log(items);
+      //construct the csv string
+      this.toCSV();
+    });
   }
 
 
   onAdd(formData) {
-    this.savedData.push(formData);
+    //mode is for server.js file to recognize the intent
     formData.mode = 'Save';
+
+    console.log('formdata is ',formData);
+
+    //save the form object to database
+    this.newService.savePurchase(formData).subscribe(data => {
+      alert(data.data);
+      //update has to be inside the callback
+      this.ngOnInit();
+      
+    }, error => console.error(error));
+
+    
+    // var blob = new Blob([this.res], { type: 'application/history' });
+    // this.fileUrl = this.domSan.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(blob));
+  }
+
+  toCSV(){
+    // this.savedData.push(formData);
+    this.savedData = this.dataFromStore;
+    
     console.log('the history list is ', this.savedData);
     if(this.output.length == 0){
       this.output.push(Object.keys(this.savedData[0]));
@@ -69,16 +94,6 @@ export class AppComponent implements OnInit {
 
     console.log(this.res);
     console.log(this.output);
-
-    this.newService.savePurchase(formData).subscribe(data => {
-      alert(data.data);
-      //update has to be inside the callback
-      this.ngOnInit();
-    }, error => console.error(error));
-
-    
-    // var blob = new Blob([this.res], { type: 'application/history' });
-    // this.fileUrl = this.domSan.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(blob));
   }
 
   onDownload(){
