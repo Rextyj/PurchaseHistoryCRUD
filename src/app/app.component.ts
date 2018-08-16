@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { CommonService } from './common.service';
@@ -9,7 +9,7 @@ import { CommonService } from './common.service';
   styleUrls: [ './app.component.css' ],
   providers: [CommonService]
 })
-export class AppComponent  {
+export class AppComponent implements OnInit {
   name = 'Angular';
 
   form: FormGroup;
@@ -17,6 +17,7 @@ export class AppComponent  {
   output = [];
   res = '';
   fileUrl;
+  dataFromStore;
 
   constructor(private fb: FormBuilder, private domSan: DomSanitizer, private newService: CommonService){
     this.form = this.fb.group({
@@ -27,6 +28,12 @@ export class AppComponent  {
       companyName: ['']      
     });
   }
+
+  //reading all the records from the database
+  ngOnInit() {
+    this.newService.GetPurchase().subscribe(item => this.dataFromStore = item);
+  }
+
 
   onAdd(formData) {
     this.savedData.push(formData);

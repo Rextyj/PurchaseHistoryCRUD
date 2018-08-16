@@ -18,7 +18,7 @@
       <div *ngIf="form.controls['price'].touched && form.controls['price'].hasError('required')" class="alert alert-danger">Please enter the item price</div>
     </div>
     <div class="form-group">
-      <label>Purchase Data:</label>
+      <label>Purchase Date:</label>
       <input type="date" class='form-control' formControlName='purchaseDate'>
       <div *ngIf="form.controls['purchaseDate'].touched && form.controls['purchaseDate'].hasError('required')" class="alert alert-danger">Please enter the purchase date</div>
     </div>
@@ -33,4 +33,13 @@
     </div>
     
   </form>
+</div>
+
+<div>
+  <ul *ngFor = 'let item of dataFromStore'>
+    <li>
+      <b>Name:</b> {{item.itemName}} <b>Quantity:</b> {{item.quantity}}  <b>Price:</b> {{item.price}}
+      <b>Purchase Date:</b> {{item.purchaseDate}}  <b>Company Name:</b> {{item.companyName}} 
+    </li>
+  </ul>
 </div>
