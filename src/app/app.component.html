@@ -28,8 +28,8 @@
 
     </div>
     <div class="buttonGroup">
-    <button type="submit" class="btn btn-primary">Add</button>
-    <button type='button' (click)='onDownload()' class="btn btn-primary">Download</button>
+    <button [disabled] = '!form.valid' type="submit" class="btn btn-primary">Add</button>
+    <button [disabled] = 'savedData.length == 0' type='button' (click)='onDownload()' class="btn btn-primary">Download</button>
     </div>
     
   </form>
