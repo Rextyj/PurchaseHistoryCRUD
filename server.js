@@ -27,11 +27,14 @@ app.use(function (req, res, next) {
   
  //define the structure of saved data
 var UsersSchema = new Schema({      
- itemName: { type: String },       
- quantity: { type: String },
- price: { type: String },
+ companyName: { type: String },       
+ numOfSharesBought: { type: String },
  purchaseDate: { type: String },
- companyName: { type: String }   
+ soldDate: { type: String },
+ numOfSharesSold: { type: String },
+ purchasePrice: {type: String },
+ soldPrice: {type: String},
+ lossGainPrice: {type: String}
 },{ versionKey: false });  
    
   
