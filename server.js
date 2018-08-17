@@ -75,7 +75,15 @@ else
          res.send(err);    
      }    
      else{      
-            res.send({data:"Record has been Deleted..!!"});               
+            // res.send({data:"Record has been Deleted..!!"});
+            model.find({}, function(err, data){
+                if(err){
+                    res.send(err);
+                } else {
+                    res.send(data);  
+                }
+                 
+            });       
         }    
  });    
    })  

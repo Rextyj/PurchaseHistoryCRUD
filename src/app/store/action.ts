@@ -5,6 +5,7 @@ export const ADD_ITEM: string = 'ADD_ITEM';
 export const DELETE_ITEM: string = 'DETELET_ITEM';
 export const UPDATE_LIST: string = 'UPDATE_LIST';
 export const UPDATE_SUCCESS: string = 'UPDATE_SUCCESS';
+export const DELETE_SUCCESS: string = 'DELETE_SUCCESS';
 
 
 export class AppActionADD implements Action{
@@ -23,9 +24,14 @@ export class AppActionUpd implements Action{
     constructor(public payload?: any){}
 }
 
-export class AppActionSuccess implements Action {
+export class AppActionUpdateSuccess implements Action {
     readonly type = UPDATE_SUCCESS;
     constructor(public payload?: any){}
 }
 
-export type AppActions = AppActionADD | AppActionDel | AppActionUpd;
+export class AppActionDeleteSuccess implements Action {
+    readonly type = DELETE_SUCCESS;
+    constructor(public payload?: any){}
+}
+
+export type AppActions = AppActionADD | AppActionDel | AppActionUpd | AppActionUpdateSuccess;

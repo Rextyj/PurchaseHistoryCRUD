@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '../../../node_modules/@ngrx/store';
-import { AppActions } from '../store/action';
+import { AppActions, AppActionDel } from '../store/action';
 
 @Component({
   selector: 'app-display',
@@ -18,8 +18,10 @@ export class DisplayComponent implements OnInit {
     });
   }
 
-  // deleteItem(id) {
-  //   this.
-  // }
+  deleteItem(id) {
+    //dispatch a delete action/ payload is the id 
+    console.log('Item id is ' + id);
+    this.store.dispatch(new AppActionDel(id));
+  }
 
 }
