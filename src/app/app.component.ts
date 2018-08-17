@@ -26,11 +26,13 @@ export class AppComponent implements OnInit {
   constructor(private fb: FormBuilder, private domSan: DomSanitizer, 
     private newService: CommonService, private store: Store<AppState>){
     this.form = this.fb.group({
-      itemName: ['', [Validators.required]],
-      quantity: ['', [Validators.required]],
-      price: ['', [Validators.required]],
-      purchaseDate: ['', [Validators.required]],
-      companyName: ['']      
+      CompanyName: ['', [Validators.required]],
+      NumberOfSharesBought: ['', [Validators.required]],
+      DatePurchased: ['', [Validators.required]],
+      DateSold: ['', [Validators.required]],
+      NumberOfSharesSold: ['', [Validators.required]],
+      PurchasePrice:['', [Validators.required]],
+      SoldPrice: ['', [Validators.required]]      
     });
   }
 
@@ -63,7 +65,9 @@ export class AppComponent implements OnInit {
     formData.mode = 'Save';
 
     console.log('formdata is ',formData);
+    formData['LossGainPrice'] = (formData['SoldPrice'] - formData['PurchasePrice']) * formData['NumberOfSharesSold'];
 
+    console.log('the modified data is ', formData);
     //save the form object to database
     this.newService.savePurchase(formData).subscribe(data => {
       alert(data.data);
