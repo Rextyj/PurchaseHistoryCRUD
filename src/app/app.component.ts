@@ -5,12 +5,13 @@ import { CommonService } from './common.service';
 import { Store } from '../../node_modules/@ngrx/store';
 import { AppState } from './store/state';
 import { AppActionUpd } from './store/action';
+import { listEffect } from './store/effect';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: [ './app.component.css' ],
-  providers: [CommonService]
+  providers: []
 })
 export class AppComponent implements OnInit {
   name = 'Angular';
@@ -41,10 +42,19 @@ export class AppComponent implements OnInit {
     //   //construct the csv string
     //   this.toCSV();
     // });
-    this.newService.GetPurchase().subscribe(items => {
-      this.dataFromStore = items;
-      this.store.dispatch(new AppActionUpd(items));
-    })
+
+
+    // this.newService.GetPurchase().subscribe(items => {
+    //   this.dataFromStore = items;
+    //   this.store.dispatch(new AppActionUpd(items));
+    // })
+
+    console.log('action dispatched');
+    this.store.dispatch(new AppActionUpd());
+    this.store.select("AppReducer").subscribe(items => {
+      console.log('subscribed data is ' , items);
+      this.dataFromStore = items.dataList;
+    });
   }
 
 

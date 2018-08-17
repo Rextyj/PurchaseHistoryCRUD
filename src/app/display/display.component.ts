@@ -13,8 +13,13 @@ export class DisplayComponent implements OnInit {
 
   ngOnInit() {
     this.store.select('AppReducer').subscribe(state => {
+      console.log('state changed detected');
       this.dataToDisplay = state.dataList;
     });
   }
+
+  // deleteItem(id) {
+  //   this.
+  // }
 
 }

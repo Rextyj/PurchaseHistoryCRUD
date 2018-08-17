@@ -1,6 +1,6 @@
 import { ActionReducer, Action } from '@ngrx/store';
 import { initialState, AppState } from './state';
-import { ADD_ITEM, DELETE_ITEM, AppActions, UPDATE_LIST } from './action';
+import { ADD_ITEM, DELETE_ITEM, AppActions, UPDATE_LIST, UPDATE_SUCCESS } from './action';
 
 
 export const AppReducer: ActionReducer<AppState> =
@@ -18,7 +18,7 @@ export const AppReducer: ActionReducer<AppState> =
             //     }
             //     return state;
 
-            case UPDATE_LIST:
+            case UPDATE_SUCCESS:
                 state = {
                     dataList: action.payload
                 }
