@@ -3,7 +3,7 @@ var path = require("path");
 var bodyParser = require('body-parser');  
 var mongo = require("mongoose");  
   
-var db = mongo.connect("mongodb://localhost:27017/PurchaseHistory", function(err, response){  
+var db = mongo.connect("mongodb://localhost:27017/StockHistory", function(err, response){  
    if(err){ console.log( err); }  
    else{ console.log('Connected to ' + db, ' + ', response); }  
 });  
@@ -26,15 +26,16 @@ app.use(function (req, res, next) {
  var Schema = mongo.Schema;  
   
  //define the structure of saved data
-var UsersSchema = new Schema({      
- companyName: { type: String },       
- numOfSharesBought: { type: String },
- purchaseDate: { type: String },
- soldDate: { type: String },
- numOfSharesSold: { type: String },
- purchasePrice: {type: String },
- soldPrice: {type: String},
- lossGainPrice: {type: String}
+var UsersSchema = new Schema({
+    //have to match the property names of the data passed in      
+ CompanyName: { type: String },       
+ NumberOfSharesBought: { type: String },
+ DatePurchased: { type: String },
+ DateSold: { type: String },
+ NumberOfSharesSold: { type: String },
+ PurchasePrice: {type: String },
+ SoldPrice: {type: String},
+ LossGainPrice: {type: String}
 },{ versionKey: false });  
    
   
