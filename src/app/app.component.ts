@@ -69,7 +69,8 @@ export class AppComponent implements OnInit {
       alert(data.data);
       //update has to be inside the callback
       this.ngOnInit();
-      
+      //reset the form after the data has been saved
+      this.resetForm();
     }, error => console.error(error));
 
     
@@ -128,5 +129,9 @@ export class AppComponent implements OnInit {
     // document.body.appendChild(aTag);
   }
 
-
+  resetForm(){
+    console.log('reset called');
+    // myForm.resetForm;
+    this.form.reset();
+  }
 }

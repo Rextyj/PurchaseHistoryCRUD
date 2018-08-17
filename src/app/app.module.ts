@@ -26,4 +26,4 @@ import {listEffect} from './store/effect';
   providers: [CommonService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
