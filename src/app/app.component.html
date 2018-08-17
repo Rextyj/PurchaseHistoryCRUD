@@ -7,30 +7,40 @@
       <div class="card-body">
         <form [formGroup]='form' #myForm = 'ngForm' (ngSubmit)='onAdd(form.value)' class='formFields'>
           <div class="form-group">
-            <label>Item Name:</label>
-            <input type="text" #refName class='form-control' formControlName='itemName' placeholder="Iphone">
+            <label>Company Name:</label>
+            <input type="text" class='form-control' formControlName='Company Name' placeholder="Apple lnc.">
+          </div>
+          <div class="form-group">
+            <label>Number of shares bought:</label>
+            <input type="number" class='form-control' formControlName='Number of shares bought' placeholder="1">
+          </div>
+          <div class="form-group">
+            <label>Date Purchased:</label>
+            <input type="date" class='form-control' formControlName='Date Purchased'>
+            <div *ngIf="form.controls['purchaseDate'].touched && form.controls['purchaseDate'].hasError('required')" class="alert alert-danger">Please enter the purchase date</div>
+          </div>
+
+          <div class="form-group">
+            <label>Date sold:</label>
+            <input type="date" #refName class='form-control' formControlName='Date sold'>
             <div *ngIf="form.controls.itemName.touched && form.controls['itemName'].hasError('required')" class="alert alert-danger">Please enter the item name</div>
           </div>
           <div class="form-group">
-            <label>Quantity:</label>
-            <input type="number" class='form-control' formControlName='quantity' placeholder="1">
+            <label>Number of shares sold:</label>
+            <input type="number" class='form-control' formControlName='Number of shares sold' placeholder="1">
             <div *ngIf="form.controls['quantity'].touched && form.controls['quantity'].hasError('required')" class="alert alert-danger">Please enter the Quantity</div>
           </div>
           <div class="form-group">
-            <label>Price:</label>
-            <input type="number" class='form-control' formControlName='price' placeholder="$1000">
+            <label>Purchase Price:</label>
+            <input type="number" class='form-control' formControlName='Purchase Price' placeholder="$1000">
             <div *ngIf="form.controls['price'].touched && form.controls['price'].hasError('required')" class="alert alert-danger">Please enter the item price</div>
           </div>
           <div class="form-group">
-            <label>Purchase Date:</label>
-            <input type="date" class='form-control' formControlName='purchaseDate'>
-            <div *ngIf="form.controls['purchaseDate'].touched && form.controls['purchaseDate'].hasError('required')" class="alert alert-danger">Please enter the purchase date</div>
+            <label>Sold Price:</label>
+            <input type="number" class='form-control' formControlName='Sold Price' placeholder="$2000">
+            <div *ngIf="form.controls['price'].touched && form.controls['price'].hasError('required')" class="alert alert-danger">Please enter the item price</div>
           </div>
-          <div class="form-group">
-            <label>Company Name:</label>
-            <input type="text" class='form-control' formControlName='companyName' placeholder="Apple lnc.">
-
-          </div>
+          
           <div class="buttonGroup">
             <button [disabled]='!form.valid' type="submit" class="btn btn-primary">Add</button>
             <button [disabled]='dataFromStore === undefined || dataFromStore.length == 0' type='button' (click)='onDownload()' class="btn btn-primary">Download</button>
