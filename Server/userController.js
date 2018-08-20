@@ -17,7 +17,15 @@ router.get("/api/getUsers", (req, res) => {
 
 //create
 router.post('/api/SaveUser', (req, res) => {
+    var user = new User(req.body);
     
+    user.save((err, data) => {
+        if(!err){
+            res.send({data: 'added a new user'});
+        } else {
+            res.send(err);
+        }
+    });
 });
 
 module.exports = router;

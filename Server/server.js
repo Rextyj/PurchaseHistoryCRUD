@@ -81,6 +81,7 @@ else
      }    
      else{      
             // res.send({data:"Record has been Deleted..!!"});
+            //update the view
             model.find({}, function(err, data){
                 if(err){
                     res.send(err);

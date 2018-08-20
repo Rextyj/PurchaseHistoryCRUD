@@ -30,4 +30,36 @@ router.post('/api/SavePurchase', (req, res) => {
     }
 });
 
+//delete
+router.post('/api/deletePurchase', (req, res) => {
+    RecordList.remove({ _id: req.body.id }, (err, data) => {
+        if(err){    
+            res.send(err);    
+        }    
+        else{      
+               // res.send({data:"Record has been Deleted..!!"});
+               //update the view
+               RecordList.find({}, function(err, data){
+                   if(err){
+                       res.send(err);
+                   } else {
+                       res.send(data);  
+                   }
+                    
+               });       
+           }       
+    });
+
+    //return the updated list
+    // RecordList.findByIdAndRemove(new objectId(req.body.id), {new: true}, (err, data) => {
+    //     if(!err) {
+    //         res.send(data);
+    //     } else {
+    //         console.log('Error removing');
+    //         res.send(err);
+    //     }
+    // })
+});
+
+
 module.exports = router;

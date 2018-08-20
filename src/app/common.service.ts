@@ -25,4 +25,8 @@ export class CommonService {
             .pipe(map((response: Response) =>response.json()))               
   }  
   
+  saveUser(user){
+    return this.http.post('http://localhost:8080/users/api/SaveUser/', user);
+  }
+
 }  
