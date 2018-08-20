@@ -10,17 +10,18 @@ export class CommonService {
   
   constructor(private http: Http) { }  
   
-  savePurchase(user){      
-    return this.http.post('http://localhost:8080/api/SavePurchase/', user)  
+  savePurchase(item){   
+    console.log('saving');   
+    return this.http.post('http://localhost:8080/records/api/SavePurchase/', item)  
             .pipe(map((response: Response) =>response.json()))              
   }  
   
   GetPurchase(){       
-    return this.http.get('http://localhost:8080/api/getPurchase/')  
+    return this.http.get('http://localhost:8080/records/api/getPurchase/')  
             .pipe(map((response: Response) => response.json()))              
   }  
  deletePurchase(id){   
-    return this.http.post('http://localhost:8080/api/deletePurchase/',{'id': id})  
+    return this.http.post('http://localhost:8080/records/api/deletePurchase/',{'id': id})  
             .pipe(map((response: Response) =>response.json()))               
   }  
   
