@@ -11,11 +11,15 @@ import { AppComponent } from './app.component';
 import { AppReducer } from './store/reducer';
 import { DisplayComponent } from './display/display.component';
 import {listEffect} from './store/effect';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DisplayComponent
+    DisplayComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule, FormsModule, 
