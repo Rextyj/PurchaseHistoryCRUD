@@ -41,7 +41,8 @@ var UsersSchema = new Schema({
   
 var model = mongo.model('users', UsersSchema, 'users');  
   //create the date we want to save as the model defined above 
-app.post("/api/SavePurchase",function(req,res){   
+app.post("/api/SavePurchase",function(req,res){
+    //create a mod object using the body object passed in   
  var mod = new model(req.body);  
  if(req.body.mode =="Save")  
  {  
@@ -80,6 +81,7 @@ else
      }    
      else{      
             // res.send({data:"Record has been Deleted..!!"});
+            //update the view
             model.find({}, function(err, data){
                 if(err){
                     res.send(err);
