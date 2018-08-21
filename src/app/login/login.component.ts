@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
+  hidden = true;
+
   constructor(private service: CommonService,
               private router: Router) { }
 
@@ -22,6 +24,8 @@ export class LoginComponent implements OnInit {
         console.log(data.data);
         if(data.data === 'verified'){
           this.router.navigateByUrl('/dashboard');
+        } else if(data.data === 'unsuccessful'){
+          this.hidden = false;
         }
     });
 

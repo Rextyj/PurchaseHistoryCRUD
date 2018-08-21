@@ -11,6 +11,9 @@
       <input type="password" class="form-control" name="password" ngModel required>
     </div>
 
+    <div *ngIf = '!hidden' class="alert alert-danger">
+      The combination of username and password is not found. Please try again.
+    </div>
     <button type="submit">Login</button>
   </form>
 

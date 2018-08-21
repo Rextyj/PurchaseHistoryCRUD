@@ -15,9 +15,11 @@ router.post("/api/getUser", (req, res) => {
         if(!err && data.length != 0){
             console.log('user found', data);
             res.send({data: 'verified'});
+        } else if(err) {
+            res.send({data: 'error connecting to db'});
         } else {
             console.log('not found');
-            res.send({data: 'No matching record has been found'});
+            res.send({data: 'unsuccessful'});
         }
     });
 });
