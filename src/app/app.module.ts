@@ -15,6 +15,7 @@ import {listEffect} from './store/effect';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { AddItemComponent } from './add-item/add-item.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     LoginComponent,
     SignupComponent,
     routingComponents,
-    DashboardComponent
+    DashboardComponent,
+    AddItemComponent
   ],
   imports: [
     BrowserModule, FormsModule, 
