@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonService } from '../common.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -7,7 +9,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(private service: CommonService,
+              private router: Router) { }
 
   ngOnInit() {
   }
@@ -15,5 +18,12 @@ export class LoginComponent implements OnInit {
   onLogin(formValue){
     //passed in an object
     console.log(formValue);
+    this.service.getUser(formValue).subscribe(data => {
+        console.log(data.data);
+        if(data.data === 'verified'){
+          this.router.navigateByUrl('/dashboard');
+        }
+    });
+
   }
 }

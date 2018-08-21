@@ -20,9 +20,11 @@ export class SignupComponent implements OnInit {
     console.log('User input is ', formValue);
     this.service.saveUser(formValue).subscribe(data => {
         console.log('return data is ', data);
+        //if successfully saved the user
         if(data.status === 200){
           this.router.navigateByUrl('/login');
         } else {
+          //error occured
           console.log('Error signing up');
         }
     });
