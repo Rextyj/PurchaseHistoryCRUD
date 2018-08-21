@@ -26,14 +26,23 @@ router.post("/api/getUser", (req, res) => {
 //create
 router.post('/api/SaveUser', (req, res) => {
     var user = new User(req.body);
-    
-    user.save((err, data) => {
-        if(!err){
-            res.send({data: 'added a new user'});
+    User.find({username: req.body.username}, (err, data) => {
+        if(!err && data.length == 0){
+            user.save((err, data) => {
+                if (!err) {
+                    res.send({ data: 'successful' });
+                } else {
+                    res.send(err);
+                }
+            });
         } else {
-            res.send(err);
+            // //403 means the server understands the req but refuse to fullfil it
+            // res.sendStatus(403);
+            res.send({data: 'Please choose another username', duplicate: true});
         }
-    });
+    })
+
+    
 });
 
 module.exports = router;
