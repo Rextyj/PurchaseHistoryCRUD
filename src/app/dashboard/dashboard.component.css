@@ -1,32 +1,9 @@
 .jumbotron{
     text-align: center;
+    margin-bottom: 5px;
 }
 
-
-.formFields .form-group{
-    display: flex;
-    flex-direction: column;
-    /* max-width: 80%; */
-    margin: auto;
-}
-
-.buttonGroup{
+#navbar{
+    cursor: default;
     margin: 5px;
-    text-align: center;
-}
-
-button{
-    margin: 5px;
-}
-
-label{
-    font-weight: bold;
-}
-
-.card{
-    padding: 0;
-}
-
-.row{
-    padding: 10px;
 }
