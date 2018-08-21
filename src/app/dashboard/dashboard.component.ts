@@ -143,10 +143,10 @@ export class DashboardComponent {
 
   onView(){
     // this.router.navigateByUrl('/display');
-    this.router.navigate(['/dashboard', {outlets: {'displayComponent': 'display'}}]);
+    this.router.navigate(['/dashboard', {outlets: {'childrenComponents': 'display'}}]);
   }
 
   onAdd(){
-    this.router.navigate(['/dashboard', {outlets: {'displayComponent': 'additem'}}]);
+    this.router.navigate(['/dashboard', {outlets: {'childrenComponents': 'additem'}}]);
   }
 }
