@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../store/state';
 import { AppActionUpd } from '../store/action';
 import { listEffect } from '../store/effect';
+import { Router } from '@angular/router';
 
 @Component({
   // selector: 'app-root',
@@ -24,7 +25,8 @@ export class DashboardComponent implements OnInit {
   dataFromStore;
 
   constructor(private fb: FormBuilder, private domSan: DomSanitizer, 
-    private newService: CommonService, private store: Store<AppState>){
+    private newService: CommonService, private store: Store<AppState>,
+    private router: Router){
     this.form = this.fb.group({
       CompanyName: ['', [Validators.required]],
       NumberOfSharesBought: ['', [Validators.required]],
@@ -137,5 +139,9 @@ export class DashboardComponent implements OnInit {
     console.log('reset called');
     // myForm.resetForm;
     this.form.reset();
+  }
+
+  onView(){
+    this.router.navigateByUrl('/display');
   }
 }

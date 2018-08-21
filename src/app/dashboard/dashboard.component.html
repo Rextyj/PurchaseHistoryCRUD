@@ -2,7 +2,7 @@
   <h1 class="jumbotron shadow text-center">Purchase History</h1>
 
   <div class="card-deck">
-    <div class="card col-md-6 border-primary text-center shadow-lg">
+    <div class="card border-primary text-center shadow-lg">
       <h5 class="card-header border-primary">Add a new item</h5>
       <div class="card-body">
         <form [formGroup]='form' #myForm = 'ngForm' (ngSubmit)='onAdd(form.value)' class='formFields'>
@@ -45,13 +45,14 @@
           
           <div class="buttonGroup">
             <button [disabled]='!form.valid' type="submit" class="btn btn-primary">Add</button>
+            <button [disabled]='dataFromStore === undefined || dataFromStore.length == 0' class="btn btn-primary" (click) = 'onView()'>View</button>
             <button [disabled]='dataFromStore === undefined || dataFromStore.length == 0' type='button' (click)='onDownload()' class="btn btn-primary">Download</button>
           </div>
 
         </form>
       </div>
     </div>
-    <app-display class="card col-md-6 shadow"></app-display>
+    <!-- <app-display class="card col-md-6 shadow"></app-display> -->
     
   </div>
 </div>
