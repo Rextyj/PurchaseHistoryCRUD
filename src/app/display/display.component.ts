@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '../../../node_modules/@ngrx/store';
 import { AppActions, AppActionDel } from '../store/action';
+import { CommonService } from '../common.service';
 
 
 @Component({
@@ -11,7 +12,8 @@ import { AppActions, AppActionDel } from '../store/action';
 export class DisplayComponent implements OnInit {
   dataToDisplay: any[];
   currentState;
-  constructor(private store: Store<AppActions>) { }
+  constructor(private store: Store<AppActions>,
+              private service: CommonService) { }
 
   ngOnInit() {
     this.store.select('AppReducer').subscribe(state => {
@@ -42,6 +44,13 @@ export class DisplayComponent implements OnInit {
 
   resetFilter(){
     this.dataToDisplay = this.currentState;
+  }
+
+  filterByText(param){
+    this.service.getSearchResult(param).subscribe(data => {
+      console.log('display comp gets ', data);
+      this.dataToDisplay = data;
+    });
   }
 
 }

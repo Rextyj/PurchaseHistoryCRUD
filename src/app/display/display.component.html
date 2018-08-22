@@ -23,6 +23,7 @@
       <div class="active-cyan-4 from-group row">
         <input type="text" #filterField class="form-control col-md-6" placeholder="Search by company name">
         <button class='btn btn-outline-success btn-rounded col-md-2' (click)='filterResult(filterField.value)'>Filter</button>
+        <button class='btn btn-outline-success btn-rounded col-md-2' (click)='filterByText(filterField.value)'>Search By Text</button>
         <button class='btn btn-outline-success btn-rounded col-md-2' (click)='resetFilter()'>Clear Filter</button>
       </div>
     </form>
