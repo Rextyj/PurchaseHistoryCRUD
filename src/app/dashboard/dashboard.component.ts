@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
   styleUrls: [ './dashboard.component.css' ],
   providers: []
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit{
   // name = 'Angular';
 
   form: FormGroup;
@@ -39,13 +39,15 @@ export class DashboardComponent {
   }
 
   // //reading all the records from the database
-  // ngOnInit() {
-  //   // this.newService.GetPurchase().subscribe(items => {
-  //   //   this.dataFromStore = items; 
-  //   //   console.log(items);
-  //   //   //construct the csv string
-  //   //   this.toCSV();
-  //   // });
+  ngOnInit() {
+    this.onAdd();
+
+    // this.newService.GetPurchase().subscribe(items => {
+    //   this.dataFromStore = items; 
+    //   console.log(items);
+    //   //construct the csv string
+    //   this.toCSV();
+    // });
 
 
   //   // this.newService.GetPurchase().subscribe(items => {
@@ -59,7 +61,7 @@ export class DashboardComponent {
   //     console.log('subscribed data is ' , items);
   //     this.dataFromStore = items.dataList;
   //   });
-  // }
+  }
 
 
   // onAdd(formData) {
