@@ -2,19 +2,22 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '../../../node_modules/@ngrx/store';
 import { AppActions, AppActionDel } from '../store/action';
 
+
 @Component({
   selector: 'app-display',
   templateUrl: './display.component.html',
   styleUrls: ['./display.component.css']
 })
 export class DisplayComponent implements OnInit {
-  dataToDisplay;
+  dataToDisplay: any[];
+  currentState;
   constructor(private store: Store<AppActions>) { }
 
   ngOnInit() {
     this.store.select('AppReducer').subscribe(state => {
       console.log('state changed detected');
       this.dataToDisplay = state.dataList;
+      this.currentState = state.dataList;
     });
   }
 
@@ -25,7 +28,20 @@ export class DisplayComponent implements OnInit {
   }
 
   filterResult(param){
-    
+    console.log('passed in filter is ', param);
+    this.dataToDisplay = this.dataToDisplay.filter(item => {
+      if (item.CompanyName === param){
+        console.log('return true');
+        return true;
+      } else {
+        return false;
+      }
+    });
+    console.log('filtered result is ', this.dataToDisplay);
+  }
+
+  resetFilter(){
+    this.dataToDisplay = this.currentState;
   }
 
 }
