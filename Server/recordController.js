@@ -60,6 +60,23 @@ router.post('/api/deletePurchase', (req, res) => {
     //     }
     // })
 });
+router.get('/api/getSummary', (req, res) => {
+       RecordList.aggregate(
+           [{$group : {_id:"$CompanyName",
+                        averagenumberbought: {$avg: "$NumberOfSharesBought"},
+                        averagenumbersold: {$avg: "$NumberOfSharesSold"},
+                        averageprice: {$avg: "$PurchasePrice"},
+                        averagesprice: {$avg: "$SoldPrice"},
+                        averagelprice: {$avg: "$LossGainPrice"}
+            }
+
+        
+            }], (err, data) => {
+                console.log('data is ', data);
+                res.send(data);
+            }
+       )
+})
 
 
 module.exports = router;

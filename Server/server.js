@@ -107,7 +107,12 @@ else
           });  
   })  
   
-  
+//   app.get("api/summary",function(req,res){
+//      var x =  model.aggregate([
+//           {$group:{_id:"$CompanyName"}}
+//       ])
+//       return x;
+//   })
 app.listen(8080, function () {  
     
  console.log('Example app listening on port 8080!')  

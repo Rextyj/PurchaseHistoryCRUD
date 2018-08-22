@@ -37,4 +37,9 @@ export class CommonService {
     //pipe map will return the response as a JSON object
                     .pipe(map((response: Response) =>response.json()));
   }
+
+  getSummary(){
+    return this.http.get('http://localhost:8080/records/api/getSummary').
+      pipe(map((response: Response) =>response.json()));
+  }
 }  
