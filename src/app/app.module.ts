@@ -16,7 +16,7 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AddItemComponent } from './add-item/add-item.component';
-
+import {SummaryComponent} from './summary/summary.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +25,8 @@ import { AddItemComponent } from './add-item/add-item.component';
     SignupComponent,
     routingComponents,
     DashboardComponent,
-    AddItemComponent
+    AddItemComponent,
+    SummaryComponent
   ],
   imports: [
     BrowserModule, FormsModule, 

@@ -151,4 +151,8 @@ export class DashboardComponent implements OnInit{
   onAdd(){
     this.router.navigate(['/dashboard', {outlets: {'childrenComponents': 'additem'}}]);
   }
+
+  onSummary(){
+    this.router.navigate(['/dashboard',{outlets:{'childrenComponents':'summary'}}]);
+  }
 }

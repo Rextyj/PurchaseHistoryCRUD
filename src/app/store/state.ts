@@ -3,5 +3,5 @@ export interface AppState{
 }
 
 export const initialState: AppState = {
-    dataList: ['petching data']
+    dataList: ['fetching data']
 };
