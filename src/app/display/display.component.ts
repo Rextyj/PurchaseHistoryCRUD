@@ -24,4 +24,8 @@ export class DisplayComponent implements OnInit {
     this.store.dispatch(new AppActionDel(id));
   }
 
+  filterResult(param){
+    
+  }
+
 }
