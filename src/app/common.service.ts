@@ -38,8 +38,15 @@ export class CommonService {
                     .pipe(map((response: Response) =>response.json()));
   }
 
+
   getSummary(){
     return this.http.get('http://localhost:8080/records/api/getSummary').
       pipe(map((response: Response) =>response.json()));
   }
+  
+  getSearchResult(param){
+    return this.http.post('http://localhost:8080/records/api/getSearchResult/', param)
+                    .pipe(map((response: Response) => response.json()));
+  }
+
 }  

@@ -11,39 +11,46 @@
         <b>Purchase Price:</b> {{item.PurchasePrice}}
         <b>Sold Price:</b> {{item.SoldPrice}}
         <b>Loss/Gain Price:</b> {{item.LossGainPrice}} -->
-        <!-- <span *ngIf = 'item.companyName && item.companyName.length != 0'><b>Company Name:</b>{{item.companyName}}</span> -->
-      <!-- </div>
+  <!-- <span *ngIf = 'item.companyName && item.companyName.length != 0'><b>Company Name:</b>{{item.companyName}}</span> -->
+  <!-- </div>
       <button (click)='deleteItem(item._id)'>
         <svg xmlns="http://www.w3.org/2000/svg" width="12" height="16" viewBox="0 0 12 16"><path fill-rule="evenodd" d="M11 2H9c0-.55-.45-1-1-1H5c-.55 0-1 .45-1 1H2c-.55 0-1 .45-1 1v1c0 .55.45 1 1 1v9c0 .55.45 1 1 1h7c.55 0 1-.45 1-1V5c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1zm-1 12H3V5h1v8h1V5h1v8h1V5h1v8h1V5h1v9zm1-10H2V3h9v1z"/></svg>
       </button>
     </li>
   </ul> -->
+  <div class="card-body">
+    <form>
+      <div class="active-cyan-4 from-group row">
+        <input type="text" #filterField class="form-control col-md-6" placeholder="Search by company name">
+        <button class='btn btn-outline-success btn-rounded col-md-2' (click)='filterResult(filterField.value)'>Filter</button>
+        <button class='btn btn-outline-success btn-rounded col-md-2' (click)='filterByText(filterField.value)'>Search By Text</button>
+        <button class='btn btn-outline-success btn-rounded col-md-2' (click)='resetFilter()'>Clear Filter</button>
+      </div>
+    </form>
+    <table class="table table-striped table-hover text-center">
+      <tr>
+        <td>Entry Number</td>
+        <td>Company Name</td>
+        <td>Number of shares bought</td>
+        <td>Date Purchased</td>
+        <td>Date Sold</td>
+        <td>Number of shares sold</td>
+        <td>Purchase Price</td>
+        <td>Sold Price</td>
+        <td>Loss/Gain Price</td>
+      </tr>
 
-  <table class="table table-striped table-hover text-center">
-    <tr>
-      <td>Entry Number</td>
-      <td>Company Name</td>
-      <td>Number of shares bought</td>
-      <td>Date Purchased</td>
-      <td>Date Sold</td>
-      <td>Number of shares sold</td>
-      <td>Purchase Price</td>
-      <td>Sold Price</td>
-      <td>Loss/Gain Price</td>
-    </tr>
-
-    <tr *ngFor = 'let item of dataToDisplay; let i = index'>
-      <td>{{i+1}}</td>
-      <td>{{item.CompanyName}}</td>
-      <td>{{item.NumberOfSharesBought}}</td>
-      <td>{{item.DatePurchased}}</td>
-      <td>{{item.DateSold}}</td>
-      <td>{{item.NumberOfSharesSold}}</td>
-      <td>{{item.PurchasePrice}}</td>
-      <td>{{item.SoldPrice}}</td>
-      <td>{{item.LossGainPrice}}</td>
-    </tr>
-
-
-  </table>
+      <tr *ngFor='let item of dataToDisplay.reverse(); let i = index'>
+        <td>{{dataToDisplay.length - i}}</td>
+        <td>{{item.CompanyName}}</td>
+        <td>{{item.NumberOfSharesBought}}</td>
+        <td>{{item.DatePurchased}}</td>
+        <td>{{item.DateSold}}</td>
+        <td>{{item.NumberOfSharesSold}}</td>
+        <td>{{item.PurchasePrice}}</td>
+        <td>{{item.SoldPrice}}</td>
+        <td>{{item.LossGainPrice}}</td>
+      </tr>
+    </table>
+  </div>
 </div>
