@@ -32,8 +32,8 @@
       <td>Loss/Gain Price</td>
     </tr>
 
-    <tr *ngFor = 'let item of dataToDisplay; let i = index'>
-      <td>{{i+1}}</td>
+    <tr *ngFor = 'let item of dataToDisplay.reverse(); let i = index'>
+      <td>{{dataToDisplay.length - i}}</td>
       <td>{{item.CompanyName}}</td>
       <td>{{item.NumberOfSharesBought}}</td>
       <td>{{item.DatePurchased}}</td>
