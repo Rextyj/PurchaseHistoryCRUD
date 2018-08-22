@@ -1,5 +1,5 @@
-<div class="container-fluid">
-  <div class="jumbotron shadow text-center">
+<!--<div class="container-fluid">-->
+  <div class="jumbotron shadow text-center text-white">
     <!-- <button class="btn btn-primary" (click)='onAdd()'>Add</button>
     <button class="btn btn-primary" (click)='onView()'>View</button> -->
 
@@ -8,18 +8,18 @@
 
     </ul> -->
 
-    <h1>
+    <h1 class="display-3">
       Purchase History
     </h1>
   </div>
-  <ul id='navbar' class="nav nav-pills">
+  <ul id='navbar' class="nav nav-tabs flex-columns">
     <!-- <button class="nav-item" (click)='onAdd()'>Add</button>
       <button class="nav-item" (click)='onView()'>View</button> -->
     <li class="nav-item">
-      <a class="nav-link active" data-toggle="tab" (click)='onAdd()'>Add</a>
+      <a class="nav-link " data-toggle="tab" (click)='onAdd()'>Add</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" (click)='onView()'>View</a>
+      <a class="nav-link " data-toggle="tab" (click)='onView()'>View</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" data-toggle="tab" (click)='onSummary()'>Summary</a>
@@ -29,4 +29,4 @@
   <router-outlet name='childrenComponents'></router-outlet>
   <!-- <router-outlet name='additemComponent'></router-outlet> -->
   <!-- <router-outlet name = 'displayComponent'></router-outlet> -->
-</div>
+<!--</div>-->
