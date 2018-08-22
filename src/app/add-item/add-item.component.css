@@ -1,14 +1,13 @@
-.jumbotron{
+/* .jumbotron{
     text-align: center;
-}
+} */
 
 
-.formFields .form-group{
+/* .formFields .form-group{
     display: flex;
     flex-direction: column;
-    /* max-width: 80%; */
     margin: auto;
-}
+} */
 
 .buttonGroup{
     margin: 5px;
