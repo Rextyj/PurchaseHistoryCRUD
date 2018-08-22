@@ -1,1 +1,9 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+     background-image: url('/assets/stripes-light.png');
+}
+.jumbotron {
+    background-image: url('https://cdn-images-1.medium.com/max/2000/1*S1cZtX37TUoGL8lFUJvwHA.jpeg')
+}
+footer {
+    background-color:#102a46;
+}
