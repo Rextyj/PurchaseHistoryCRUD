@@ -31,7 +31,10 @@ export class DisplayComponent implements OnInit {
 
   filterResult(param){
     console.log('passed in filter is ', param);
-    this.dataToDisplay = this.dataToDisplay.filter(item => {
+    /*
+      filter again should be using the currentState
+    */
+    this.dataToDisplay = this.currentState.filter(item => {
       if (item.CompanyName === param){
         console.log('return true');
         return true;
