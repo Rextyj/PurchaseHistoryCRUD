@@ -1,8 +1,7 @@
-<div class="container mb-2 mt-2">
-
+<div class="container mb-2  mt-4">
   <div class="card-deck">
     <!--begin card deck-->
-    <div class="card text-center shadow-lg">
+    <div class="card text-center shadow">
       <h5 class="card-header ">Add a new item</h5>
       <div class="card-body">
         <form [formGroup]='form' #myForm='ngForm' (ngSubmit)='onAdd(form.value)' class='formFields bg-gradient-primary'>
@@ -14,6 +13,7 @@
                 enter the company name</div>
             </div>
           </div>
+
 
           <div class="form-group row">
             <label class="col-md-3 col-form-label ">Number of shares bought:</label>
@@ -77,8 +77,8 @@
 
 
 
-          <div class="buttonGroup">
-            <button [disabled]='!form.valid' type="submit" class="btn btn-primary">Add</button>
+          <div class="btn-group">
+            <button [disabled]='!form.valid' type="submit" class="btn btn-success">Add</button>
             <!-- <button [disabled]='dataFromStore === undefined || dataFromStore.length == 0' class="btn btn-primary" (click) = 'onView()'>View</button> -->
             <button [disabled]='dataFromStore === undefined || dataFromStore.length == 0' type='button' (click)='onDownload()' class="btn btn-primary">Download</button>
           </div>
