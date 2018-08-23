@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 @Component({
   // selector: 'app-root',
   templateUrl: './dashboard.component.html',
-  styleUrls: [ './dashboard.component.css' ],
+  styleUrls: [ './dashboard.component.scss' ],
   providers: []
 })
 export class DashboardComponent implements OnInit{
@@ -150,5 +150,8 @@ export class DashboardComponent implements OnInit{
 
   onAdd(){
     this.router.navigate(['/dashboard', {outlets: {'childrenComponents': 'additem'}}]);
+  }
+   onMobile(){
+    this.router.navigate(['/dashboard', {outlets: {'childrenComponents': 'mobile'}}]);
   }
 }

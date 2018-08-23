@@ -3,3 +3,48 @@
 body {
      background-image: url('/assets/stripes-light.png');
 }
+
+body {
+     background-image: url('/assets/stripes-light.png');
+}
+.jumbotron {
+    background-image: url('https://www.ceres.org/sites/default/files/2017-04/financial-stock-ticker-banner_4.jpg');
+    background-position: center center;
+    background-repeat: no-repeat-y;
+
+}
+.class {
+    width:100%;
+    min-height:200px;
+        background-image: url('https://www.ceres.org/sites/default/files/2017-04/financial-stock-ticker-banner_4.jpg');
+    background-position: center center;
+    background-repeat: no-repeat-y;
+}
+footer {
+    background-color:#102a46;
+}
+
+a {
+cursor:pointer;
+
+}
+
+
+.nav-link {
+    display: block;
+    background-color:white;
+}
+
+.nav-link.active {
+    border:2px solid black;
+}
+
+.img-thumbnail {
+    padding: .25rem;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: .25rem;
+    max-width: 100%;
+    height: auto;
+    height: 200px;
+}
