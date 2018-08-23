@@ -96,7 +96,7 @@ router.post('/api/getBetweenDate', (req, res)=>{
 
 })
 
-//text search
+//text search is not being used and not working at this moment
 router.post('/api/getSearchResult', (req, res) => {
     RecordList.createIndexes({ CompanyName: "text" }, err => {
         if (!err) {
