@@ -78,8 +78,9 @@ export class AddItemComponent implements OnInit {
     this.newService.savePurchase(formData).subscribe(data => {
       alert(data.data);
 
-      // //update has to be inside the callback
-      // this.ngOnInit();
+      this.store.dispatch(new AppActionUpd({owner: this.owner}));
+      //update has to be inside the callback
+      this.ngOnInit();
       
       //reset the form after the data has been saved
       this.resetForm();

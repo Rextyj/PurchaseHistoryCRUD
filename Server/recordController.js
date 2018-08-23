@@ -74,14 +74,29 @@ router.get('/api/getSummary', (req, res) => {
 
         
             }], (err, data) => {
-                console.log('data is ', data);
+                //console.log('data is ', data);
                 res.send(data);
             }
        )
 })
 
+router.post('/api/getBetweenDate', (req, res)=>{
+    var beginDate = req.body.beginningDate;
+    var endDate = req.body.endDate;
+   
+        RecordList.aggregate([
+            {$match: {"DateSold":{$gte: beginDate, $lte: endDate},
+                       },
+                
+            }
+        ], (err, data) => {
+            console.log('data is ', data);
+            res.send(data);
+        })
 
-//text search
+})
+
+//text search is not being used and not working at this moment
 router.post('/api/getSearchResult', (req, res) => {
     RecordList.createIndexes({ CompanyName: "text" }, err => {
         if (!err) {
