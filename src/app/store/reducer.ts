@@ -1,6 +1,6 @@
 import { ActionReducer, Action } from '@ngrx/store';
 import { initialState, AppState } from './state';
-import { ADD_ITEM, DELETE_ITEM, AppActions, UPDATE_LIST, UPDATE_SUCCESS, DELETE_SUCCESS } from './action';
+import {AppActions,UPDATE_SUCCESS, DELETE_SUCCESS, ASSIGN_OWNER} from './action';
 
 
 export const AppReducer: ActionReducer<AppState> =
@@ -23,14 +23,21 @@ export const AppReducer: ActionReducer<AppState> =
             //we can merge those two cases
             case UPDATE_SUCCESS:
                 state = {
-                    dataList: action.payload
+                    dataList: action.payload,
+                    owner: state.owner
                 }
                 return state;
             case DELETE_SUCCESS:
                 state = {
-                    dataList: action.payload
+                    dataList: action.payload,
+                    owner: state.owner
                 }
                 return state;
+            case ASSIGN_OWNER:
+                state = {
+                    dataList: state.dataList,
+                    owner: action.payload
+                }
             default:
                 //return the current state unchanged
                 return state;
