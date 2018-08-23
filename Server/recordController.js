@@ -5,8 +5,10 @@ var objectId = require('mongoose').Types.ObjectId;
 var { RecordList } = require('./models/list');
 
 //Read
-router.get("/api/getPurchase", (req, res) => {
-    RecordList.find({}, (err, data) => {
+//we need to find records that belongs to a specific user
+router.post("/api/getPurchase", (req, res) => {
+    console.log('request is ', req.body);
+    RecordList.find({Owner: req.body.owner}, (err, data) => {
         if (!err) {
             res.send(data);
         } else {

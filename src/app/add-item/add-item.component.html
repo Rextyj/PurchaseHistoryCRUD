@@ -1,9 +1,11 @@
-<div class="container-fluid">
+<div class="container mb-2 mt-2">
+
   <div class="card-deck">
-    <div class="card border-primary text-center shadow-lg">
-      <h5 class="card-header border-primary">Add a new item</h5>
+    <!--begin card deck-->
+    <div class="card text-center shadow-lg">
+      <h5 class="card-header ">Add a new item</h5>
       <div class="card-body">
-        <form [formGroup]='form' #myForm='ngForm' (ngSubmit)='onAdd(form.value)' class='formFields'>
+        <form [formGroup]='form' #myForm='ngForm' (ngSubmit)='onAdd(form.value)' class='formFields bg-gradient-primary'>
           <div class="form-group row">
             <label class="col-md-3 col-form-label ">Company Name:</label>
             <div class="col-md-9">
@@ -87,4 +89,5 @@
     <!-- <app-display class="card col-md-6 shadow"></app-display> -->
 
   </div>
+
 </div>

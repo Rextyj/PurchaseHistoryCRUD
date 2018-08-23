@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '../../../node_modules/@ngrx/store';
-import { AppActions, AppActionDel } from '../store/action';
+import { AppActions, AppActionDel, AppActionUpd } from '../store/action';
 import { CommonService } from '../common.service';
 
 
@@ -12,15 +12,27 @@ import { CommonService } from '../common.service';
 export class DisplayComponent implements OnInit {
   dataToDisplay: any[];
   currentState;
+  owner;
   constructor(private store: Store<AppActions>,
-              private service: CommonService) { }
+    private service: CommonService) {
+    
+  }
 
   ngOnInit() {
+    //then we dispatch the update action with owner info as payload
+    //effect will intercept the action
+    console.log('about to dispatch update with owner ', this.owner);
+    
     this.store.select('AppReducer').subscribe(state => {
+      console.log('get owner', state.owner);
+      this.owner = state.owner;
       console.log('state changed detected');
+      console.log('state is', state);
       this.dataToDisplay = state.dataList;
       this.currentState = state.dataList;
     });
+    //we have to pass in a JSON object!!!
+    this.store.dispatch(new AppActionUpd({owner: this.owner}));
   }
 
   deleteItem(id) {
@@ -29,10 +41,13 @@ export class DisplayComponent implements OnInit {
     this.store.dispatch(new AppActionDel(id));
   }
 
-  filterResult(param){
+  filterByCompanyName(param) {
     console.log('passed in filter is ', param);
-    this.dataToDisplay = this.dataToDisplay.filter(item => {
-      if (item.CompanyName === param){
+    /*
+      filter again should be using the currentState
+    */
+    this.dataToDisplay = this.currentState.filter(item => {
+      if (item.CompanyName === param) {
         console.log('return true');
         return true;
       } else {
@@ -42,11 +57,24 @@ export class DisplayComponent implements OnInit {
     console.log('filtered result is ', this.dataToDisplay);
   }
 
-  resetFilter(){
+  filterByDate(param){
+    console.log(this.dataToDisplay);
+    this.dataToDisplay = this.currentState.filter(item => {
+      var date = new Date(item.DatePurchased);
+      var month = date.getMonth() + 1;
+      if(month == param){
+        return true;
+      } else {
+        return false;
+      }
+    });
+  }
+
+  resetFilter() {
     this.dataToDisplay = this.currentState;
   }
 
-  filterByText(param){
+  filterByText(param) {
     this.service.getSearchResult(param).subscribe(data => {
       console.log('display comp gets ', data);
       this.dataToDisplay = data;

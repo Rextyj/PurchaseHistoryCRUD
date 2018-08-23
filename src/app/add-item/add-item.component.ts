@@ -23,6 +23,7 @@ export class AddItemComponent implements OnInit {
   res = '';
   fileUrl;
   dataFromStore;
+  owner;
 
   constructor(private fb: FormBuilder, private domSan: DomSanitizer, 
     private newService: CommonService, private store: Store<AppState>,
@@ -54,10 +55,11 @@ export class AddItemComponent implements OnInit {
     // })
 
     console.log('action dispatched');
-    this.store.dispatch(new AppActionUpd());
-    this.store.select("AppReducer").subscribe(items => {
-      console.log('subscribed data is ' , items);
-      this.dataFromStore = items.dataList;
+    
+    this.store.select("AppReducer").subscribe(state => {
+      console.log('subscribed data is ' , state);
+      this.owner = state.owner;
+      this.dataFromStore = state.dataList;
     });
   }
 
@@ -66,6 +68,8 @@ export class AddItemComponent implements OnInit {
     //mode is for server.js file to recognize the intent
     formData.mode = 'Save';
 
+    formData.Owner = this.owner;
+
     console.log('formdata is ',formData);
     formData['LossGainPrice'] = (formData['SoldPrice'] - formData['PurchasePrice']) * formData['NumberOfSharesSold'];
 
@@ -73,8 +77,10 @@ export class AddItemComponent implements OnInit {
     //save the form object to database
     this.newService.savePurchase(formData).subscribe(data => {
       alert(data.data);
-      //update has to be inside the callback
-      this.ngOnInit();
+
+      // //update has to be inside the callback
+      // this.ngOnInit();
+      
       //reset the form after the data has been saved
       this.resetForm();
     }, error => console.error(error));

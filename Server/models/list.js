@@ -8,7 +8,8 @@ var listItemSchema = new mongoose.Schema({
     NumberOfSharesSold: { type: Number },
     PurchasePrice: { type: Number },
     SoldPrice: { type: Number },
-    LossGainPrice: { type: Number }
+    LossGainPrice: { type: Number },
+    Owner: {type: String}
 });
 
 var RecordList = mongoose.model('RecordList', listItemSchema);

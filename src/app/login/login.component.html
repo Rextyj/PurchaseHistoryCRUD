@@ -1,23 +1,29 @@
-<div class="container-fluid">
-  <div class="jumbotron text-center">
+
+  <div class="class text-center">
+
+  </div>
+
+      <div class="container col-md-8 col-sm-6 col-xs-6 p-4 mb-5 bg-light text-dark text-center relative-center">
+      <img src="/assets/modernfinance.png" alt="..." class="img-thumbnail">
   <h1 class="display-3">Login</h1>
   <p class="lead"> Enter your credentials to log in.</p>
+  <div>New user? Click <a href="/signUp">here</a> to sign up</div>
   </div>
-  <div >New user? Click <a href="/signUp">here</a> to sign up</div>
-  <form #form='ngForm' (ngSubmit)='onLogin(form.value)'>
-    <div class="col-md-10">
+
+  <form #form='ngForm' class="formLogin p-5 m-auto col-md-8" (ngSubmit)='onLogin(form.value)'>
     <div class="form-group row">
-      <label class="col-md-2">Username: </label>
-      <input type="text" class="form-control col-md-10" name="username" ngModel required>
+      <label class="col-md-2 col-sm-2 text-light">Username: </label>
+      <input type="text" class="form-control  col-md-10 col-sm-12" name="username" ngModel required>
     </div>
     <div class="form-group row">
-      <label class="col-md-2">Password: </label>
-      <input type="password" class="form-control col-md-10" name="password" ngModel required>
+      <label class="col-md-2  col-sm-2 text-light">Password: </label>
+      <input type="password" class="form-control col-md-10 col-sm-12" name="password" ngModel required>
     </div>
-    <button class="btn btn-primary" type="submit">Login</button>
-      </div> 
-       <div *ngIf = '!hidden' class="mb-2 alert alert-danger">
+    <div *ngIf = '!hidden' class="form-group row mb-2 alert alert-danger">
       The combination of username and password is not found. Please try again.
     </div>
+    <button class="btn btn-secondary" type="submit">Login</button>
+
+
   
   </form>
