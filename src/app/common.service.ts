@@ -16,8 +16,9 @@ export class CommonService {
             .pipe(map((response: Response) =>response.json()))              
   }  
   
-  GetPurchase(){       
-    return this.http.get('http://localhost:8080/records/api/getPurchase/')  
+  GetPurchase(owner){
+    //note: we have to pass in a JSON object!!!!       
+    return this.http.post('http://localhost:8080/records/api/getPurchase/', owner)  
             .pipe(map((response: Response) => response.json()))              
   }  
  deletePurchase(id){   
