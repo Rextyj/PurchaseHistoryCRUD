@@ -42,4 +42,9 @@ export class CommonService {
     return this.http.get('http://localhost:8080/records/api/getSummary').
       pipe(map((response: Response) =>response.json()));
   }
+
+  getBetweenDate(user){
+    return this.http.post('http://localhost:8080/records/api/getBetweenDate',user).
+    pipe(map((response: Response) =>response.json()));
+  }
 }  

@@ -72,11 +72,26 @@ router.get('/api/getSummary', (req, res) => {
 
         
             }], (err, data) => {
-                console.log('data is ', data);
+                //console.log('data is ', data);
                 res.send(data);
             }
        )
 })
 
+router.post('/api/getBetweenDate', (req, res)=>{
+    var beginDate = req.body.beginningDate;
+    var endDate = req.body.endDate;
+   
+        RecordList.aggregate([
+            {$match: {"DateSold":{$gte: beginDate, $lte: endDate},
+                       },
+                
+            }
+        ], (err, data) => {
+            console.log('data is ', data);
+            res.send(data);
+        })
+
+})
 
 module.exports = router;

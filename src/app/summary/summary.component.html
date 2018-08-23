@@ -21,3 +21,44 @@
         <td>{{item.averagelprice}}</td>
       </tr>
     </table>
+    <form [formGroup]='form' #myForm='ngForm' (ngSubmit)='dateBetween(form.value)' class='formFields'>
+
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label">Beginning Date</label>
+        <div class="col-md-9">
+          <input type="date" class='form-control' formControlName='beginningDate'>
+        </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label">End Date</label>
+          <div class="col-md-9">
+            <input type="date" class='form-control' formControlName='endDate'>
+          </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Show</button>
+    </form>
+    <table class="table table-striped table-hover text-center">
+        <tr>
+            <td>Entry Number</td>
+            <td>Company Name</td>
+            <td>Date Purchased</td>
+           
+            <td>Date Sold</td>
+            <td>Number Of Shares Bought</td>
+            <td>Number Of Shares Sold</td>
+            <td>Purchase Price</td>
+            <td>Sold Price</td>
+            <td>Loss Gain Price</td>
+          </tr>
+    <tr *ngFor = 'let item of betweenDate; let i = index'>
+      <td>{{i+1}}</td>
+      <td>{{item.CompanyName}}</td>
+      <td>{{item.DatePurchased}}</td>
+      <td>{{item.DateSold}}</td>
+      <td>{{item.NumberOfSharesBought}}</td>
+      <td>{{item.NumberOfSharesSold}}</td>
+      <td>{{item.PurchasePrice}}</td>
+      <td>{{item.SoldPrice}}</td>
+      <td>{{item.LossGainPrice}}</td>
+    </tr> 
+  </table>
