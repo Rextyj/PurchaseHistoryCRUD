@@ -2,12 +2,12 @@
   <div class="bg-white border col mx-auto mt-4 p-4 shadow">
     <h5 class=" text-center">Summary</h5>
 
-    <table class="table table-striped table-hover text-center">
+
+    <table class="table table-responsive table-striped table-hover text-center">
       <tr>
         <td>Entry Number</td>
         <td>Company Name</td>
         <td>Number of shares bought</td>
-
         <td>Number of shares sold</td>
         <td>Purchase Price</td>
         <td>Sold Price</td>
@@ -27,21 +27,22 @@
     </table>
 
 
+<hr>
+
+
     <form [formGroup]='form' #myForm='ngForm' (ngSubmit)='dateBetween(form.value)' class='formFields'>
 
       <div class="form-group row">
-        <label class="col-md-3 col-form-label">Beginning Date</label>
-        <div class="col-md-9">
-          <input type="date" class='form-control' formControlName='beginningDate'>
-        </div>
+        <label class="col-md-2">Beginning Date</label>
+        <input type="date" class='form-control col-md-8' formControlName='beginningDate'>
       </div>
       <div class="form-group row">
-        <label class="col-md-3 col-form-label">End Date</label>
-        <div class="col-md-9">
-          <input type="date" class='form-control' formControlName='endDate'>
-        </div>
+        <label class="col-md-2">End Date</label>
+        <input type="date" class='col-md-8 form-control' formControlName='endDate'>
+      
+      
       </div>
-      <button type="submit" class="btn btn-primary">Show</button>
+      <button type="submit" class="btn btn-outline-success btn-rounded mx-auto my-2">Show</button>
     </form>
     <table class="table table-responsive table-striped table-hover text-center">
       <tr>
