@@ -41,7 +41,7 @@ export class DisplayComponent implements OnInit {
     this.store.dispatch(new AppActionDel(id));
   }
 
-  filterResult(param) {
+  filterByCompanyName(param) {
     console.log('passed in filter is ', param);
     /*
       filter again should be using the currentState
@@ -55,6 +55,19 @@ export class DisplayComponent implements OnInit {
       }
     });
     console.log('filtered result is ', this.dataToDisplay);
+  }
+
+  filterByDate(param){
+    console.log(this.dataToDisplay);
+    this.dataToDisplay = this.currentState.filter(item => {
+      var date = new Date(item.DatePurchased);
+      var month = date.getMonth() + 1;
+      if(month == param){
+        return true;
+      } else {
+        return false;
+      }
+    });
   }
 
   resetFilter() {
