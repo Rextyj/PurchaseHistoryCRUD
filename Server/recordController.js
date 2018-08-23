@@ -2,12 +2,12 @@ const express = require('express');
 var router = express.Router();
 var objectId = require('mongoose').Types.ObjectId;
 
-var {RecordList} = require('./models/list');
+var { RecordList } = require('./models/list');
 
 //Read
 router.get("/api/getPurchase", (req, res) => {
     RecordList.find({}, (err, data) => {
-        if(!err){
+        if (!err) {
             res.send(data);
         } else {
             res.send(err);
@@ -19,10 +19,10 @@ router.get("/api/getPurchase", (req, res) => {
 router.post('/api/SavePurchase', (req, res) => {
     var newRecord = new RecordList(req.body);
 
-    if(req.body.mode == 'Save'){
+    if (req.body.mode == 'Save') {
         newRecord.save((err, data) => {
-            if(!err){
-                res.send({data: 'inserted a new item'});
+            if (!err) {
+                res.send({ data: 'inserted a new item' });
             } else {
                 res.send(err);
             }
@@ -33,21 +33,21 @@ router.post('/api/SavePurchase', (req, res) => {
 //delete
 router.post('/api/deletePurchase', (req, res) => {
     RecordList.remove({ _id: req.body.id }, (err, data) => {
-        if(err){    
-            res.send(err);    
-        }    
-        else{      
-               // res.send({data:"Record has been Deleted..!!"});
-               //update the view
-               RecordList.find({}, function(err, data){
-                   if(err){
-                       res.send(err);
-                   } else {
-                       res.send(data);  
-                   }
-                    
-               });       
-           }       
+        if (err) {
+            res.send(err);
+        }
+        else {
+            // res.send({data:"Record has been Deleted..!!"});
+            //update the view
+            RecordList.find({}, function (err, data) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send(data);
+                }
+
+            });
+        }
     });
 
     //return the updated list
@@ -93,5 +93,25 @@ router.post('/api/getBetweenDate', (req, res)=>{
         })
 
 })
+
+//text search
+router.post('/api/getSearchResult', (req, res) => {
+    RecordList.createIndexes({ CompanyName: "text" }, err => {
+        if (!err) {
+            RecordList.find({ $text: { $search: req.body } }, (err, data) => {
+                if (!err) {
+                    console.log('text search returns ', data);
+                    res.send(data);
+                } else {
+                    res.send(err);
+                }
+            });
+        } else {
+            res.send({ data: 'Error creating text index' });
+        }
+    });
+});
+
+
 
 module.exports = router;
