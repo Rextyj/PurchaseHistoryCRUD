@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { CommonService } from '../common.service';
-import { Store } from '@ngrx/store';
+import { Store, State } from '@ngrx/store';
 import { AppState } from '../store/state';
 import { AppActionUpd } from '../store/action';
 import { listEffect } from '../store/effect';
@@ -23,6 +23,7 @@ export class DashboardComponent implements OnInit{
   res = '';
   fileUrl;
   dataFromStore;
+  owner;
 
   constructor(private fb: FormBuilder, private domSan: DomSanitizer, 
     private newService: CommonService, private store: Store<AppState>,
@@ -38,9 +39,14 @@ export class DashboardComponent implements OnInit{
     // });
   }
 
-  // //reading all the records from the database
+  // //reading all the records belongs to the user from the database
   ngOnInit() {
     this.onAdd();
+    this.store.select('AppReducer').subscribe(state => {
+      //fitst login page updated the state with the user
+      this.owner = state.owner;
+    });
+
 
     // this.newService.GetPurchase().subscribe(items => {
     //   this.dataFromStore = items; 

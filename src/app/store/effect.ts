@@ -17,11 +17,14 @@ export class listEffect {
 
     @Effect()
     updateList(): Observable<Action> {
-        console.log(this.action);
+        console.log('effect gets ', this.action);
         var updAction = this.action.pipe(
+            //effect will intercept the AppActionUpd action that has owner info
             ofType<AppActions>(UPDATE_LIST),
-            switchMap(action => this.service.GetPurchase()),
-            map(list => new AppActionUpdateSuccess(list))
+            //it passes the owner info to the getpurchase service method and get back records belongs to the owner
+            switchMap(action => {console.log(action.payload); return this.service.GetPurchase(action.payload)}),
+            //it will then use the data received to create a new action and pass it to reducer
+            map(dataReceived => new AppActionUpdateSuccess(dataReceived))
         )
         console.log(updAction);
         return updAction;
