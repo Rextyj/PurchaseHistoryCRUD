@@ -1,23 +1,27 @@
-<table class="table table-striped table-hover text-center">
-    <tr>
+<div class="container">
+
+  <div class="bg-white border col mx-auto mt-4 p-4 shadow">
+    <h5 class=" text-center">Summary</h5>
+    <table class="table table-responsive table-striped table-hover text-center">
+      <tr>
         <td>Entry Number</td>
         <td>Company Name</td>
         <td>Number of shares bought</td>
-       
+
         <td>Number of shares sold</td>
         <td>Purchase Price</td>
         <td>Sold Price</td>
         <td>Loss/Gain Price</td>
       </tr>
-    <tr *ngFor = 'let item of dataToDisplay; let i = index'>
+      <tr *ngFor='let item of dataToDisplay; let i = index'>
         <td>{{i+1}}</td>
         <td>{{item._id}}</td>
-    
         <td>{{item.averagenumberbought}}</td>
-        
         <td>{{item.averagenumbersold}}</td>
         <td>{{item.averageprice}}</td>
         <td>{{item.averagesprice}}</td>
         <td>{{item.averagelprice}}</td>
       </tr>
     </table>
+
+  </div>
