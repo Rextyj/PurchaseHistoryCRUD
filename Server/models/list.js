@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 var listItemSchema = new mongoose.Schema({
     CompanyName: { type: String },
     NumberOfSharesBought: { type: Number },
-    DatePurchased: { type: Date },
+    DatePurchased: { type: String },
     DateSold: { type: String },
     NumberOfSharesSold: { type: Number },
     PurchasePrice: { type: Number },
