@@ -1,7 +1,32 @@
-
-/* You can add global styles to this file, and also import other style files */
 body {
-     background-image: url('/assets/stripes-light.png');
+    background-image: url('/assets/stripes-light.png');
+}
+.jumbotron {
+   background-image: url('https://www.ceres.org/sites/default/files/2017-04/financial-stock-ticker-banner_4.jpg');
+   background-position: center center;
+   background-repeat: no-repeat-y;
+
+}
+.class {
+   width:100%;
+   min-height:200px;
+       background-image: url('https://www.ceres.org/sites/default/files/2017-04/financial-stock-ticker-banner_4.jpg');
+   background-position: center center;
+   background-repeat: no-repeat-y;
+}
+footer {
+   background-color:#102a46;
+}
+
+a {
+cursor:pointer;
+
+}
+
+
+.nav-link {
+   display: block;
+   background-color:white;
 }
 
 body {

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '../../../node_modules/@ngrx/store';
 import { AppActions, AppActionDel } from '../store/action';
+import { CommonService } from '../common.service';
+
 
 @Component({
   selector: 'app-display',
@@ -8,13 +10,16 @@ import { AppActions, AppActionDel } from '../store/action';
   styleUrls: ['./display.component.css']
 })
 export class DisplayComponent implements OnInit {
-  dataToDisplay;
-  constructor(private store: Store<AppActions>) { }
+  dataToDisplay: any[];
+  currentState;
+  constructor(private store: Store<AppActions>,
+              private service: CommonService) { }
 
   ngOnInit() {
     this.store.select('AppReducer').subscribe(state => {
       console.log('state changed detected');
       this.dataToDisplay = state.dataList;
+      this.currentState = state.dataList;
     });
   }
 
@@ -25,7 +30,30 @@ export class DisplayComponent implements OnInit {
   }
 
   filterResult(param){
-    
+    console.log('passed in filter is ', param);
+    /*
+      filter again should be using the currentState
+    */
+    this.dataToDisplay = this.currentState.filter(item => {
+      if (item.CompanyName === param){
+        console.log('return true');
+        return true;
+      } else {
+        return false;
+      }
+    });
+    console.log('filtered result is ', this.dataToDisplay);
+  }
+
+  resetFilter(){
+    this.dataToDisplay = this.currentState;
+  }
+
+  filterByText(param){
+    this.service.getSearchResult(param).subscribe(data => {
+      console.log('display comp gets ', data);
+      this.dataToDisplay = data;
+    });
   }
 
 }
