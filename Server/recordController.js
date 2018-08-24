@@ -52,15 +52,6 @@ router.post('/api/deletePurchase', (req, res) => {
         }
     });
 
-    //return the updated list
-    // RecordList.findByIdAndRemove(new objectId(req.body.id), {new: true}, (err, data) => {
-    //     if(!err) {
-    //         res.send(data);
-    //     } else {
-    //         console.log('Error removing');
-    //         res.send(err);
-    //     }
-    // })
 });
 router.post('/api/getSummary', (req, res) => {
     console.log('request owner is ', req.body);
