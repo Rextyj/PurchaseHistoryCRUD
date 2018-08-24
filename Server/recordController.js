@@ -62,9 +62,12 @@ router.post('/api/deletePurchase', (req, res) => {
     //     }
     // })
 });
-router.get('/api/getSummary', (req, res) => {
+router.post('/api/getSummary', (req, res) => {
+    console.log('request owner is ', req.body);
        RecordList.aggregate(
-           [{$group : {_id:"$CompanyName",
+           [
+               {$match: {Owner: req.body.owner}},
+               {$group : {_id:"$CompanyName",
                         averagenumberbought: {$avg: "$NumberOfSharesBought"},
                         averagenumbersold: {$avg: "$NumberOfSharesSold"},
                         averageprice: {$avg: "$PurchasePrice"},
@@ -74,7 +77,7 @@ router.get('/api/getSummary', (req, res) => {
 
         
             }], (err, data) => {
-                //console.log('data is ', data);
+                console.log('data is ', data);
                 res.send(data);
             }
        )

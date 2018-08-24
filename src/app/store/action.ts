@@ -7,7 +7,7 @@ export const UPDATE_LIST: string = 'UPDATE_LIST';
 export const UPDATE_SUCCESS: string = 'UPDATE_SUCCESS';
 export const DELETE_SUCCESS: string = 'DELETE_SUCCESS';
 export const ASSIGN_OWNER: string = 'ASSIGN_OWNER';
-
+export const UPDATE_SUMM: string = 'UPDATE_SUMM';
 
 export class AppActionADD implements Action{
     readonly type = ADD_ITEM;
@@ -37,6 +37,11 @@ export class AppActionDeleteSuccess implements Action {
 
 export class AppActionAssignOwner implements Action {
     readonly type = ASSIGN_OWNER;
+    constructor(public payload:any){}
+}
+
+export class AppActionUpdateSummary implements Action {
+    readonly type = UPDATE_SUMM;
     constructor(public payload:any){}
 }
 

@@ -1,5 +1,5 @@
 import { Injectable } from "../../../node_modules/@angular/core";
-import { AppActions, UPDATE_LIST, AppActionUpdateSuccess, DELETE_ITEM, AppActionDeleteSuccess } from "./action";
+import { AppActions, UPDATE_LIST, AppActionUpdateSuccess, DELETE_ITEM, AppActionDeleteSuccess, UPDATE_SUMM } from "./action";
 import { CommonService } from "../common.service";
 import { Effect, Actions, ofType } from "../../../node_modules/@ngrx/effects";
 import { switchMap, map } from "../../../node_modules/rxjs/operators";
@@ -28,6 +28,21 @@ export class listEffect {
         )
         console.log(updAction);
         return updAction;
+    }
+
+    @Effect()
+    updateSummary(): Observable<Action> {
+        console.log('effect gets ', this.action);
+        var updSummary = this.action.pipe(
+            //effect will intercept the AppActionUpd action that has owner info
+            ofType<AppActions>(UPDATE_SUMM),
+            //it passes the owner info to the getpurchase service method and get back records belongs to the owner
+            switchMap(action => {console.log(action.payload); return this.service.getSummary(action.payload)}),
+            //it will then use the data received to create a new action and pass it to reducer
+            map(dataReceived => new AppActionUpdateSuccess(dataReceived))
+        )
+        console.log(updSummary);
+        return updSummary;
     }
 
     @Effect()

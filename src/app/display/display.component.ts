@@ -32,6 +32,9 @@ export class DisplayComponent implements OnInit {
       this.currentState = state.dataList;
     });
     //we have to pass in a JSON object!!!
+    /*
+      any dispatch action will trigger subscription updates
+    */
     this.store.dispatch(new AppActionUpd({owner: this.owner}));
   }
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '../../../node_modules/@ngrx/store';
-import { AppActions, AppActionDel } from '../store/action';
+import { AppActions, AppActionDel, AppActionUpdateSummary } from '../store/action';
 import { CommonService } from '../common.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
@@ -12,6 +12,8 @@ export class SummaryComponent implements OnInit {
     dataToDisplay;
     betweenDate;
     form: FormGroup;
+    owner;
+
     constructor(private store: Store<AppActions>, 
     private service: CommonService,
     private fb: FormBuilder) { 
@@ -28,8 +30,20 @@ export class SummaryComponent implements OnInit {
        //     this.dataToDisplay = state.dataList;
 
     //});
-        this.service.getSummary().subscribe(data => this.dataToDisplay = data);
+
+        // this.service.getSummary().subscribe(data => this.dataToDisplay = data);
+
+        this.store.select('AppReducer').subscribe(state => {
+            console.log('get owner', state.owner);
+            this.owner = state.owner;
+            console.log('state changed detected');
+            console.log('state is', state);
+            this.dataToDisplay = state.dataList;
+          });
+          //we have to pass in a JSON object!!!
+          this.store.dispatch(new AppActionUpdateSummary({owner: this.owner}));
     }
+    
     dateBetween(dateForm){
         
         this.service.getBetweenDate(dateForm).subscribe(data => {
