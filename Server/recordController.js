@@ -70,9 +70,9 @@ router.post('/api/getSummary', (req, res) => {
                {$group : {_id:"$CompanyName",
                         averagenumberbought: {$avg: "$NumberOfSharesBought"},
                         averagenumbersold: {$avg: "$NumberOfSharesSold"},
-                        averageprice: {$avg: "$PurchasePrice"},
-                        averagesprice: {$avg: "$SoldPrice"},
-                        averagelprice: {$avg: "$LossGainPrice"}
+                        averagePurchasePrice: {$avg: "$PurchasePrice"},
+                        averageSoldPrice: {$avg: "$SoldPrice"},
+                        averageGainOrLossPrice: {$avg: "$LossGainPrice"}
             }
 
         
