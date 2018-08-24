@@ -59,5 +59,42 @@ export class CommonService {
                     .pipe(map((response: Response) => response.json()));
   }
 
+  convertToCSV(data){
+    // this.savedData.push(formData);
+    var savedData = data;
+    var output = [];
+    console.log('the history list is ', savedData);
+    if(output.length == 0){
+      output.push(Object.keys(savedData[0]));
+    }
+    var res = '';
+    //for property names
+    for(var i = 0; i < output.length; i++){
+      res += output[i];
+      if(i == output.length - 1){
+        res += "\n";
+      }
+    }
+    //for data
+    for (let item of savedData){
+      var temp;
+      //note that object.values is not supported everywehre
+      temp = Object.keys(item).map(key => {
+        return item[key];
+      });
+      for(var i = 0; i < temp.length; i++){
+        
+        if(i == temp.length - 1){
+          res += temp[i] + "\n";
+        }else{
+          res += temp[i] + ',';
+        }
+      }
+    }
+
+    console.log(res);
+    console.log(output);
+    return res;
+  }
 
 }  
