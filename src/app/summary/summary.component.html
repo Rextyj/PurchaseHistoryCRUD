@@ -14,7 +14,8 @@
       </div>
       <div class="form-group row">
         <button type="submit" class="btn btn-outline-success btn-rounded my-2 mx-1">Show</button>
-        <div *ngIf='betweenDate !== undefined && betweenDate.length == 0' class="alert alert-danger my-auto mx-1">No records to show</div>
+        <div *ngIf='betweenDate !== undefined && betweenDate.length == 0' class="alert alert-danger my-auto mx-1">No records
+          to show</div>
       </div>
     </form>
 
@@ -71,6 +72,8 @@
           <td>{{item.averagelprice}}</td>
         </tr>
       </table>
-
+      <div class="text-center">
+        <button [disabled]='dataToDisplay === undefined || dataToDisplay.length == 0' type='button' (click)='onDownload()' class="btn btn-primary">Download</button>
+      </div>
     </div>
   </div>
