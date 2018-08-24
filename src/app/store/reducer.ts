@@ -1,6 +1,6 @@
 import { ActionReducer, Action } from '@ngrx/store';
 import { initialState, AppState } from './state';
-import {AppActions,UPDATE_SUCCESS, DELETE_SUCCESS, ASSIGN_OWNER} from './action';
+import {AppActions,UPDATE_SUCCESS, DELETE_SUCCESS, ASSIGN_OWNER, LOG_OUT} from './action';
 
 
 export const AppReducer: ActionReducer<AppState> =
@@ -38,6 +38,12 @@ export const AppReducer: ActionReducer<AppState> =
                     dataList: state.dataList,
                     owner: action.payload
                 }
+            case LOG_OUT:
+                state = {
+                    dataList: ['fetching data'],
+                    owner: ''
+                }
+                return state;
             default:
                 //return the current state unchanged
                 return state;
