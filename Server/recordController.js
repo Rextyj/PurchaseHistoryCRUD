@@ -41,7 +41,7 @@ router.post('/api/deletePurchase', (req, res) => {
         else {
             // res.send({data:"Record has been Deleted..!!"});
             //update the view
-            RecordList.find({}, function (err, data) {
+            RecordList.find({Owner: req.body.owner}, function (err, data) {
                 if (err) {
                     res.send(err);
                 } else {

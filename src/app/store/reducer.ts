@@ -38,6 +38,7 @@ export const AppReducer: ActionReducer<AppState> =
                     dataList: state.dataList,
                     owner: action.payload
                 }
+                return state;
             case LOG_OUT:
                 state = {
                     dataList: ['fetching data'],

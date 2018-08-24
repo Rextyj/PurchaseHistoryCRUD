@@ -44,6 +44,7 @@ export class DashboardComponent implements OnInit{
     this.onAdd();
     this.store.select('AppReducer').subscribe(state => {
       //fitst login page updated the state with the user
+      console.log('dashboard gets state ', state);
       this.owner = state.owner;
     });
   }

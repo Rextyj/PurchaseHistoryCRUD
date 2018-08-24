@@ -41,7 +41,7 @@ export class DisplayComponent implements OnInit {
   deleteItem(id) {
     //dispatch a delete action/ payload is the id 
     console.log('Item id is ' + id);
-    this.store.dispatch(new AppActionDel(id));
+    this.store.dispatch(new AppActionDel({'id': id, owner: this.owner }));
   }
 
   filterByCompanyName(param) {
