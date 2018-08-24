@@ -38,8 +38,6 @@ router.post('/api/SaveUser', (req, res) => {
                 }
             });
         } else {
-            // //403 means the server understands the req but refuse to fullfil it
-            // res.sendStatus(403);
             res.send({data: 'Please choose another username', duplicate: true});
         }
     })

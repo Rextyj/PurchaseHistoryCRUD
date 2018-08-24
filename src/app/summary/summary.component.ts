@@ -28,13 +28,6 @@ export class SummaryComponent implements OnInit {
     }
 
     ngOnInit() {
-        // this.store.select('AppReducer').subscribe(state => {
-        //     this.dataToDisplay = state.dataList;
-
-        //});
-
-        // this.service.getSummary().subscribe(data => this.dataToDisplay = data);
-
         this.store.select('AppReducer').subscribe(state => {
             console.log('get owner', state.owner);
             this.owner = state.owner;
@@ -50,14 +43,6 @@ export class SummaryComponent implements OnInit {
 
         this.service.getBetweenDate(dateForm).subscribe(data => {
             this.betweenDate = data;
-            /*  for(var i = 0; i<this.betweenDate.length; i++){
-                  let solddate = new Date(this.betweenDate[i].DateSold);
-                  let pdate = new Date(this.betweenDate[i].DatePurchased);
-                  this.betweenDate[i].DateSold = solddate.getFullYear() + "-" + (solddate.getMonth() + 1) + "-" + solddate.getDay();
-                  this.betweenDate[i].DatePurchased = pdate.getFullYear() + "-" + (pdate.getMonth() + 1) + "-" + pdate.getDay();
-                 //this.betweenDate[i].DateSold = date.getDate();
-                // console.log(typeof solddate.getDate()); 
-              }*/
         });
 
     }

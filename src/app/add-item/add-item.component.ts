@@ -41,19 +41,6 @@ export class AddItemComponent implements OnInit {
 
   //reading all the records from the database
   ngOnInit() {
-    // this.newService.GetPurchase().subscribe(items => {
-    //   this.dataFromStore = items; 
-    //   console.log(items);
-    //   //construct the csv string
-    //   this.toCSV();
-    // });
-
-
-    // this.newService.GetPurchase().subscribe(items => {
-    //   this.dataFromStore = items;
-    //   this.store.dispatch(new AppActionUpd(items));
-    // })
-
     console.log('action dispatched');
     
     this.store.select("AppReducer").subscribe(state => {
@@ -85,48 +72,7 @@ export class AddItemComponent implements OnInit {
       //reset the form after the data has been saved
       this.resetForm();
     }, error => console.error(error));
-
-    
-    // var blob = new Blob([this.res], { type: 'application/history' });
-    // this.fileUrl = this.domSan.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(blob));
   }
-
-  // toCSV(){
-  //   // this.savedData.push(formData);
-  //   this.savedData = this.dataFromStore;
-    
-  //   console.log('the history list is ', this.savedData);
-  //   if(this.output.length == 0){
-  //     this.output.push(Object.keys(this.savedData[0]));
-  //   }
-  //   this.res = '';
-  //   //for property names
-  //   for(var i = 0; i < this.output.length; i++){
-  //     this.res += this.output[i];
-  //     if(i == this.output.length - 1){
-  //       this.res += "\n";
-  //     }
-  //   }
-  //   //for data
-  //   for (let item of this.savedData){
-  //     var temp;
-  //     //note that object.values is not supported everywehre
-  //     temp = Object.keys(item).map(key => {
-  //       return item[key];
-  //     });
-  //     for(var i = 0; i < temp.length; i++){
-        
-  //       if(i == temp.length - 1){
-  //         this.res += temp[i] + "\n";
-  //       }else{
-  //         this.res += temp[i] + ',';
-  //       }
-  //     }
-  //   }
-
-  //   console.log(this.res);
-  //   console.log(this.output);
-  // }
 
   onDownload(){
     // console.log(this.res);

@@ -28,15 +28,6 @@ export class DashboardComponent implements OnInit{
   constructor(private fb: FormBuilder, private domSan: DomSanitizer, 
     private newService: CommonService, private store: Store<AppState>,
     private router: Router){
-    // this.form = this.fb.group({
-    //   CompanyName: ['', [Validators.required]],
-    //   NumberOfSharesBought: ['', [Validators.required]],
-    //   DatePurchased: ['', [Validators.required]],
-    //   DateSold: ['', [Validators.required]],
-    //   NumberOfSharesSold: ['', [Validators.required]],
-    //   PurchasePrice:['', [Validators.required]],
-    //   SoldPrice: ['', [Validators.required]]      
-    // });
   }
 
   // //reading all the records belongs to the user from the database
