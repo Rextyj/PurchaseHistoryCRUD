@@ -7,7 +7,9 @@ var listItemSchema = new mongoose.Schema({
     DateSold: { type: String },
     NumberOfSharesSold: { type: Number },
     PurchasePrice: { type: Number },
+    AveragePurchasePrice: {type: Number},
     SoldPrice: { type: Number },
+    AverageSoldPrice: {type: Number},
     LossGainPrice: { type: Number },
     Owner: {type: String}
 });

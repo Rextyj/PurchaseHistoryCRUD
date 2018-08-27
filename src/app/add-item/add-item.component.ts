@@ -24,6 +24,8 @@ export class AddItemComponent implements OnInit {
   fileUrl;
   dataFromStore;
   owner;
+  purchasePricePerShare;
+  soldPricePerShare;
 
   constructor(private fb: FormBuilder, private domSan: DomSanitizer, 
     private newService: CommonService, private store: Store<AppState>,
@@ -59,6 +61,8 @@ export class AddItemComponent implements OnInit {
 
     console.log('formdata is ',formData);
     formData['LossGainPrice'] = (formData['SoldPrice'] - formData['PurchasePrice']) * formData['NumberOfSharesSold'];
+    formData['AveragePurchasePrice'] = formData.PurchasePrice / formData.NumberOfSharesBought;
+    formData['AverageSoldPrice'] = formData.SoldPrice / formData.NumberOfSharesSold;
 
     console.log('the modified data is ', formData);
     //save the form object to database
