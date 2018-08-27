@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 //this is object destructuring
+//connect to mongoDB
 const {Mongoose} = require('./db');
 var userController = require('./userController');
 var recordController = require('./recordController');

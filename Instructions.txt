@@ -9,12 +9,23 @@ Setting up:
 	db runs locally
 	db name: StockHistory
 	url: mongodb://localhost:27017/StockHistory
+	
+	collections
+	url: mongodb://localhost:27017/StockHistory/users
+	url: mongodb://localhost:27017/StockHistory/recordlists
 
-3. ng serve the project
-4. go to: localhost:4200 (or whichever port it is served on)
-5. click signup to set up a new user
-6. login with the credential
-7. You will then be redirected to the dashboard.
+3. cd appcode
+4. npm install
+5. npm start /ng serve
+6. go to: 
+     http://localhost:4200/
+
+7. click signup to set up a new user
+8. login with the credential
+9. You will then be redirected to the dashboard.
+
+
+
 
 
 The dashboard will display addItem pane by default.
