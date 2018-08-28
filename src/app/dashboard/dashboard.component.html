@@ -29,9 +29,16 @@
   </ul>
 
   <button class="btn btn-primary ml-auto mr-1" (click)='onLogout()'>Log Out</button>
+  <button class="btn btn-primary" (click)="hero.toggleState()">Uhh</button>
 </div>
 </div>
-<router-outlet name='childrenComponents'></router-outlet>
+
+<!--<main [@slideAnimation]="o.isActivated ? o.activatedRoute : ''" >-->
+  <router-outlet #o="outlet" name='childrenComponents'></router-outlet>
+<!--</main>-->
+<!--<router-outlet name='childrenComponents'></router-outlet>-->
+
+
 <!-- <router-outlet name='additemComponent'></router-outlet> -->
 <!-- <router-outlet name = 'displayComponent'></router-outlet> -->
 <!--</div>-->

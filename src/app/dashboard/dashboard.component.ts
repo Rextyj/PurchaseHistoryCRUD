@@ -7,12 +7,15 @@ import { AppState } from '../store/state';
 import { AppActions, AppActionLogout } from '../store/action';
 import { listEffect } from '../store/effect';
 import { Router } from '@angular/router';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { fadeAnimation } from '../animations';
+import { slideAnimation } from '../animations';
 @Component({
   // selector: 'app-root',
   templateUrl: './dashboard.component.html',
   styleUrls: [ './dashboard.component.scss' ],
-  providers: []
+  providers: [],
+  animations: [fadeAnimation,slideAnimation]
 })
 export class DashboardComponent implements OnInit{
   // name = 'Angular';

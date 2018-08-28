@@ -8,6 +8,8 @@ import {DashboardComponent} from '../dashboard/dashboard.component';
 import { DisplayComponent } from '../display/display.component';
 import { AddItemComponent } from '../add-item/add-item.component';
 import {SummaryComponent} from '../summary/summary.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
@@ -23,10 +25,13 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    CommonModule, RouterModule.forRoot(routes)
+    CommonModule, RouterModule.forRoot(routes),BrowserAnimationsModule
   ],
+  
   declarations: [],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  
+  
 })
 export class AppRouterModule { }
 
