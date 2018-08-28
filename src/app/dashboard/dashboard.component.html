@@ -12,13 +12,13 @@
     Purchase History
   </h1>
 </div>
-<div class="container mx-2">
+<div class="container mb-0 mx-2">
 <div class="row">
   <ul id='navbar' class="nav nav-tabs flex-columns">
     <!-- <button class="nav-item" (click)='onAdd()'>Add</button>
       <button class="nav-item" (click)='onView()'>View</button> -->
     <li class="nav-item">
-      <a class="nav-link " data-toggle="tab" (click)='onAdd()'>Add</a>
+      <a class="nav-link active" data-toggle="tab" (click)='onAdd()'>Add</a>
     </li>
     <li class="nav-item">
       <a class="nav-link " data-toggle="tab" (click)='onView()'>View</a>
@@ -29,13 +29,12 @@
   </ul>
 
   <button class="btn btn-primary ml-auto mr-1" (click)='onLogout()'>Log Out</button>
-  <button class="btn btn-primary" (click)="hero.toggleState()">Uhh</button>
 </div>
 </div>
 
-<!--<main [@slideAnimation]="o.isActivated ? o.activatedRoute : ''" >-->
+<div class="main" [@slideAnimation]="o.isActivated ? o.activatedRoute : ''" >
   <router-outlet #o="outlet" name='childrenComponents'></router-outlet>
-<!--</main>-->
+
 <!--<router-outlet name='childrenComponents'></router-outlet>-->
 
 

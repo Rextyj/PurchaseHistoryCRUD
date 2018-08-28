@@ -3,66 +3,40 @@ body {
 }
 .jumbotron {
    background-image: url('https://www.ceres.org/sites/default/files/2017-04/financial-stock-ticker-banner_4.jpg');
-   background-position: center center;
+   background-position: center 70%;
    background-repeat: no-repeat-y;
+   margin-bottom:0.5em!important;
 
 }
 .class {
    width:100%;
-   min-height:5em;
-   max-height:5em;
+   min-height:12em;
+   max-height:12em;
        background-image: url('https://www.ceres.org/sites/default/files/2017-04/financial-stock-ticker-banner_4.jpg');
    background-position: center center;
    background-repeat: no-repeat-y;
 }
-footer {
-   background-color:#102a46;
-}
 
 a {
 cursor:pointer;
 
 }
-
-
 .nav-link {
    display: block;
-   background-color:white;
-}
-
-body {
-     background-image: url('/assets/stripes-light.png');
-}
-.jumbotron {
-    background-image: url('https://www.ceres.org/sites/default/files/2017-04/financial-stock-ticker-banner_4.jpg');
-    background-position: center center;
-    background-repeat: no-repeat-y;
+   margin-bottom:0.5px;
+   background-color:rgba(215, 227, 230, .90);
 
 }
-.class {
-    width:100%;
-    min-height:200px;
-        background-image: url('https://www.ceres.org/sites/default/files/2017-04/financial-stock-ticker-banner_4.jpg');
-    background-position: center center;
-    background-repeat: no-repeat-y;
+.nav-link:hover {
+      box-shadow: 0px 0.5px 2px #09364C;
+   
 }
-footer {
-    background-color:#102a46;
+.nav-link:active {
+      box-shadow: 0px 0.5px 1px #69C8C9;
+   
 }
-
-a {
-cursor:pointer;
-
-}
-
-
-.nav-link {
-    display: block;
-    background-color:white;
-}
-
-.nav-link.active {
-    border:2px solid black;
+.nav-link.active{
+    box-shadow: 0px 0px 1px #09364C;
 }
 
 .img-thumbnail {
@@ -79,4 +53,15 @@ router-outlet ~ * {
   position: absolute;
   height: 100%;
   width: 100%;
+}
+
+.main {
+    background-color:rgba(215, 227, 230, .70);
+    height:99vh;
+    width:99vw;
+
+}
+
+.btn * {
+    background-color:#09364C;
 }
