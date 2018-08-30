@@ -41,7 +41,7 @@ export class SummaryComponent implements OnInit {
 
     dateBetween(dateForm) {
 
-        this.service.getBetweenDate(dateForm).subscribe(data => {
+        this.service.getBetweenDate(this.owner,dateForm).subscribe(data => {
             this.betweenDate = data;
         });
 

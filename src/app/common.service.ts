@@ -39,6 +39,12 @@ export class CommonService {
             .pipe(map((response: Response) =>response.json()))               
   }  
   
+
+  /*onAverage(){
+    var url = "http://localhost:8080/records/api/getPurchase/getAverage";
+    return this.http.get(url).pipe(map((response:Response)=> response.json()))
+  }*/
+
   // saveUser(user){
   //   return this.http.post('http://localhost:8080/users/api/SaveUser/', user)
   //           .pipe(map((response: Response) =>response.json()));
@@ -59,13 +65,25 @@ export class CommonService {
 
 
   getSummary(owner){
-    return this.http.post('http://localhost:8080/records/api/getSummary', owner).
+    var url = "http://localhost:8080/records/api/";
+    url += owner.owner;
+    url += "/getPurchase/getAverage"
+    console.log("the get Summary url is ", url);
+    return this.http.get(url).
       pipe(map((response: Response) =>response.json()));
   }
 
 
-  getBetweenDate(date){
-    return this.http.post('http://localhost:8080/records/api/getBetweenDate',date).
+  getBetweenDate(owner,date){
+    var url = "http://localhost:8080/records/api/";
+    url += owner;
+    url += "/getPurchase/getBetweenDate";
+    url += "/";
+    url += date.beginningDate;
+    url += "/";
+    url += date.endDate;
+    console.log("the get BetweenDate url is ", url);
+    return this.http.get(url).
     pipe(map((response: Response) =>response.json()));
   }
 
@@ -77,6 +95,7 @@ export class CommonService {
 
   convertToCSV(data){
     // this.savedData.push(formData);
+    console.log(typeof data);
     var savedData = data;
     var output = [];
     console.log('the history list is ', savedData);

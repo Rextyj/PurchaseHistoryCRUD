@@ -62,7 +62,7 @@ public class Record extends AuditModel{
 	
 	@Column(name = "Loss_or_gain_price")
 	private Double lossOrGain;
-
+	
 	public Long getId() {
 		return id;
 	}
