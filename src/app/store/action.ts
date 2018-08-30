@@ -11,7 +11,7 @@ export const ASSIGN_OWNER: string = 'ASSIGN_OWNER';
 export const UPDATE_SUMM: string = 'UPDATE_SUMM';
 export const LOG_OUT: string = 'LOG_OUT';
 
-export class AppActionADD implements Action{
+export class AppActionAdd implements Action{
     readonly type = ADD_ITEM;
     constructor(public payload?: any){}
 }
@@ -52,6 +52,6 @@ export class AppActionLogout implements Action {
     constructor(public payload?:any){}
 }
 
-export type AppActions = AppActionADD | AppActionDel | 
+export type AppActions = AppActionAdd | AppActionDel | 
                          AppActionUpd | AppActionUpdateSuccess | 
                          AppActionAssignOwner | AppActionUpdateSummary | AppActionLogout;
