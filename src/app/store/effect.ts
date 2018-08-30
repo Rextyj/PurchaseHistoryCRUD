@@ -48,9 +48,11 @@ export class listEffect {
     @Effect()
     deleteItem(): Observable<Action> {
         console.log(this.action);
+        var username;
         var delAction = this.action.pipe(
             ofType<AppActions>(DELETE_ITEM),
-            switchMap(action => this.service.deletePurchase(action.payload)),
+            switchMap(action => {username = action.payload.owner ;return this.service.deletePurchase(action.payload)}),
+            switchMap(respose => this.service.GetPurchase({owner: username})),
             map(list => {console.log('in deleteitem ', list) ;return new AppActionDeleteSuccess(list)})
         )
         // var delAction = this.action.pipe(
