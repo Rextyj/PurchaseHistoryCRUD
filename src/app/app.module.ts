@@ -5,9 +5,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {StoreModule} from '@ngrx/store';
 import {EffectsModule} from '@ngrx/effects';
 import {AppRouterModule, routingComponents} from './Router/router.module';
-
-import {CommonService} from './common.service'
-
+import {CommonService} from './common.service';
+import { CacheService } from './cache.service';
+// adding cache support from rxjs -cj
 import { AppComponent } from './app.component';
 import { AppReducer } from './store/reducer';
 import { DisplayComponent } from './display/display.component';
@@ -16,7 +16,11 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AddItemComponent } from './add-item/add-item.component';
-import {SummaryComponent} from './summary/summary.component'
+import {SummaryComponent} from './summary/summary.component';
+// adding animation module -cj
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +33,7 @@ import {SummaryComponent} from './summary/summary.component'
     SummaryComponent
   ],
   imports: [
-    BrowserModule, FormsModule, 
+    BrowserModule,BrowserAnimationsModule, FormsModule, 
     ReactiveFormsModule, HttpModule,
     StoreModule.forRoot({AppReducer}),
     EffectsModule.forRoot([listEffect]),

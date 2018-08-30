@@ -4,10 +4,12 @@ import { AppActions, AppActionDel, AppActionUpd } from '../store/action';
 import { CommonService } from '../common.service';
 
 
+
 @Component({
   selector: 'app-display',
   templateUrl: './display.component.html',
   styleUrls: ['./display.component.css']
+
 })
 export class DisplayComponent implements OnInit {
   dataToDisplay: any[];
