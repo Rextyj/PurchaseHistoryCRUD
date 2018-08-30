@@ -60,7 +60,8 @@ export class AddItemComponent implements OnInit {
     formData.Owner = this.owner;
 
     console.log('formdata is ',formData);
-    formData['lossOrGain'] = (formData['soldPrice'] - formData['purchasePrice']) * formData['numOfSharesSold'];
+    //Note the sold price and purchase price are total price not per share price
+    formData['lossOrGain'] = formData['soldPrice'] - formData['purchasePrice'];
     formData['avgPurchasePrice'] = formData.purchasePrice / formData.numOfSharesBought;
     formData['avgSoldPrice'] = formData.soldPrice / formData.numOfSharesSold;
 
