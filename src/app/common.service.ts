@@ -10,26 +10,42 @@ export class CommonService {
   
   constructor(private http: Http) { }  
   
-  savePurchase(item){   
-    console.log('saving');   
-    return this.http.post('http://localhost:8080/records/api/SavePurchase/', item)  
+  savePurchase(formdata){   
+    console.log('saving'); 
+    var url = "http://localhost:8080/records/api/";
+    url += formdata.Owner;
+    url += "/SavePurchase";
+    return this.http.post(url, formdata)  
             .pipe(map((response: Response) =>response.json()))              
   }  
   
   GetPurchase(owner){
-    //note: we have to pass in a JSON object!!!!       
-    return this.http.post('http://localhost:8080/records/api/getPurchase/', owner)  
+    var url = "http://localhost:8080/records/api/";
+    url += owner.owner;
+    url += "/getPurchase";
+    console.log("the get purchase url is ", url);
+    return this.http.get(url)  
             .pipe(map((response: Response) => response.json()))              
   }  
 
  deletePurchase(idAndOwner){   
    //idAndOwner is a JSON object
-    return this.http.post('http://localhost:8080/records/api/deletePurchase/',idAndOwner)  
+   var url = "http://localhost:8080/records/api/";
+    url += idAndOwner.owner;
+    url += "/deletePurchase/";
+    url += idAndOwner.id
+    console.log("the get purchase url is ", url);
+    return this.http.delete(url)  
             .pipe(map((response: Response) =>response.json()))               
   }  
   
+  // saveUser(user){
+  //   return this.http.post('http://localhost:8080/users/api/SaveUser/', user)
+  //           .pipe(map((response: Response) =>response.json()));
+  // }
+
   saveUser(user){
-    return this.http.post('http://localhost:8080/users/api/SaveUser/', user)
+    return this.http.post('http://localhost:8080/users/api/saveUser/', user)
             .pipe(map((response: Response) =>response.json()));
   }
 

@@ -31,13 +31,13 @@ export class AddItemComponent implements OnInit {
     private newService: CommonService, private store: Store<AppState>,
     private router: Router){
     this.form = this.fb.group({
-      CompanyName: ['', [Validators.required]],
-      NumberOfSharesBought: ['', [Validators.required]],
-      DatePurchased: ['', [Validators.required]],
-      DateSold: ['', [Validators.required]],
-      NumberOfSharesSold: ['', [Validators.required]],
-      PurchasePrice:['', [Validators.required]],
-      SoldPrice: ['', [Validators.required]]      
+      companyName: ['', [Validators.required]],
+      numOfSharesBought: ['', [Validators.required]],
+      datePurchased: ['', [Validators.required]],
+      dateSold: ['', [Validators.required]],
+      numOfSharesSold: ['', [Validators.required]],
+      purchasePrice:['', [Validators.required]],
+      soldPrice: ['', [Validators.required]]      
     });
   }
 
@@ -60,9 +60,9 @@ export class AddItemComponent implements OnInit {
     formData.Owner = this.owner;
 
     console.log('formdata is ',formData);
-    formData['LossGainPrice'] = (formData['SoldPrice'] - formData['PurchasePrice']) * formData['NumberOfSharesSold'];
-    formData['AveragePurchasePrice'] = formData.PurchasePrice / formData.NumberOfSharesBought;
-    formData['AverageSoldPrice'] = formData.SoldPrice / formData.NumberOfSharesSold;
+    formData['lossOrGain'] = (formData['soldPrice'] - formData['purchasePrice']) * formData['numOfSharesSold'];
+    formData['avgPurchasePrice'] = formData.purchasePrice / formData.numOfSharesBought;
+    formData['avgSoldPrice'] = formData.soldPrice / formData.numOfSharesSold;
 
     console.log('the modified data is ', formData);
     //save the form object to database

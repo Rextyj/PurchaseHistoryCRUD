@@ -21,7 +21,7 @@ export class DisplayComponent implements OnInit {
   ngOnInit() {
     //then we dispatch the update action with owner info as payload
     //effect will intercept the action
-    console.log('about to dispatch update with owner ', this.owner);
+    
     
     this.store.select('AppReducer').subscribe(state => {
       console.log('get owner', state.owner);
@@ -35,13 +35,20 @@ export class DisplayComponent implements OnInit {
     /*
       any dispatch action will trigger subscription updates
     */
+   console.log('about to dispatch update with owner ', this.owner);
     this.store.dispatch(new AppActionUpd({owner: this.owner}));
+
+    // this.service.GetPurchase({owner: this.owner}).subscribe(data => {
+    //   console.log("returned data is ", data);
+    //   this.dataToDisplay = data;
+    // });
   }
 
   deleteItem(id) {
     //dispatch a delete action/ payload is the id 
     console.log('Item id is ' + id);
     this.store.dispatch(new AppActionDel({'id': id, owner: this.owner }));
+    // this.service.deletePurchase({id: id, owner: this.owner}).subscribe(data => console.log(data));
   }
 
   filterByCompanyName(param) {
