@@ -6,7 +6,6 @@ import {StoreModule} from '@ngrx/store';
 import {EffectsModule} from '@ngrx/effects';
 import {AppRouterModule, routingComponents} from './Router/router.module';
 import {CommonService} from './common.service';
-import { CacheService } from './cache.service';
 // adding cache support from rxjs -cj
 import { AppComponent } from './app.component';
 import { AppReducer } from './store/reducer';

@@ -15,30 +15,39 @@ export class DisplayComponent implements OnInit {
   dataToDisplay: any[];
   currentState;
   owner;
+  needToUpdate;
   constructor(private store: Store<AppActions>,
     private service: CommonService) {
-    
+
   }
 
   ngOnInit() {
     //then we dispatch the update action with owner info as payload
     //effect will intercept the action
-    
-    
+
+
     this.store.select('AppReducer').subscribe(state => {
       console.log('get owner', state.owner);
       this.owner = state.owner;
       console.log('state changed detected');
       console.log('state is', state);
+      this.needToUpdate = state.needToUpdate;
       this.dataToDisplay = state.dataList;
       this.currentState = state.dataList;
     });
-    //we have to pass in a JSON object!!!
-    /*
-      any dispatch action will trigger subscription updates
-    */
-   console.log('about to dispatch update with owner ', this.owner);
-    this.store.dispatch(new AppActionUpd({owner: this.owner}));
+
+    if (this.needToUpdate) {
+      //we have to pass in a JSON object!!!
+      /*
+        any dispatch action will trigger subscription updates
+      */
+      console.log('about to dispatch update with owner ', this.owner);
+      this.store.dispatch(new AppActionUpd({ owner: this.owner }));
+
+    }
+
+
+
 
     // this.service.GetPurchase({owner: this.owner}).subscribe(data => {
     //   console.log("returned data is ", data);
@@ -49,7 +58,7 @@ export class DisplayComponent implements OnInit {
   deleteItem(id) {
     //dispatch a delete action/ payload is the id 
     console.log('Item id is ' + id);
-    this.store.dispatch(new AppActionDel({'id': id, owner: this.owner }));
+    this.store.dispatch(new AppActionDel({ 'id': id, owner: this.owner }));
     // this.service.deletePurchase({id: id, owner: this.owner}).subscribe(data => console.log(data));
   }
 
@@ -59,7 +68,7 @@ export class DisplayComponent implements OnInit {
       filter again should be using the currentState
     */
     this.dataToDisplay = this.currentState.filter(item => {
-      if (item.CompanyName === param) {
+      if (item.companyName === param) {
         console.log('return true');
         return true;
       } else {
@@ -69,12 +78,12 @@ export class DisplayComponent implements OnInit {
     console.log('filtered result is ', this.dataToDisplay);
   }
 
-  filterByDate(param){
+  filterByDate(param) {
     console.log(this.dataToDisplay);
     this.dataToDisplay = this.currentState.filter(item => {
-      var date = new Date(item.DatePurchased);
+      var date = new Date(item.datePurchased);
       var month = date.getMonth() + 1;
-      if(month == param){
+      if (month == param) {
         return true;
       } else {
         return false;

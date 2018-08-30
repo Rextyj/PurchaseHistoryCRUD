@@ -4,7 +4,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { CommonService } from '../common.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/state';
-import { AppActionUpd } from '../store/action';
+import { AppActionUpd, AppActionAdd } from '../store/action';
 import { listEffect } from '../store/effect';
 import { Router } from '@angular/router';
 
@@ -45,6 +45,17 @@ export class AddItemComponent implements OnInit {
   ngOnInit() {
     console.log('action dispatched');
     
+    //this.store.subscribe will return 
+    /*
+      {
+        AppReducer: {
+          dataList: ...,
+          owner: ...
+        }
+      }
+
+      we just want what's inside the appreducer 
+    */
     this.store.select("AppReducer").subscribe(state => {
       console.log('subscribed data is ' , state);
       this.owner = state.owner;
@@ -67,16 +78,18 @@ export class AddItemComponent implements OnInit {
 
     console.log('the modified data is ', formData);
     //save the form object to database
-    this.newService.savePurchase(formData).subscribe(data => {
-      alert(data.data);
+    this.store.dispatch(new AppActionAdd(formData));
+    this.resetForm();
+    // this.newService.savePurchase(formData).subscribe(data => {
+    //   alert(data.data);
 
-      this.store.dispatch(new AppActionUpd({owner: this.owner}));
-      //update has to be inside the callback
-      this.ngOnInit();
+    //   this.store.dispatch(new AppActionUpd({owner: this.owner}));
+    //   //update has to be inside the callback
+    //   this.ngOnInit();
       
-      //reset the form after the data has been saved
-      this.resetForm();
-    }, error => console.error(error));
+    //   //reset the form after the data has been saved
+    //   this.resetForm();
+    // }, error => console.error(error));
   }
 
   onDownload(){
