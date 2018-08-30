@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -23,10 +24,16 @@ import com.example.purshaseHistoryMDF.models.Record;
 import com.example.purshaseHistoryMDF.models.User;
 import com.example.purshaseHistoryMDF.repository.RecordRepository;
 import com.example.purshaseHistoryMDF.repository.UserRepository;
+import com.example.purshaseHistoryMDF.service.RecordService;
 
 @RestController
 @CrossOrigin("*")
 public class RecordController {
+	private RecordService recordService;
+	
+	public RecordController(RecordService recordService) {
+		this.recordService = recordService;
+	}
 	@Autowired
 	private RecordRepository recordRepository;
 
@@ -82,7 +89,33 @@ public class RecordController {
 		return ResponseEntity.ok().body(customResponse);
 		
 	}
+	
+	@GetMapping("/records/api/{username}/getPurchase/getAverage")
+	public List<?> getAverage(@PathVariable String username) {
+		ExampleMatcher matcher = ExampleMatcher.matching()
+				.withMatcher("username", ExampleMatcher.GenericPropertyMatchers.exact());
 
+		User tempUser = new User();
+		tempUser.setUsername(username);
+		Long userId = userRepository.findOne(Example.of(tempUser, matcher))
+				.map(user -> {
+					return user.getId();
+				}).orElseThrow(() -> new ResourceNotFoundException("User not found when trying to get record"));
+		return recordService.getAverage(userId);
+	}
 
+	@GetMapping("/records/api/{username}/getPurchase/getBetweenDate/{beginDate}/{endDate}")
+	public List<?> getBetweenDate(@PathVariable String beginDate, @PathVariable String endDate,@PathVariable String username) {
+		ExampleMatcher matcher = ExampleMatcher.matching()
+				.withMatcher("username", ExampleMatcher.GenericPropertyMatchers.exact());
+
+		User tempUser = new User();
+		tempUser.setUsername(username);
+		Long userId = userRepository.findOne(Example.of(tempUser, matcher))
+				.map(user -> {
+					return user.getId();
+				}).orElseThrow(() -> new ResourceNotFoundException("User not found when trying to get record"));
+		return recordService.getBetweenDate(beginDate, endDate, userId);
+	}
 
 }
