@@ -1,92 +1,108 @@
-import { Injectable } from '@angular/core';   
-import {Http,Response, Headers, RequestOptions } from '@angular/http';   
-import { Subject } from 'rxjs';
-import { Observable } from 'rxjs';  
-import {map} from 'rxjs/operators'
- 
-  
-@Injectable()  
-export class CommonService {  
-  
-  constructor(private http: Http) { }  
-  
-  savePurchase(item){   
-    console.log('saving');   
-    return this.http.post('http://localhost:8080/records/api/SavePurchase/', item)  
-            .pipe(map((response: Response) =>response.json()))              
-  }  
-  
-  GetPurchase(owner){
-    //note: we have to pass in a JSON object!!!!       
-    return this.http.post('http://localhost:8080/records/api/getPurchase/', owner)  
-            .pipe(map((response: Response) => response.json()))              
-  }  
+import { Injectable } from '@angular/core';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
+import { Subject, Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators'
+const CACHE_KEY = 'httpAppCache';
 
- deletePurchase(idAndOwner){   
-   //idAndOwner is a JSON object
-    return this.http.post('http://localhost:8080/records/api/deletePurchase/',idAndOwner)  
-            .pipe(map((response: Response) =>response.json()))               
-  }  
-  
-  saveUser(user){
-    return this.http.post('http://localhost:8080/users/api/SaveUser/', user)
-            .pipe(map((response: Response) =>response.json()));
+@Injectable()
+export class CommonService {
+  path;
+  cacheURL;
+  constructor(private http: Http, private httpz: HttpClient) {
+
   }
 
-  getUser(user){
+
+  savePurchase(item) {
+    console.log('saving');
+
+    return this.http.post('http://localhost:8080/records/api/SavePurchase/', item)
+      .pipe(map((response: Response) => response.json()))
+
+  }
+
+  GetPurchase(owner) {
+    //note: we have to pass in a JSON object!!!!       
+    return this.http.post('http://localhost:8080/records/api/getPurchase/', owner)
+      .pipe(map((response: Response) => response.json()))
+  }
+
+  getPurchase2(owner) {
+    return this.http.post('http://localhost:8080/records/api/getPurchase/', owner)
+      .pipe(map((response: Response) => response.json()))
+      .subscribe(data => {
+        console.log("get returns ", data);
+        localStorage[CACHE_KEY] = JSON.stringify(data);
+      })
+  }
+
+  deletePurchase(idAndOwner) {
+    //idAndOwner is a JSON object
+    return this.http.post('http://localhost:8080/records/api/deletePurchase/', idAndOwner)
+      .pipe(map((response: Response) => response.json()))
+  }
+
+  saveUser(user) {
+    return this.http.post('http://localhost:8080/users/api/SaveUser/', user)
+      .pipe(map((response: Response) => response.json()));
+  }
+
+  getUser(user) {
     console.log('getuser');
     //use post to handle login
     return this.http.post('http://localhost:8080/users/api/getUser/', user)
-    //pipe map will return the response as a JSON object
-                    .pipe(map((response: Response) =>response.json()));
+      //pipe map will return the response as a JSON object
+      .pipe(map((response: Response) => response.json()));
   }
 
 
-  getSummary(owner){
+  getSummary(owner) {
+
+
     return this.http.post('http://localhost:8080/records/api/getSummary', owner).
-      pipe(map((response: Response) =>response.json()));
+      pipe(map((response: Response) => response.json()));
   }
 
 
-  getBetweenDate(date){
-    return this.http.post('http://localhost:8080/records/api/getBetweenDate',date).
-    pipe(map((response: Response) =>response.json()));
+  getBetweenDate(date) {
+    return this.http.post('http://localhost:8080/records/api/getBetweenDate', date).
+      pipe(map((response: Response) => response.json()));
   }
 
-  
-  getSearchResult(param){
+
+  getSearchResult(param) {
     return this.http.post('http://localhost:8080/records/api/getSearchResult/', param)
-                    .pipe(map((response: Response) => response.json()));
+      .pipe(map((response: Response) => response.json()));
   }
-
-  convertToCSV(data){
+  convertToCSV(data) {
     // this.savedData.push(formData);
     var savedData = data;
     var output = [];
     console.log('the history list is ', savedData);
-    if(output.length == 0){
+    if (output.length == 0) {
       output.push(Object.keys(savedData[0]));
     }
     var res = '';
     //for property names
-    for(var i = 0; i < output.length; i++){
+    for (var i = 0; i < output.length; i++) {
       res += output[i];
-      if(i == output.length - 1){
+      if (i == output.length - 1) {
         res += "\n";
       }
     }
     //for data
-    for (let item of savedData){
+    for (let item of savedData) {
       var temp;
       //note that object.values is not supported everywehre
       temp = Object.keys(item).map(key => {
         return item[key];
       });
-      for(var i = 0; i < temp.length; i++){
-        
-        if(i == temp.length - 1){
+      for (var i = 0; i < temp.length; i++) {
+
+        if (i == temp.length - 1) {
           res += temp[i] + "\n";
-        }else{
+        } else {
           res += temp[i] + ',';
         }
       }
@@ -98,98 +114,3 @@ export class CommonService {
   }
 
 }
-
-interface CacheContent {
-  expiry: number;
-  value: any;
-}
-  console.log('f');
-/**
- * Cache Service is an observables based in-memory cache implementation
- * Keeps track of in-flight observables and sets a default expiry for cached values
- * @export
- * @class CacheService
- */
-export class CacheService {
-  
-  private cache: Map<string, CacheContent> = new Map<string, CacheContent>();
-  private inFlightObservables: Map<string, Subject<any>> = new Map<string, Subject<any>>();
-  readonly DEFAULT_MAX_AGE: number = 300000;
-
-  /**
-   * Gets the value from cache if the key is provided.
-   * If no value exists in cache, then check if the same call exists
-   * in flight, if so return the subject. If not create a new
-   * Subject inFlightObservable and return the source observable.
-   */
-  get(key: string, fallback?: Observable<any>, maxAge?: number): Observable<any> | Subject<any> {
-
-    if (this.hasValidCachedValue(key)) {
-      console.log(`%cGetting from cache ${key}`, 'color: green');
-      return this.cache.get(key).value;
-    }
-
-    if (!maxAge) {
-      maxAge = this.DEFAULT_MAX_AGE;
-    }
-
-    if (this.inFlightObservables.has(key)) {
-      return this.inFlightObservables.get(key);
-    } else if (fallback && fallback instanceof Observable) {
-      this.inFlightObservables.set(key, new Subject());
-      console.log(`%c Calling api for ${key}`, 'color: purple');
-    } else {
-      return Observable.throw('Requested key is not available in Cache');
-    }
-
-  }
-
-  /**
-   * Sets the value with key in the cache
-   * Notifies all observers of the new value
-   */
-  set(key: string, value: any, maxAge: number = this.DEFAULT_MAX_AGE): void {
-    this.cache.set(key, { value: value, expiry: Date.now() + maxAge });
-    this.notifyInFlightObservers(key, value);
-  }
-
-  /**
-   * Checks if the a key exists in cache
-   */
-  has(key: string): boolean {
-    return this.cache.has(key);
-  }
-
-  /**
-   * Publishes the value to all observers of the given
-   * in progress observables if observers exist.
-   */
-  private notifyInFlightObservers(key: string, value: any): void {
-    if (this.inFlightObservables.has(key)) {
-      const inFlight = this.inFlightObservables.get(key);
-      const observersCount = inFlight.observers.length;
-      if (observersCount) {
-        console.log(`%cNotifying ${inFlight.observers.length} flight subscribers for ${key}`, 'color: blue');
-        inFlight.next(value);
-      }
-      inFlight.complete();
-      this.inFlightObservables.delete(key);
-    }
-  }
-
-  /**
-   * Checks if the key exists and   has not expired.
-   */
-  private hasValidCachedValue(key: string): boolean {
-    if (this.cache.has(key)) {
-      if (this.cache.get(key).expiry < Date.now()) {
-        this.cache.delete(key);
-        return false;
-      }
-      return true;
-    } else {
-      return false;
-    }
-  }
-}
-  

@@ -7,7 +7,12 @@ import { AppState } from '../store/state';
 import { AppActionUpd } from '../store/action';
 import { listEffect } from '../store/effect';
 import { Router } from '@angular/router';
-
+import { Injectable } from '@angular/core';   
+import {Http,Response, Headers, RequestOptions } from '@angular/http';   
+import {HttpClient} from '@angular/common/http';
+import { Subject,Observable } from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
+import { Cacheable } from 'ngx-cacheable';
 @Component({
   // selector: 'app-root',
   templateUrl: './add-item.component.html',
@@ -42,6 +47,7 @@ export class AddItemComponent implements OnInit {
   }
 
   //reading all the records from the database
+
   ngOnInit() {
     console.log('action dispatched');
     
@@ -54,10 +60,12 @@ export class AddItemComponent implements OnInit {
 
 
   onAdd(formData) {
+    
     //mode is for server.js file to recognize the intent
     formData.mode = 'Save';
 
     formData.Owner = this.owner;
+
 
     console.log('formdata is ',formData);
     formData['LossGainPrice'] = (formData['SoldPrice'] - formData['PurchasePrice']) * formData['NumberOfSharesSold'];
@@ -72,7 +80,6 @@ export class AddItemComponent implements OnInit {
       this.store.dispatch(new AppActionUpd({owner: this.owner}));
       //update has to be inside the callback
       this.ngOnInit();
-      
       //reset the form after the data has been saved
       this.resetForm();
     }, error => console.error(error));

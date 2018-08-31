@@ -4,7 +4,7 @@ import { slideAnimation } from './animations';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: [ './app.component.scss' ],
+  styleUrls: [ '../assets/app.component.scss' ],
   providers: [],
   animations: [fadeAnimation, slideAnimation]
   
