@@ -1,5 +1,5 @@
 import { Injectable } from "../../../node_modules/@angular/core";
-import { AppActions, UPDATE_LIST, AppActionUpdateSuccess, DELETE_ITEM, AppActionDeleteSuccess, UPDATE_SUMM, ADD_ITEM, AppActionUpd } from "./action";
+import { UPDATE_LIST, DELETE_ITEM, UPDATE_SUMM, ADD_ITEM, AppActions, AppActionUpd, AppActionUpdateSuccess, AppActionUpdateSummarySuccess, AppActionDeleteSuccess } from "./action";
 import { CommonService } from "../service/common.service";
 import { Effect, Actions, ofType } from "../../../node_modules/@ngrx/effects";
 import { switchMap, map, withLatestFrom } from "../../../node_modules/rxjs/operators";
@@ -56,7 +56,7 @@ export class listEffect {
             //it passes the owner info to the getpurchase service method and get back records belongs to the owner
             switchMap(action => {console.log(action.payload); return this.service.getSummary(action.payload)}),
             //it will then use the data received to create a new action and pass it to reducer
-            map(dataReceived => new AppActionUpdateSuccess(dataReceived))
+            map(dataReceived => {console.log(dataReceived); return new AppActionUpdateSummarySuccess(dataReceived)})
         )
         console.log(updSummary);
         return updSummary;

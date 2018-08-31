@@ -33,7 +33,7 @@ export class SummaryComponent implements OnInit {
             this.owner = state.owner;
             console.log('state changed detected');
             console.log('state is', state);
-            this.dataToDisplay = state.dataList;
+            this.dataToDisplay = state.summary;
         });
         //we have to pass in a JSON object!!!
         this.store.dispatch(new AppActionUpdateSummary({ owner: this.owner }));
