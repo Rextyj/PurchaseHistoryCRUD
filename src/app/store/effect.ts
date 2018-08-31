@@ -1,6 +1,6 @@
 import { Injectable } from "../../../node_modules/@angular/core";
 import { AppActions, UPDATE_LIST, AppActionUpdateSuccess, DELETE_ITEM, AppActionDeleteSuccess, UPDATE_SUMM, ADD_ITEM, AppActionUpd } from "./action";
-import { CommonService } from "../common.service";
+import { CommonService } from "../service/common.service";
 import { Effect, Actions, ofType } from "../../../node_modules/@ngrx/effects";
 import { switchMap, map, withLatestFrom } from "../../../node_modules/rxjs/operators";
 import { Observable } from "../../../node_modules/rxjs";

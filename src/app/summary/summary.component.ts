@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '../../../node_modules/@ngrx/store';
 import { AppActions, AppActionDel, AppActionUpdateSummary } from '../store/action';
-import { CommonService } from '../common.service';
+import { CommonService } from '../service/common.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '../../../node_modules/@ngrx/store';
 import { AppActions, AppActionDel, AppActionUpd } from '../store/action';
-import { CommonService } from '../common.service';
+import { CommonService } from '../service/common.service';
 
 
 
@@ -95,11 +95,11 @@ export class DisplayComponent implements OnInit {
     this.dataToDisplay = this.currentState;
   }
 
-  filterByText(param) {
-    this.service.getSearchResult(param).subscribe(data => {
-      console.log('display comp gets ', data);
-      this.dataToDisplay = data;
-    });
-  }
+  // filterByText(param) {
+  //   this.service.getSearchResult(param).subscribe(data => {
+  //     console.log('display comp gets ', data);
+  //     this.dataToDisplay = data;
+  //   });
+  // }
 
 }
