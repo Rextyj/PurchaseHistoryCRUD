@@ -46,6 +46,61 @@ export class CommonService {
   saveUser(user) {
     return this.http.post('http://localhost:8080/users/api/SaveUser/', user)
       .pipe(map((response: Response) => response.json()));
+import { Injectable } from '@angular/core';   
+import {Http,Response, Headers, RequestOptions } from '@angular/http';   
+import { Subject } from 'rxjs';
+import { Observable } from 'rxjs';  
+import {map} from 'rxjs/operators'
+ 
+  
+@Injectable()  
+export class CommonService {  
+  
+  constructor(private http: Http) { }  
+  
+  savePurchase(formdata){   
+    console.log('saving'); 
+    var url = "http://localhost:8080/records/api/";
+    url += formdata.Owner;
+    url += "/SavePurchase";
+    return this.http.post(url, formdata)  
+            .pipe(map((response: Response) =>response.json()))              
+  }  
+  
+  GetPurchase(owner){
+    var url = "http://localhost:8080/records/api/";
+    url += owner.owner;
+    url += "/getPurchase";
+    console.log("the get purchase url is ", url);
+    return this.http.get(url)  
+            .pipe(map((response: Response) => response.json()))              
+  }  
+
+ deletePurchase(idAndOwner){   
+   //idAndOwner is a JSON object
+   var url = "http://localhost:8080/records/api/";
+    url += idAndOwner.owner;
+    url += "/deletePurchase/";
+    url += idAndOwner.id
+    console.log("the get purchase url is ", url);
+    return this.http.delete(url)  
+            .pipe(map((response: Response) =>response.json()))               
+  }  
+  
+
+  /*onAverage(){
+    var url = "http://localhost:8080/records/api/getPurchase/getAverage";
+    return this.http.get(url).pipe(map((response:Response)=> response.json()))
+  }*/
+
+  // saveUser(user){
+  //   return this.http.post('http://localhost:8080/users/api/SaveUser/', user)
+  //           .pipe(map((response: Response) =>response.json()));
+  // }
+
+  saveUser(user){
+    return this.http.post('http://localhost:8080/users/api/saveUser/', user)
+            .pipe(map((response: Response) =>response.json()));
   }
 
   getUser(user) {
@@ -68,6 +123,27 @@ export class CommonService {
   getBetweenDate(date) {
     return this.http.post('http://localhost:8080/records/api/getBetweenDate', date).
       pipe(map((response: Response) => response.json()));
+  getSummary(owner){
+    var url = "http://localhost:8080/records/api/";
+    url += owner.owner;
+    url += "/getPurchase/getAverage"
+    console.log("the get Summary url is ", url);
+    return this.http.get(url).
+      pipe(map((response: Response) =>response.json()));
+  }
+
+
+  getBetweenDate(owner,date){
+    var url = "http://localhost:8080/records/api/";
+    url += owner;
+    url += "/getPurchase/getBetweenDate";
+    url += "/";
+    url += date.beginningDate;
+    url += "/";
+    url += date.endDate;
+    console.log("the get BetweenDate url is ", url);
+    return this.http.get(url).
+    pipe(map((response: Response) =>response.json()));
   }
 
 
@@ -77,6 +153,7 @@ export class CommonService {
   }
   convertToCSV(data) {
     // this.savedData.push(formData);
+    console.log(typeof data);
     var savedData = data;
     var output = [];
     console.log('the history list is ', savedData);

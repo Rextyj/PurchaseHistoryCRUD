@@ -67,6 +67,24 @@
                         <td>
                             {{dataToDisplay.length - i}}
                             <button (click)='deleteItem(item._id)'>
+        <thead>
+          <tr>
+            <th>Entry Number</th>
+            <th>Company Name</th>
+            <th>Shares bought</th>
+            <th>Date Purchased</th>
+            <th>Date Sold</th>
+            <th>Shares sold</th>
+            <th>Purchase Price</th>
+            <th>Sold Price</th>
+            <th>Loss/Gain Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor='let item of dataToDisplay.reverse(); let i = index'>
+            <td>
+              {{dataToDisplay.length - i}}
+              <button (click)='deleteItem(item.id)'>
                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="16" viewBox="0 0 12 16">
                   <path fill-rule="evenodd"
                     d="M11 2H9c0-.55-.45-1-1-1H5c-.55 0-1 .45-1 1H2c-.55 0-1 .45-1 1v1c0 .55.45 1 1 1v9c0 .55.45 1 1 1h7c.55 0 1-.45 1-1V5c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1zm-1 12H3V5h1v8h1V5h1v8h1V5h1v8h1V5h1v9zm1-10H2V3h9v1z"
@@ -82,6 +100,17 @@
                         <td>{{item.SoldPrice}}</td>
                         <td>{{item.LossGainPrice}}</td>
                     </tr>
+                </tbody>
+                </td>
+                <td>{{item.companyName}}</td>
+                <td>{{item.numOfSharesBought}}</td>
+                <td>{{item.datePurchased}}</td>
+                <td>{{item.dateSold}}</td>
+                <td>{{item.numOfSharesSold}}</td>
+                <td>{{item.purchasePrice}}</td>
+                <td>{{item.soldPrice}}</td>
+                <td>{{item.lossOrGain}}</td>
+                </tr>
                 </tbody>
 
             </table>

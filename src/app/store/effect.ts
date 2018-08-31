@@ -1,10 +1,12 @@
 import { Injectable } from "../../../node_modules/@angular/core";
-import { AppActions, UPDATE_LIST, AppActionUpdateSuccess, DELETE_ITEM, AppActionDeleteSuccess, UPDATE_SUMM } from "./action";
+import { AppActions, UPDATE_LIST, AppActionUpdateSuccess, DELETE_ITEM, AppActionDeleteSuccess, UPDATE_SUMM, ADD_ITEM, AppActionUpd } from "./action";
 import { CommonService } from "../common.service";
 import { Effect, Actions, ofType } from "../../../node_modules/@ngrx/effects";
-import { switchMap, map } from "../../../node_modules/rxjs/operators";
+import { switchMap, map, withLatestFrom } from "../../../node_modules/rxjs/operators";
 import { Observable } from "../../../node_modules/rxjs";
-import { Action } from "../../../node_modules/@ngrx/store";
+import { Action, Store } from "../../../node_modules/@ngrx/store";
+import { AppState } from "./state";
+import { AddItemComponent } from "../add-item/add-item.component";
 
 
 
@@ -12,8 +14,23 @@ import { Action } from "../../../node_modules/@ngrx/store";
 export class listEffect {
     constructor(
         private action: Actions,
-        private service: CommonService
+        private service: CommonService,
+        private store: Store<AppState>
     ) {}
+
+    @Effect()
+    addItem(): Observable<Action> {
+        var username;
+        var addAction = this.action.pipe(
+            ofType<AppActions>(ADD_ITEM),
+            //the payload passed in is formdata that has Owner property
+            switchMap(action => {username = action.payload.Owner; return this.service.savePurchase(action.payload)}),
+            map(dataReceived => {alert(dataReceived.data); return new AppActionUpd({owner: username})})
+
+        )
+
+        return addAction;
+    }
 
     @Effect()
     updateList(): Observable<Action> {
@@ -48,9 +65,11 @@ export class listEffect {
     @Effect()
     deleteItem(): Observable<Action> {
         console.log(this.action);
+        var username;
         var delAction = this.action.pipe(
             ofType<AppActions>(DELETE_ITEM),
-            switchMap(action => this.service.deletePurchase(action.payload)),
+            switchMap(action => {username = action.payload.owner ;return this.service.deletePurchase(action.payload)}),
+            switchMap(respose => this.service.GetPurchase({owner: username})),
             map(list => {console.log('in deleteitem ', list) ;return new AppActionDeleteSuccess(list)})
         )
         // var delAction = this.action.pipe(

@@ -44,35 +44,84 @@
             </tr>
         </table>
     </div>
+    <td>Date Sold</td>
+    <td>Number Of Shares Bought</td>
+    <td>Number Of Shares Sold</td>
+    <td>Purchase Price</td>
+    <td>Sold Price</td>
+    <td>Loss Gain Price</td>
+    </tr>
+    <tr *ngFor='let item of betweenDate; let i = index'>
+        <td>{{i+1}}</td>
+        <td>{{item[5]}}</td>
+        <td>{{item[6]}}</td>
+        <td>{{item[7]}}</td>
+        <td>{{item[9]}}</td>
+        <td>{{item[10]}}</td>
+        <td>{{item[11]}}</td>
+        <td>{{item[12]}}</td>
+        <td>{{item[8]}}</td>
+    </tr>
+    </table>
+</div>
 
-    <hr>
+<hr>
 
-    <div class="container">
-        <div class="bg-white border col mx-auto mt-4 p-4 shadow">
-            <table class="table table-responsive table-striped table-hover text-center">
-                <tr>
-                    <td>Entry Number</td>
-                    <td>Company Name</td>
-                    <td>Average Number Bought</td>
-                    <td>Average Number Sold</td>
-                    <td>Average Purchase Price</td>
-                    <td>Average Sold Price</td>
-                    <td>Average Loss or Gain</td>
-                </tr>
-                <tr *ngFor='let item of dataToDisplay; let i = index'>
-                    <td>{{i+1}}</td>
-                    <td>{{item._id}}</td>
+<div class="container">
+    <div class="bg-white border col mx-auto mt-4 p-4 shadow">
+        <table class="table table-responsive table-striped table-hover text-center">
+            <tr>
+                <td>Entry Number</td>
+                <td>Company Name</td>
+                <td>Average Number Bought</td>
+                <td>Average Number Sold</td>
+                <td>Average Purchase Price</td>
+                <td>Average Sold Price</td>
+                <td>Average Loss or Gain</td>
+            </tr>
+            <tr *ngFor='let item of dataToDisplay; let i = index'>
+                <td>{{i+1}}</td>
+                <td>{{item._id}}</td>
 
-                    <td>{{item.averagenumberbought}}</td>
+                <td>{{item.averagenumberbought}}</td>
 
-                    <td>{{item.averagenumbersold}}</td>
-                    <td>{{item.averagePurchasePrice}}</td>
-                    <td>{{item.averageSoldPrice}}</td>
-                    <td>{{item.averageGainOrLossPrice}}</td>
-                </tr>
-            </table>
-            <div class="text-center">
-                <button [disabled]='dataToDisplay === undefined || dataToDisplay.length == 0' type='button' (click)='onDownload()' class="btn btn-primary"><i class="fa fa-download p-1" aria-hidden="true"></i>Download as .csv</button>
-            </div>
+                <td>{{item.averagenumbersold}}</td>
+                <td>{{item.averagePurchasePrice}}</td>
+                <td>{{item.averageSoldPrice}}</td>
+                <td>{{item.averageGainOrLossPrice}}</td>
+            </tr>
+        </table>
+        <div class="text-center">
+            <button [disabled]='dataToDisplay === undefined || dataToDisplay.length == 0' type='button' (click)='onDownload()' class="btn btn-primary"><i class="fa fa-download p-1" aria-hidden="true"></i>Download as .csv</button>
         </div>
     </div>
+</div>
+<div class="container">
+    <div class="bg-white border col mx-auto mt-4 p-4 shadow">
+        <table class="table table-responsive table-striped table-hover text-center">
+            <tr>
+                <td>Entry Number</td>
+                <td>Company Name</td>
+                <td>Average Number Bought</td>
+                <td>Average Number Sold</td>
+                <td>Average Purchase Price</td>
+                <td>Average Sold Price</td>
+                <td>Average Loss or Gain</td>
+            </tr>
+            <tr *ngFor='let item of dataToDisplay; let i = index'>
+                <td>{{i+1}}</td>
+                <td>{{item[1]}}</td>
+
+                <td>{{item[2]}}</td>
+
+                <td>{{item[3]}}</td>
+                <td>{{item[4]}}</td>
+                <td>{{item[5]}}</td>
+                <td>{{item[6]}}</td>
+            </tr>
+        </table>
+        <div class="text-center">
+            <button [disabled]='dataToDisplay === undefined || dataToDisplay.length == 0' type='button' (click)='onDownload()' class="btn btn-primary">Download</button>
+        </div>
+    </div>
+</div>

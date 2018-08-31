@@ -13,25 +13,29 @@ export const AppReducer: ActionReducer<AppState> =
             case UPDATE_SUCCESS:
                 state = {
                     dataList: action.payload,
-                    owner: state.owner
+                    owner: state.owner,
+                    needToUpdate: false
                 }
                 return state;
             case DELETE_SUCCESS:
                 state = {
                     dataList: action.payload,
-                    owner: state.owner
+                    owner: state.owner,
+                    needToUpdate: false
                 }
                 return state;
             case ASSIGN_OWNER:
                 state = {
                     dataList: state.dataList,
-                    owner: action.payload
+                    owner: action.payload,
+                    needToUpdate: true
                 }
                 return state;
             case LOG_OUT:
                 state = {
                     dataList: ['fetching data'],
-                    owner: ''
+                    owner: '',
+                    needToUpdate: true
                 }
                 return state;
             default:
