@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
-
-import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -42,41 +40,63 @@ public class RecordController {
 	
 	
 	@GetMapping("/records/api/{username}/getPurchase")
-	public List<Record> getRecords(@PathVariable String username) {
-		ExampleMatcher matcher = ExampleMatcher.matching()
-				.withMatcher("username", ExampleMatcher.GenericPropertyMatchers.exact());
+	public ResponseEntity<?> getRecords(@PathVariable String username) {
+		// ExampleMatcher matcher = ExampleMatcher.matching()
+		// 		.withMatcher("username", ExampleMatcher.GenericPropertyMatchers.exact());
 
-		User tempUser = new User();
-		tempUser.setUsername(username);
-		Long userId = userRepository.findOne(Example.of(tempUser, matcher))
-				.map(user -> {
-					return user.getId();
-				}).orElseThrow(() -> new ResourceNotFoundException("User not found when trying to get record"));
-		return recordRepository.findByUser_Id(userId);
+		// User tempUser = new User();
+		// tempUser.setUsername(username);
+		// Long userId = userRepository.findOne(Example.of(tempUser, matcher))
+		// 		.map(user -> {
+		// 			return user.getId();
+		// 		}).orElseThrow(() -> new ResourceNotFoundException("User not found when trying to get record"));
+		User user = userRepository.findByUsername(username);
+		CustomResponse customResponse = new CustomResponse();
+		if (user == null){
+			customResponse.setData("Error finding user");
+			return ResponseEntity.ok().body(customResponse);
+		}
+
+		List<Record> records = recordRepository.findByUser_Id(user.getId());
+		if(records != null) {
+			return ResponseEntity.ok().body(records);
+		} else {
+			customResponse.setData("Error finding records");
+			return ResponseEntity.ok().body(customResponse);
+		}
+		
 	}
 	
-//	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/records/api/{username}/SavePurchase")
 	public ResponseEntity<CustomResponse> saveRecord(@PathVariable String username, 
 			@Valid @RequestBody Record record) {
-		ExampleMatcher matcher = ExampleMatcher.matching()
-				.withMatcher("username", ExampleMatcher.GenericPropertyMatchers.exact());
+		// ExampleMatcher matcher = ExampleMatcher.matching()
+		// 		.withMatcher("username", ExampleMatcher.GenericPropertyMatchers.exact());
 
-		User tempUser = new User();
-		tempUser.setUsername(username);
-		userRepository.findOne(Example.of(tempUser, matcher))
-		.map(user -> {
-			record.setUser(user);
-			return recordRepository.save(record);
-		}).orElseThrow(() -> new ResourceNotFoundException("User not found when trying to save record " + username));
-
-		CustomResponse customResponse = new CustomResponse(); 
-		customResponse.setData("Added a new item");
-		return ResponseEntity.ok().body(customResponse);
-
+		// User tempUser = new User();
+		// tempUser.setUsername(username);
+		// userRepository.findOne(Example.of(tempUser, matcher))
+		// .map(user -> {
+		// 	record.setUser(user);
+		// 	return recordRepository.save(record);
+		// }).orElseThrow(() -> new ResourceNotFoundException("User not found when trying to save record " + username));
+		
+		User user = userRepository.findByUsername(username);
+		CustomResponse customResponse = new CustomResponse();
+		record.setUser(user);
+		try {
+			this.recordRepository.save(record);
+			customResponse.setData("Added a new item");
+			return ResponseEntity.ok().body(customResponse);
+		} catch (Exception e) {
+			//TODO: handle exception
+			System.out.println(e.getStackTrace());
+			customResponse.setData("Error");
+			return ResponseEntity.ok().body(customResponse);
+		}
 	}
 	
-//	@CrossOrigin(origins = "http://localhost:4200")
+
 	@DeleteMapping("/records/api/{username}/deletePurchase/{recordId}")
 	public ResponseEntity<?> deleteRecord(@PathVariable String username,
 											@PathVariable Long recordId) {

@@ -7,5 +7,5 @@ import com.example.purshaseHistoryMDF.models.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>{
-	
+	public User findByUsername(String username);
 }
