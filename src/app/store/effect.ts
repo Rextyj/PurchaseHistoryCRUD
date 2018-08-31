@@ -6,10 +6,10 @@ import { switchMap, map, withLatestFrom } from "../../../node_modules/rxjs/opera
 import { Observable } from "../../../node_modules/rxjs";
 import { Action, Store } from "../../../node_modules/@ngrx/store";
 import { AppState } from "./state";
-import { AddItemComponent } from "../add-item/add-item.component";
 
-
-
+/**
+ * @description Ngrx effects used for handling side effects
+ */
 @Injectable()
 export class listEffect {
     constructor(
@@ -18,20 +18,22 @@ export class listEffect {
         private store: Store<AppState>
     ) {}
 
+    //Additem effect
     @Effect()
     addItem(): Observable<Action> {
         var username;
         var addAction = this.action.pipe(
             ofType<AppActions>(ADD_ITEM),
             //the payload passed in is formdata that has Owner property
+            //save the purchase record came with action by making an API call
             switchMap(action => {username = action.payload.Owner; return this.service.savePurchase(action.payload)}),
+            //use the returned response from backend and dispatch a new update action
             map(dataReceived => {alert(dataReceived.data); return new AppActionUpd({owner: username})})
-
         )
-
         return addAction;
     }
 
+    //Effect to intercept update list action
     @Effect()
     updateList(): Observable<Action> {
         console.log('effect gets ', this.action);
@@ -47,6 +49,7 @@ export class listEffect {
         return updAction;
     }
 
+    //Effect to intercept update summary action
     @Effect()
     updateSummary(): Observable<Action> {
         console.log('effect gets ', this.action);
@@ -62,6 +65,7 @@ export class listEffect {
         return updSummary;
     }
 
+    //Effect to intercept delete item action
     @Effect()
     deleteItem(): Observable<Action> {
         console.log(this.action);
@@ -72,11 +76,6 @@ export class listEffect {
             switchMap(respose => this.service.GetPurchase({owner: username})),
             map(list => {console.log('in deleteitem ', list) ;return new AppActionDeleteSuccess(list)})
         )
-        // var delAction = this.action.pipe(
-        //     ofType<AppActions>(DELETE_ITEM),
-        //     switchMap(action => this.service.deletePurchase(action.payload)),
-        //     map(list => {console.log('in deleteitem ', list) ;return new AppActionDeleteSuccess(list)})
-        // )
         return delAction;
     }
 }

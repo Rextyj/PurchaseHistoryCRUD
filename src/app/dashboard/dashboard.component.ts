@@ -17,11 +17,11 @@ import { slideAnimation } from '../animations';
 @Component({
   // selector: 'app-root',
   templateUrl: './dashboard.component.html',
-  styleUrls: [ './dashboard.component.scss' ],
+  styleUrls: ['./dashboard.component.scss'],
   providers: [],
-  animations: [fadeAnimation,slideAnimation]
+  animations: [fadeAnimation, slideAnimation]
 })
-export class DashboardComponent implements OnInit{
+export class DashboardComponent implements OnInit {
   //variable declaration
   form: FormGroup;
   savedData: Array<Object> = [];
@@ -31,37 +31,35 @@ export class DashboardComponent implements OnInit{
   dataFromStore;
   owner;
 
-  constructor(private fb: FormBuilder, private domSan: DomSanitizer, 
+  constructor(private fb: FormBuilder, private domSan: DomSanitizer,
     private newService: CommonService, private store: Store<AppState>,
-    private router: Router){
+    private router: Router) {
   }
 
   ngOnInit() {
     //show the add component by default when user first logged in
     this.onAdd();
-    // //subscribe to the ngrx store to get the current state of the app
-    // this.store.select('AppReducer').subscribe(state => {
-    //   console.log('dashboard gets state ', state);
-    //   this.owner = state.owner;
-    // });
   }
 
-  onView(){
-    // this.router.navigateByUrl('/display');
-    this.router.navigate(['/dashboard', {outlets: {'childrenComponents': 'display'}}]);
+  //invoked when the user clicks view tab
+  onView() {
+    this.router.navigate(['/dashboard', { outlets: { 'childrenComponents': 'display' } }]);
   }
 
-  onAdd(){
-    this.router.navigate(['/dashboard', {outlets: {'childrenComponents': 'additem'}}]);
+  //invoked when the user clicks add tab
+  onAdd() {
+    this.router.navigate(['/dashboard', { outlets: { 'childrenComponents': 'additem' } }]);
   }
 
-
-  onSummary(){
-    this.router.navigate(['/dashboard',{outlets:{'childrenComponents':'summary'}}]);
+  //invoked when the user clicks summary tab
+  onSummary() {
+    this.router.navigate(['/dashboard', { outlets: { 'childrenComponents': 'summary' } }]);
 
   }
 
-  onLogout(){
+  //invoked when the user clicks logout button
+  onLogout() {
+    //dispatch a logout action to rest the state
     this.store.dispatch(new AppActionLogout());
     this.router.navigateByUrl('/login');
   }

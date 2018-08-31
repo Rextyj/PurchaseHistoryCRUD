@@ -10,6 +10,7 @@ import { AddItemComponent } from '../add-item/add-item.component';
 import {SummaryComponent} from '../summary/summary.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+//define the routes
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
@@ -19,9 +20,7 @@ const routes: Routes = [
     {path: 'additem', component: AddItemComponent, outlet: "childrenComponents"},
     {path: 'summary', component: SummaryComponent, outlet: "childrenComponents"}
   ]}
-  
 ];
-
 
 @NgModule({
   imports: [

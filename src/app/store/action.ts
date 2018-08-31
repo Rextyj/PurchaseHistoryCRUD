@@ -1,6 +1,8 @@
 import { Action } from "../../../node_modules/@ngrx/store";
-import { Actions } from "../../../node_modules/@ngrx/effects";
-import { importExpr } from "@angular/compiler/src/output/output_ast";
+
+/**
+ * @description Ngrx action definitions
+ */
 
 export const ADD_ITEM: string = 'ADD_ITEM';
 export const DELETE_ITEM: string = 'DETELET_ITEM';

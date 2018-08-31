@@ -7,9 +7,6 @@ export const AppReducer: ActionReducer<AppState> =
     (state = initialState, action: AppActions) => {
         console.log('Action came in ' + action.type);
         switch (action.type) {
-
-            //note the UPDATE_SUCCESS case is the same as DELETE_SUCCESS,
-            //we can merge those two cases
             case UPDATE_SUCCESS:
                 state = {
                     dataList: action.payload,
