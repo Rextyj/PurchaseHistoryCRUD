@@ -7,12 +7,7 @@ import { AppState } from '../store/state';
 import { AppActionUpd, AppActionAdd } from '../store/action';
 import { listEffect } from '../store/effect';
 import { Router } from '@angular/router';
-import { Injectable } from '@angular/core';   
-import {Http,Response, Headers, RequestOptions } from '@angular/http';   
-import {HttpClient} from '@angular/common/http';
-import { Subject,Observable } from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
-import { Cacheable } from 'ngx-cacheable';
+
 @Component({
   // selector: 'app-root',
   templateUrl: './add-item.component.html',
@@ -47,7 +42,6 @@ export class AddItemComponent implements OnInit {
   }
 
   //reading all the records from the database
-
   ngOnInit() {
     console.log('action dispatched');
     
@@ -71,12 +65,10 @@ export class AddItemComponent implements OnInit {
 
 
   onAdd(formData) {
-    
     //mode is for server.js file to recognize the intent
     formData.mode = 'Save';
 
     formData.Owner = this.owner;
-
 
     console.log('formdata is ',formData);
     //Note the sold price and purchase price are total price not per share price
