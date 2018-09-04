@@ -1,104 +1,183 @@
 <div class="container mb-2  mt-4">
-  <div class="card-deck">
-    <!--begin card deck-->
-    <div class="card text-center shadow">
-      <h5 class="card-header ">Add a new item</h5>
-      <div class="card-body">
-        <form [formGroup]='form' #myForm='ngForm' (ngSubmit)='onAdd(form.value)' class='formFields bg-gradient-primary'>
-          <div class="form-group row">
-            <label class="col-md-3 col-form-label ">Company Name:</label>
-            <div class="col-md-9">
-              <input type="text" class='form-control' formControlName='companyName' placeholder="Apple lnc.">
-              <div *ngIf="form.controls['companyName'].touched && form.controls['companyName'].hasError('required')" class="alert alert-danger">Please
-                enter the company name</div>
+    <div class="card-deck">
+        <!--begin card deck-->
+        <div class="card text-center shadow">
+            <h5 class="card-header ">Add a new item</h5>
+            <div class="card-body">
+                <form [formGroup]='form' #myForm='ngForm' (ngSubmit)='onAdd(form.value)' class='formFields bg-gradient-primary'>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label ">Company Name:</label>
+                        <div class="col-md-9">
+                            <input type="text" class='form-control' formControlName='CompanyName' placeholder="Apple lnc.">
+                            <div *ngIf="form.controls['CompanyName'].touched && form.controls['CompanyName'].hasError('required')" class="alert alert-danger">Please enter the company name</div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label ">Number of shares bought:</label>
+                        <div class="col-md-9">
+                            <input type="number" class='form-control' formControlName='NumberOfSharesBought' placeholder="1">
+                            <div *ngIf="form.controls['NumberOfSharesBought'].touched && form.controls['NumberOfSharesBought'].hasError('required')" class="alert alert-danger">Please enter the number of shares bought</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">Date Purchased:</label>
+                        <div class="col-md-9">
+                            <input type="date" class='form-control' formControlName='DatePurchased'>
+                            <div *ngIf="form.controls['DatePurchased'].touched && form.controls['DatePurchased'].hasError('required')" class="alert alert-danger">Please enter the purchase date</div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">Date sold:</label>
+                        <div class="col-md-9">
+                            <input type="date" #refName class='form-control' formControlName='DateSold'>
+                            <div *ngIf="form.controls.DateSold.touched && form.controls['DateSold'].hasError('required')" class="alert alert-danger">Please enter the sell date</div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">Number of shares sold:</label>
+                        <div class="col-md-9">
+                            <input type="number" class='form-control' formControlName='NumberOfSharesSold' placeholder="1">
+                            <div *ngIf="form.controls['NumberOfSharesSold'].touched && form.controls['NumberOfSharesSold'].hasError('required')" class="alert alert-danger">Please enter the number of shares sold</div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group row">
+                        <label class="col-form-label col-md-3">Total Purchase Price:</label>
+                        <div class="col-md-9">
+                            <input type="number" class='form-control' formControlName='PurchasePrice' placeholder="$1000">
+                            <div *ngIf="form.controls['PurchasePrice'].touched && form.controls['PurchasePrice'].hasError('required')" class="alert alert-danger">Please enter the total purchase price</div>
+                        </div>
+                    </div>
+
+                    <div *ngIf='form.controls.PurchasePrice.valid && form.controls.NumberOfSharesBought.valid' class="form-group row">
+                        <label class="col-form-label col-md-3">Average purchase price:</label>
+                        <div class="col-md-9 text-left">
+                            <p>{{form.value.PurchasePrice / form.value.NumberOfSharesBought}}</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">Total Sold Price:</label>
+                        <div class="col-md-9">
+                            <input type="number" class='form-control' formControlName='SoldPrice' placeholder="$2000">
+                            <div *ngIf="form.controls['SoldPrice'].touched && form.controls['SoldPrice'].hasError('required')" class="alert alert-danger">Please enter the total sell price</div>
+                        </div>
+                    </div>
+
+                    <div *ngIf='form.controls.SoldPrice.valid && form.controls.NumberOfSharesSold.valid' class="form-group row">
+                        <label class="col-form-label col-md-3">Average sold price:</label>
+                        <div class="col-md-9 text-left">
+                            <p>{{form.value.SoldPrice / form.value.NumberOfSharesSold}}</p>
+                        </div>
+                    </div>
+
+
+                    <div class="btn-group">
+
+                        <button [disabled]='!form.valid' type="submit" class="btn btn-success"> <i class="fa fa-plus-circle p-1" aria-hidden="true"></i>Add</button>
+                        <!-- <button [disabled]='dataFromStore === undefined || dataFromStore.length == 0' class="btn btn-primary" (click) = 'onView()'>View</button> -->
+                        <button [disabled]='dataFromStore === undefined || dataFromStore.length == 0' type='button' (click)='onDownload()' class="btn btn-primary"><i class="fa fa-download p-1" aria-hidden="true"></i>Download as .csv</button>
+                    </div>
+
+                </form>
+                <div class="card-deck">
+                    <!--begin card deck-->
+                    <div class="card text-center shadow">
+                        <h5 class="card-header ">Add a new item</h5>
+                        <div class="card-body">
+                            <form [formGroup]='form' #myForm='ngForm' (ngSubmit)='onAdd(form.value)' class='formFields bg-gradient-primary'>
+                                <div class="form-group row">
+                                    <label class="col-md-3 col-form-label ">Company Name:</label>
+                                    <div class="col-md-9">
+                                        <input type="text" class='form-control' formControlName='companyName' placeholder="Apple lnc.">
+                                        <div *ngIf="form.controls['companyName'].touched && form.controls['companyName'].hasError('required')" class="alert alert-danger">Please enter the company name</div>
+                                    </div>
+                                </div>
+                                <!-- <app-display class="card col-md-6 shadow"></app-display> -->
+                                < div class="form-group row">
+                                    <label class="col-md-3 col-form-label ">Number of shares bought:</label>
+                                    <div class="col-md-9">
+                                        <input type="number" class='form-control' formControlName='numOfSharesBought' placeholder="1">
+                                        <div *ngIf="form.controls['numOfSharesBought'].touched && form.controls['numOfSharesBought'].hasError('required')" class="alert alert-danger">Please enter the number of shares bought</div>
+                                    </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Date Purchased:</label>
+                            <div class="col-md-9">
+                                <input type="date" class='form-control' formControlName='datePurchased'>
+                                <div *ngIf="form.controls['datePurchased'].touched && form.controls['datePurchased'].hasError('required')" class="alert alert-danger">Please enter the purchase date</div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Date sold:</label>
+                            <div class="col-md-9">
+                                <input type="date" #refName class='form-control' formControlName='dateSold'>
+                                <div *ngIf="form.controls.dateSold.touched && form.controls['dateSold'].hasError('required')" class="alert alert-danger">Please enter the sell date</div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Number of shares sold:</label>
+                            <div class="col-md-9">
+                                <input type="number" class='form-control' formControlName='numOfSharesSold' placeholder="1">
+                                <div *ngIf="form.controls['numOfSharesSold'].touched && form.controls['numOfSharesSold'].hasError('required')" class="alert alert-danger">Please enter the number of shares sold</div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group row">
+                            <label class="col-form-label col-md-3">Total Purchase Price:</label>
+                            <div class="col-md-9">
+                                <input type="number" class='form-control' formControlName='purchasePrice' placeholder="$1000">
+                                <div *ngIf="form.controls['purchasePrice'].touched && form.controls['purchasePrice'].hasError('required')" class="alert alert-danger">Please enter the total purchase price</div>
+                            </div>
+                        </div>
+
+                        <div *ngIf='form.controls.purchasePrice.valid && form.controls.numOfSharesBought.valid' class="form-group row">
+                            <label class="col-form-label col-md-3">Average purchase price:</label>
+                            <div class="col-md-9 text-left">
+                                <p>{{form.value.purchasePrice / form.value.numOfSharesBought}}</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Total Sold Price:</label>
+                            <div class="col-md-9">
+                                <input type="number" class='form-control' formControlName='soldPrice' placeholder="$2000">
+                                <div *ngIf="form.controls['soldPrice'].touched && form.controls['soldPrice'].hasError('required')" class="alert alert-danger">Please enter the total sell price</div>
+                            </div>
+                        </div>
+
+                        <div *ngIf='form.controls.soldPrice.valid && form.controls.numOfSharesSold.valid' class="form-group row">
+                            <label class="col-form-label col-md-3">Average sold price:</label>
+                            <div class="col-md-9 text-left">
+                                <p>{{form.value.soldPrice / form.value.numOfSharesSold}}</p>
+                            </div>
+                        </div>
+
+
+                        <div class="btn-group">
+                            <button [disabled]='!form.valid' type="submit" class="btn btn-success">Add</button>
+                            <!-- <button [disabled]='dataFromStore === undefined || dataFromStore.length == 0' class="btn btn-primary" (click) = 'onView()'>View</button> -->
+                            <button [disabled]="dataFromStore === undefined || dataFromStore.length == 0" type='button' (click)='onDownload()' class="btn btn-primary">Download</button>
+                        </div>
+
+                        </form>
+                    </div>
+                </div>
+
             </div>
-          </div>
-
-
-          <div class="form-group row">
-            <label class="col-md-3 col-form-label ">Number of shares bought:</label>
-            <div class="col-md-9">
-              <input type="number" class='form-control' formControlName='numOfSharesBought' placeholder="1">
-              <div *ngIf="form.controls['numOfSharesBought'].touched && form.controls['numOfSharesBought'].hasError('required')"
-                class="alert alert-danger">Please enter the number of shares bought</div>
-            </div>
-          </div>
-
-          <div class="form-group row">
-            <label class="col-md-3 col-form-label">Date Purchased:</label>
-            <div class="col-md-9">
-              <input type="date" class='form-control' formControlName='datePurchased'>
-              <div *ngIf="form.controls['datePurchased'].touched && form.controls['datePurchased'].hasError('required')" class="alert alert-danger">Please
-                enter the purchase date</div>
-            </div>
-          </div>
-
-
-          <div class="form-group row">
-            <label class="col-md-3 col-form-label">Date sold:</label>
-            <div class="col-md-9">
-              <input type="date" #refName class='form-control' formControlName='dateSold'>
-              <div *ngIf="form.controls.dateSold.touched && form.controls['dateSold'].hasError('required')" class="alert alert-danger">Please
-                enter the sell date</div>
-            </div>
-          </div>
-
-
-          <div class="form-group row">
-            <label class="col-md-3 col-form-label">Number of shares sold:</label>
-            <div class="col-md-9">
-              <input type="number" class='form-control' formControlName='numOfSharesSold' placeholder="1">
-              <div *ngIf="form.controls['numOfSharesSold'].touched && form.controls['numOfSharesSold'].hasError('required')" class="alert alert-danger">Please
-                enter the number of shares sold</div>
-            </div>
-          </div>
-
-
-
-          <div class="form-group row">
-            <label class="col-form-label col-md-3">Total Purchase Price:</label>
-            <div class="col-md-9">
-              <input type="number" class='form-control' formControlName='purchasePrice' placeholder="$1000">
-              <div *ngIf="form.controls['purchasePrice'].touched && form.controls['purchasePrice'].hasError('required')" class="alert alert-danger">Please
-                enter the total purchase price</div>
-            </div>
-          </div>
-
-          <div *ngIf='form.controls.purchasePrice.valid && form.controls.numOfSharesBought.valid' class="form-group row">
-            <label class="col-form-label col-md-3">Average purchase price:</label>
-            <div class="col-md-9 text-left">
-              <p>{{form.value.purchasePrice / form.value.numOfSharesBought}}</p>
-            </div>
-          </div>
-
-          <div class="form-group row">
-            <label class="col-md-3 col-form-label">Total Sold Price:</label>
-            <div class="col-md-9">
-              <input type="number" class='form-control' formControlName='soldPrice' placeholder="$2000">
-              <div *ngIf="form.controls['soldPrice'].touched && form.controls['soldPrice'].hasError('required')" class="alert alert-danger">Please
-                enter the total sell price</div>
-            </div>
-          </div>
-
-          <div *ngIf='form.controls.soldPrice.valid && form.controls.numOfSharesSold.valid' class="form-group row">
-              <label class="col-form-label col-md-3">Average sold price:</label>
-              <div class="col-md-9 text-left">
-                <p>{{form.value.soldPrice / form.value.numOfSharesSold}}</p>
-              </div>
-            </div>
-
-
-          <div class="btn-group">
-            <button [disabled]='!form.valid' type="submit" class="btn btn-success">Add</button>
-            <!-- <button [disabled]='dataFromStore === undefined || dataFromStore.length == 0' class="btn btn-primary" (click) = 'onView()'>View</button> -->
-            <button [disabled]="dataFromStore === undefined || dataFromStore.length == 0" type='button' (click)='onDownload()' class="btn btn-primary">Download</button>
-          </div>
-
-        </form>
-      </div>
-    </div>
-    <!-- <app-display class="card col-md-6 shadow"></app-display> -->
-
-  </div>
-
-</div>

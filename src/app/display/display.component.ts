@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '../../../node_modules/@ngrx/store';
 import { AppActions, AppActionDel, AppActionUpd } from '../store/action';
 import { CommonService } from '../common.service';
-
-
+import { LocalStorageService } from '../caching.service';
 
 @Component({
   selector: 'app-display',
@@ -15,6 +14,11 @@ export class DisplayComponent implements OnInit {
   dataToDisplay: any[];
   currentState;
   owner;
+  
+  constructor(private store: Store<AppActions>,
+    private service: CommonService,
+    private caching: LocalStorageService) {
+    
   needToUpdate;
   constructor(private store: Store<AppActions>,
     private service: CommonService) {
@@ -35,6 +39,14 @@ export class DisplayComponent implements OnInit {
       this.dataToDisplay = state.dataList;
       this.currentState = state.dataList;
     });
+    //we have to pass in a JSON object!!!
+    /*
+      any dispatch action will trigger subscription updates
+    */
+    this.store.dispatch(new AppActionUpd({owner: this.owner}));
+
+    this.service.getPurchase2({owner: this.owner});
+    this.caching.readLocalStorage();
 
     if (this.needToUpdate) {
       //we have to pass in a JSON object!!!
