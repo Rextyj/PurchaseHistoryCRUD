@@ -4,90 +4,40 @@
 // #D7E3E6 --bkg elements light steel blue;
 // #69C8C9 --accent1 med aquamarine; 
 // #D61431 --accent2 crimson; 
-@import '/assets/sass/mixins.scss';
-$break-small: 320px;
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-family: 'Bitter', serif;
-}
 
-p,
-table,
-body {
-    font-family: 'Roboto', sans-serif;
-}
 
 body {
     background-image: url('/assets/stripes-light.png');
 }
-
-table {
-    resize: horizontal;
-    overflow: auto;
-    max-width: 101%;
-}
-
-.btn-spc {
-    border-radius: 0;
-    border: 1px solid $accent1;
-    background-color: $light-contrast;
-    color: white;
-    text-shadow: 0px 0px 0.2px ghostwhite;
-    &:hover {
-        border: 1px solid $light-contrast;
-        background-color: darken($light-contrast, 10%);
-        transform: scaleX(40px);
-    }
-    &:active {
-        background-color: $dark-contrast;
-    }
-    &:focus {
-        border: 1px solid $light-contrast;
-    }
-}
-
-#logout {
-    position: absolute!important;
-    right: 0!important;
-    padding-right: 6em;
-}
-
-.btn {
-    border-radius: $border-no;
-}
-
 .jumbotron {
-    min-height: 20vh;
-    max-height: 20vh;
-    background-image: url('/assets/financial-stock-ticker-banner_4.jpg');
-    background-position: center center;
-    background-repeat: no-repeat-y;
-    border-radius: $border-no;
+   min-height:12em;
+   max-height:12em;
+       background-image: url('/assets/financial-stock-ticker-banner_4.jpg');
+   background-position: center center;
+   background-repeat: no-repeat-y;
+   margin-bottom:0.5em!important;
+
 }
 
 a {
-    cursor: pointer;
-}
+cursor:pointer;
 
+}
 .nav-link {
-    display: block;
-    margin-bottom: 0.5px;
-    background-color: rgba(215, 227, 230, .90);
-}
+   display: block;
+   margin-bottom:0.5px;
+   background-color:rgba(215, 227, 230, .90);
 
+}
 .nav-link:hover {
-    box-shadow: 0px 0.5px 2px #09364C;
+      box-shadow: 0px 0.5px 2px #09364C;
+   
 }
-
 .nav-link:active {
-    box-shadow: 0px 0.5px 1px #69C8C9;
+      box-shadow: 0px 0.5px 1px #69C8C9;
+   
 }
-
-.nav-link.active {
+.nav-link.active{
     box-shadow: 0px 0px 1px #09364C;
 }
 
@@ -101,13 +51,19 @@ a {
     height: 200px;
 }
 
-router-outlet~* {
-    position: absolute;
-    height: 100%;
-    width: 100%;
+router-outlet ~ * {
+  position: absolute;
+  height: 100%;
+  width: 100%;
 }
 
 .main {
-    background-color: rgba($light-contrast, .7);
-    min-height: 100%;
+    background-color:rgba(215, 227, 230, .70);
+    height:99vh;
+    width:99vw;
+
+}
+
+.btn * {
+    background-color:#09364C;
 }

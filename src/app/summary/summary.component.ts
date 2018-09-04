@@ -3,7 +3,6 @@ import { Store } from '../../../node_modules/@ngrx/store';
 import { AppActions, AppActionDel, AppActionUpdateSummary } from '../store/action';
 import { CommonService } from '../common.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Cacheable } from 'ngx-cacheable';
 
 @Component({
     templateUrl: './summary.component.html'
@@ -30,7 +29,6 @@ export class SummaryComponent implements OnInit {
 
     ngOnInit() {
         this.store.select('AppReducer').subscribe(state => {
-            
             console.log('get owner', state.owner);
             this.owner = state.owner;
             console.log('state changed detected');
