@@ -4,6 +4,10 @@ import { AppActions, AppActionDel, AppActionUpdateSummary } from '../store/actio
 import { CommonService } from '../service/common.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
+/**
+ * @description Displays the summary information about user's purchase history in a table.
+ * Also provides the ability to search for records between dates defined by user 
+ */
 @Component({
     templateUrl: './summary.component.html'
 })
@@ -28,25 +32,30 @@ export class SummaryComponent implements OnInit {
     }
 
     ngOnInit() {
+        //subscribe to the store to get the latest state
         this.store.select('AppReducer').subscribe(state => {
             console.log('get owner', state.owner);
+            //get the owner information
             this.owner = state.owner;
             console.log('state changed detected');
             console.log('state is', state);
+            //get the summary data
             this.dataToDisplay = state.summary;
         });
-        //we have to pass in a JSON object!!!
+        //dispatch the action to update the summary table
         this.store.dispatch(new AppActionUpdateSummary({ owner: this.owner }));
     }
 
+    //invoked when show button is clicked
     dateBetween(dateForm) {
-
+        //get the records between the dates
         this.service.getBetweenDate(this.owner,dateForm).subscribe(data => {
             this.betweenDate = data;
         });
 
     }
 
+    //invoked when download button is clicked
     onDownload() {
         this.res = this.service.convertToCSV(this.dataToDisplay);
         var blob = new Blob([this.res], { type: 'application/summary' });

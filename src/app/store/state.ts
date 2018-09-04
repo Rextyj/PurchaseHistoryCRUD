@@ -1,3 +1,6 @@
+/**
+ *  @description State definition 
+ */
 export interface AppState{
     dataList: Array<any>;
     summary: Array<any>;

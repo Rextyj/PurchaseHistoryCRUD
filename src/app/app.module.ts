@@ -4,9 +4,8 @@ import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {StoreModule} from '@ngrx/store';
 import {EffectsModule} from '@ngrx/effects';
-import {AppRouterModule, routingComponents} from './Router/router.module';
+import {AppRouterModule, routingComponents} from './router/router.module';
 import {CommonService} from './service/common.service';
-// adding cache support from rxjs -cj
 import { AppComponent } from './app.component';
 import { AppReducer } from './store/reducer';
 import { DisplayComponent } from './display/display.component';
