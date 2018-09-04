@@ -53,12 +53,20 @@ export class DashboardComponent implements OnInit {
       but this is not safe! User can edit the username information in the session storage
     */
 
-    //If the owner information of the current state is empty, redirect user to the login page
-    this.store.select("AppReducer").subscribe(state => {
-      if (state.owner === "none"){
-        this.router.navigateByUrl("/login");
-      }
-    })
+    // //If the owner information of the current state is empty, redirect user to the login page
+    // this.store.select("AppReducer").subscribe(state => {
+    //   if (state.owner === "none"){
+    //     this.router.navigateByUrl("/login");
+    //   }
+    // })
+    
+
+    // DONT FORGET TO DELETE THIS IF STATEMENT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    if (localStorage.getItem('user')) {
+      console.log('it is stored');
+      // assign the owner in the state to the username stored in the session storage
+      this.store.dispatch(new AppActionAssignOwner(sessionStorage.getItem('user')));
+    }
   }
 
   //invoked when the user clicks view tab
