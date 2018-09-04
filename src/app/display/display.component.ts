@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '../../../node_modules/@ngrx/store';
 import { AppActions, AppActionDel, AppActionUpd } from '../store/action';
-import { CommonService } from '../common.service';
+import { CommonService } from '../service/common.service';
 
-
-
+/**
+ * @description A component to display all the records belong to the user currently logged in,
+ * in a table. Also privides filtering functionalities through company name and month
+ */
 @Component({
   selector: 'app-display',
   templateUrl: './display.component.html',
@@ -12,20 +14,18 @@ import { CommonService } from '../common.service';
 
 })
 export class DisplayComponent implements OnInit {
+
   dataToDisplay: any[];
   currentState;
   owner;
   needToUpdate;
+
   constructor(private store: Store<AppActions>,
     private service: CommonService) {
-
   }
 
   ngOnInit() {
-    //then we dispatch the update action with owner info as payload
-    //effect will intercept the action
-
-
+    //subscribe to the ngrx store to get the current state of the app
     this.store.select('AppReducer').subscribe(state => {
       console.log('get owner', state.owner);
       this.owner = state.owner;
@@ -36,36 +36,31 @@ export class DisplayComponent implements OnInit {
       this.currentState = state.dataList;
     });
 
+    //check if we need to make an API call
     if (this.needToUpdate) {
-      //we have to pass in a JSON object!!!
       /*
         any dispatch action will trigger subscription updates
       */
       console.log('about to dispatch update with owner ', this.owner);
+      //dispatch an action to update the state
       this.store.dispatch(new AppActionUpd({ owner: this.owner }));
 
     }
-
-
-
-
-    // this.service.GetPurchase({owner: this.owner}).subscribe(data => {
-    //   console.log("returned data is ", data);
-    //   this.dataToDisplay = data;
-    // });
   }
 
+  //invoked when the user clicks on the trash can icon
   deleteItem(id) {
-    //dispatch a delete action/ payload is the id 
     console.log('Item id is ' + id);
+    //dispatch a delete action/ payload is the id of the item and its owner
     this.store.dispatch(new AppActionDel({ 'id': id, owner: this.owner }));
-    // this.service.deletePurchase({id: id, owner: this.owner}).subscribe(data => console.log(data));
   }
 
+  //invoked when user clicks search by company button
   filterByCompanyName(param) {
     console.log('passed in filter is ', param);
     /*
-      filter again should be using the currentState
+      filter should be using the currentState
+      Assign the filtered results to the dataToDisplay array
     */
     this.dataToDisplay = this.currentState.filter(item => {
       if (item.companyName === param) {
@@ -78,6 +73,7 @@ export class DisplayComponent implements OnInit {
     console.log('filtered result is ', this.dataToDisplay);
   }
 
+  //invoked when user clicks search by month button
   filterByDate(param) {
     console.log(this.dataToDisplay);
     this.dataToDisplay = this.currentState.filter(item => {
@@ -91,15 +87,10 @@ export class DisplayComponent implements OnInit {
     });
   }
 
+  //invoked when user clicks display all button
   resetFilter() {
+    //reset the dataToDisplay array to the state
     this.dataToDisplay = this.currentState;
-  }
-
-  filterByText(param) {
-    this.service.getSearchResult(param).subscribe(data => {
-      console.log('display comp gets ', data);
-      this.dataToDisplay = data;
-    });
   }
 
 }
