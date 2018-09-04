@@ -40,7 +40,7 @@ export const AppReducer: ActionReducer<AppState> =
                 state = {
                     dataList: ['fetching data'],
                     summary: state.summary,
-                    owner: '',
+                    owner: 'none',
                     needToUpdate: true
                 };
                 return state;

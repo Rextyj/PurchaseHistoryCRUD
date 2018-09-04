@@ -11,6 +11,6 @@ export interface AppState{
 export const initialState: AppState = {
     dataList: ['fetching data'],
     summary: [],
-    owner: '',
+    owner: 'none',
     needToUpdate: true
 };
