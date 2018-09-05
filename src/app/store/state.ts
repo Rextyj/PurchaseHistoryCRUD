@@ -6,11 +6,13 @@ export interface AppState{
     summary: Array<any>;
     owner: string;
     needToUpdate: boolean;
+    needToUpdateSummary: boolean;
 }
 
 export const initialState: AppState = {
     dataList: ['fetching data'],
     summary: [],
     owner: 'none',
-    needToUpdate: true
+    needToUpdate: true,
+    needToUpdateSummary: true
 };

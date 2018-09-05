@@ -4,7 +4,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { CommonService } from '../service/common.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/state';
-import { AppActionAdd } from '../store/action';
+import { AppActionAdd, AppActionUpdateSummary } from '../store/action';
 import { Router } from '@angular/router';
 
 @Component({
@@ -50,8 +50,6 @@ export class AddItemComponent implements OnInit {
           owner: ...
         }
       }
-
-      we just want what's inside the appreducer 
     */
     this.store.select("AppReducer").subscribe(state => {
       console.log('subscribed data is ', state);
@@ -60,35 +58,35 @@ export class AddItemComponent implements OnInit {
     });
   }
 
-  //invoked when the add button is clicked
+  // invoked when the add button is clicked
   onAdd(formData) {
-    //mode is for server.js file to recognize the intent
+    // mode is for server.js file to recognize the intent
     formData.mode = 'Save';
-    //pass the owner info into the formData object
+    // pass the owner info into the formData object
     formData.Owner = this.owner;
 
     console.log('formdata is ', formData);
-    //Note the sold price and purchase price are total price not per share price
+    // Note the sold price and purchase price are total price not per share price
     formData['lossOrGain'] = formData['soldPrice'] - formData['purchasePrice'];
     formData['avgPurchasePrice'] = formData.purchasePrice / formData.numOfSharesBought;
     formData['avgSoldPrice'] = formData.soldPrice / formData.numOfSharesSold;
 
     console.log('the modified data is ', formData);
 
-    //dispatch an action to save the form object to database
+    // dispatch an action to save the form object to database
     this.store.dispatch(new AppActionAdd(formData));
-    //reset the form after the data is saved
+    // reset the form after the data is saved
     this.resetForm();
   }
 
-  //invoked when download button is pressed
+  // invoked when download button is pressed
   onDownload() {
     this.res = this.newService.convertToCSV(this.dataFromStore);
-    //storing the CSV string to a blob
+    // storing the CSV string to a blob
     var blob = new Blob([this.res], { type: 'application/history' });
-    //create a url for the blob
+    // create a url for the blob
     this.fileUrl = window.URL.createObjectURL(blob);
-    //create a <a> tag and set the href to the url just created
+    // create a <a> tag and set the href to the url just created
     var aTag = document.createElement('a');
     console.log(this.fileUrl);
     aTag.href = this.fileUrl;

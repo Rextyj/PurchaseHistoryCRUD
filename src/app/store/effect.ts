@@ -1,5 +1,5 @@
 import { Injectable } from "../../../node_modules/@angular/core";
-import { UPDATE_LIST, DELETE_ITEM, UPDATE_SUMM, ADD_ITEM, AppActions, AppActionUpd, AppActionUpdateSuccess, AppActionUpdateSummarySuccess, AppActionDeleteSuccess } from "./action";
+import { UPDATE_LIST, DELETE_ITEM, UPDATE_SUMM, ADD_ITEM, AppActions, AppActionUpd, AppActionUpdateSuccess, AppActionUpdateSummarySuccess, AppActionDeleteSuccess, AppActionUpdateSummary } from "./action";
 import { CommonService } from "../service/common.service";
 import { Effect, Actions, ofType } from "../../../node_modules/@ngrx/effects";
 import { switchMap, map, withLatestFrom } from "../../../node_modules/rxjs/operators";
@@ -16,7 +16,7 @@ export class listEffect {
         private action: Actions,
         private service: CommonService,
         private store: Store<AppState>
-    ) {}
+    ) { }
 
     //Additem effect
     @Effect()
@@ -26,9 +26,15 @@ export class listEffect {
             ofType<AppActions>(ADD_ITEM),
             //the payload passed in is formdata that has Owner property
             //save the purchase record came with action by making an API call
-            switchMap(action => {username = action.payload.Owner; return this.service.savePurchase(action.payload)}),
+            switchMap(action => { username = action.payload.Owner; return this.service.savePurchase(action.payload) }),
             //use the returned response from backend and dispatch a new update action
-            map(dataReceived => {alert(dataReceived.data); return new AppActionUpd({owner: username})})
+            switchMap(dataReceived => {
+                alert(dataReceived.data);
+                return [
+                    new AppActionUpdateSummary({ owner: username }),
+                    new AppActionUpd({ owner: username })
+                ]
+            })
         )
         return addAction;
     }
@@ -41,7 +47,7 @@ export class listEffect {
             //effect will intercept the AppActionUpd action that has owner info
             ofType<AppActions>(UPDATE_LIST),
             //it passes the owner info to the getpurchase service method and get back records belongs to the owner
-            switchMap(action => {console.log(action.payload); return this.service.GetPurchase(action.payload)}),
+            switchMap(action => { console.log(action.payload); return this.service.GetPurchase(action.payload) }),
             //it will then use the data received to create a new action and pass it to reducer
             map(dataReceived => new AppActionUpdateSuccess(dataReceived))
         )
@@ -57,9 +63,9 @@ export class listEffect {
             //effect will intercept the AppActionUpd action that has owner info
             ofType<AppActions>(UPDATE_SUMM),
             //it passes the owner info to the getpurchase service method and get back records belongs to the owner
-            switchMap(action => {console.log(action.payload); return this.service.getSummary(action.payload)}),
+            switchMap(action => { console.log(action.payload); return this.service.getSummary(action.payload) }),
             //it will then use the data received to create a new action and pass it to reducer
-            map(dataReceived => {console.log(dataReceived); return new AppActionUpdateSummarySuccess(dataReceived)})
+            map(dataReceived => { console.log(dataReceived); return new AppActionUpdateSummarySuccess(dataReceived) })
         )
         console.log(updSummary);
         return updSummary;
@@ -72,9 +78,15 @@ export class listEffect {
         var username;
         var delAction = this.action.pipe(
             ofType<AppActions>(DELETE_ITEM),
-            switchMap(action => {username = action.payload.owner ;return this.service.deletePurchase(action.payload)}),
-            switchMap(respose => this.service.GetPurchase({owner: username})),
-            map(list => {console.log('in deleteitem ', list) ;return new AppActionDeleteSuccess(list)})
+            switchMap(action => { username = action.payload.owner; return this.service.deletePurchase(action.payload) }),
+            switchMap(respose => this.service.GetPurchase({ owner: username })),
+            switchMap(list => {
+                console.log('in deleteitem ', list);
+                return [
+                    new AppActionDeleteSuccess(list),
+                    new AppActionUpdateSummary({ owner: username })
+                ]
+            })
         )
         return delAction;
     }
