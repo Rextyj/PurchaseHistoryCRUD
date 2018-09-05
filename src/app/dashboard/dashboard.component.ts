@@ -22,7 +22,7 @@ import { slideAnimation } from '../animations';
   animations: [fadeAnimation, slideAnimation]
 })
 export class DashboardComponent implements OnInit {
-  //variable declaration
+  // variable declaration
   form: FormGroup;
   savedData: Array<Object> = [];
   output = [];
@@ -37,10 +37,10 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    //show the add component by default when user first logged in
+    // show the add component by default when user first logged in
     this.onAdd();
 
-    /** 
+    /**
     everytime the user refreshes the page, we want the owner of this session to be automatically assigned
     with the username stored in the session storage
 
@@ -48,8 +48,7 @@ export class DashboardComponent implements OnInit {
         console.log("it is stored");
         //assign the owner in the state to the username stored in the session storage
         this.store.dispatch(new AppActionAssignOwner(sessionStorage.getItem("user")));
-      } 
-
+      }
       but this is not safe! User can edit the username information in the session storage
     */
 
@@ -59,6 +58,7 @@ export class DashboardComponent implements OnInit {
         this.router.navigateByUrl("/login");
       }
     })
+    
   }
 
   //invoked when the user clicks view tab
