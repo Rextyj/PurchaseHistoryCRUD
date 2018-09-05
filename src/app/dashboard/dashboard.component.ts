@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { CommonService } from '../service/common.service';
@@ -21,6 +21,7 @@ import { slideAnimation } from '../animations';
   providers: [],
   animations: [fadeAnimation, slideAnimation]
 })
+
 export class DashboardComponent implements OnInit {
   // variable declaration
   form: FormGroup;
@@ -39,7 +40,6 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     // show the add component by default when user first logged in
     this.onAdd();
-
     /**
     everytime the user refreshes the page, we want the owner of this session to be automatically assigned
     with the username stored in the session storage
@@ -52,37 +52,45 @@ export class DashboardComponent implements OnInit {
       but this is not safe! User can edit the username information in the session storage
     */
 
-    //If the owner information of the current state is empty, redirect user to the login page
-    this.store.select("AppReducer").subscribe(state => {
-      if (state.owner === "none"){
-        this.router.navigateByUrl("/login");
+    // If the owner information of the current state is empty, redirect user to the login page
+
+
+    // DONT FORGET UNCOMMENT THIS OUT --REX (PS IM NOT ANNOYING)
+    this.store.select('AppReducer').subscribe(state => {
+      if (state.owner === 'none') {
+        this.router.navigateByUrl('/login');
       }
-    })
-    
+    });
+
+    // this.store.dispatch(new AppActionAssignOwner(localStorage.getItem('user')));
   }
 
-  //invoked when the user clicks view tab
+  // invoked when the user clicks view tab
   onView() {
     this.router.navigate(['/dashboard', { outlets: { 'childrenComponents': 'display' } }]);
   }
 
-  //invoked when the user clicks add tab
+  // invoked when the user clicks add tab
   onAdd() {
     this.router.navigate(['/dashboard', { outlets: { 'childrenComponents': 'additem' } }]);
   }
 
-  //invoked when the user clicks summary tab
+  // invoked when the user clicks summary tab
   onSummary() {
     this.router.navigate(['/dashboard', { outlets: { 'childrenComponents': 'summary' } }]);
 
   }
 
-  //invoked when the user clicks logout button
+  // invoked when the user clicks logout button
   onLogout() {
-    //clear the username stored in the session storage
+    // clear the username stored in the session storage
     sessionStorage.clear();
-    //dispatch a logout action to rest the state
+    // dispatch a logout action to rest the state
     this.store.dispatch(new AppActionLogout());
     this.router.navigateByUrl('/login');
+  }
+
+  onResize(event) {
+    console.log(document.documentElement.clientWidth);
   }
 }

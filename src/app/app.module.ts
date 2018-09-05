@@ -31,7 +31,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SummaryComponent
   ],
   imports: [
-    BrowserModule,BrowserAnimationsModule, FormsModule, 
+    BrowserModule, BrowserAnimationsModule, FormsModule,
     ReactiveFormsModule, HttpModule,
     StoreModule.forRoot({AppReducer}),
     EffectsModule.forRoot([listEffect]),

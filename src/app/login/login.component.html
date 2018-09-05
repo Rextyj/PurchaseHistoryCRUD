@@ -2,21 +2,21 @@
 
 </div>
 
-<div class="container col-md-8 col-sm-12 col-xs-6 p-4 mb-1 bg-light text-dark text-center relative-center">
+<div class="container col-lg-8 col-md-12 col-sm-12 col-xs-6 p-4 mb-1 bg-light text-dark text-center relative-center">
     <img src="/assets/modernfinance.png" alt="..." class="img-thumbnail">
     <h2>Login</h2>
     <p> Enter your credentials to log in.</p>
     <div>New user? Click <a href="/signUp">here</a> to sign up</div>
 </div>
 
-<form #form='ngForm' class="formLogin p-5 m-auto  col-sm-12 col-md-8 col-lg-8" (ngSubmit)='onLogin(form.value)'>
+<form #form='ngForm' class="formLogin p-5 m-auto  col-sm-12 col-md-12 col-lg-8" (ngSubmit)='onLogin(form.value)'>
     <div class="form-group row">
-        <label class="col-sm-2 text-light">Username: </label>
-        <input type="text" class="form-control col-sm-10" name="username" ngModel required>
+        <label class="col-sm-2 col-md-2 text-light">Username: </label>
+        <input type="text" class="form-control col-sm-10 col-md-10" name="username" ngModel required>
     </div>
     <div class="form-group row">
-        <label class="col-sm-2 text-light">Password: </label>
-        <input type="password" class="form-control col-sm-10" name="password" ngModel required>
+        <label class="col-sm-2 col-md-2 text-light">Password: </label>
+        <input type="password" class="form-control col-sm-10 col-md-10 " name="password" ngModel required>
     </div>
     <div *ngIf='!hidden' class="form-group row mb-2 alert alert-danger">
         The combination of username and password is not found. Please try again.
