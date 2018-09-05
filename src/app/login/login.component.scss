@@ -1,11 +1,14 @@
+@import '../../assets/sass/mixins.scss';
 form {
-    background-color:#09364C;
-    position:relative;
-    top:-10em;
+    background-color: #09364C;
+    position: relative;
+    top: -8em;
+    @media (max-width: $breakpoint-s) {
+        max-height: 80vh;
+    }
 }
 
 .container {
-    position:relative;
-    top:-10em;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    position: relative;
+    top: -8em;
 }

@@ -1,4 +1,3 @@
-<!--<div class="container-fluid">-->
 <div class="jumbotron shadow text-center text-white">
     <!-- <button class="btn btn-primary" (click)='onAdd()'>Add</button>
     <button class="btn btn-primary" (click)='onView()'>View</button> -->
@@ -18,26 +17,18 @@
             <!-- <button class="nav-item" (click)='onAdd()'>Add</button>
       <button class="nav-item" (click)='onView()'>View</button> -->
             <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" (click)='onAdd()'>Add</a>
+                <a class="nav-link active" data-toggle="tab" (click)='onAdd()'> <i class="fa fa-plus-circle m-1" aria-hidden="true"></i>Add</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " data-toggle="tab" (click)='onView()'>View</a>
+                <a class="nav-link " data-toggle="tab" (click)='onView()'><i class="fa fa-table m-1"></i> View</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" (click)='onSummary()'>Summary</a>
+            <li class="nav-item ">
+                <a class="nav-link" data-toggle="tab" (click)='onSummary()'> <i class="fa fa-line-chart m-1" aria-hidden="true"></i>Summary</a>
             </li>
         </ul>
-
-        <button class="btn btn-spc ml-auto" (click)='onLogout()'>Log Out</button>
+        <button class="btn btn-spc ml-auto p-6" (click)='onLogout()'>Log Out</button>
     </div>
 </div>
-
-<div class="main" [@slideAnimation]="o.isActivated ? o.activatedRoute : ''">
+<div class='main' [@slideAnimation]="o.isActivated ? o.activatedRoute : ''" (window:resize)="onResize($event)">
     <router-outlet #o="outlet" name='childrenComponents'></router-outlet>
-
-    <!--<router-outlet name='childrenComponents'></router-outlet>-->
-
-
-    <!-- <router-outlet name='additemComponent'></router-outlet> -->
-    <!-- <router-outlet name = 'displayComponent'></router-outlet> -->
-    <!--</div>-->
+</div>

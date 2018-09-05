@@ -3,8 +3,27 @@
 // #D7E3E6 --bkg elements light steel blue;
 // #69C8C9 --accent1 med aquamarine; 
 // #D61431 --accent2 crimson; 
-// @import '../sass/mixins.scss';
 $accent1:#69C8C9;
 $light-contrast:#5098A3;
 $dark-contrast:#09364C;
 $border-no:0px;
+$mainHeaderFont:'Bitter',
+sans-serif;
+$bodyTextFont:'Roboto',
+sans-serif;
+@import url('https://fonts.googleapis.com/css?family=Bitter|Roboto');
+@import url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+@font-face {
+    font-family: 'Bitter';
+    src: 'https://fonts.googleapis.com/css?family=Bitter|Roboto';
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: 'https://fonts.googleapis.com/css?family=Bitter|Roboto';
+}
+
+$breakpoint-xs:576px;
+$breakpoint-s:768px;
+$breakpoint-m:992px;
+$breakpoint-l: 1200px;
