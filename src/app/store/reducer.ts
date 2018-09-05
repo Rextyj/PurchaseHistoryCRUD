@@ -15,7 +15,8 @@ export const AppReducer: ActionReducer<AppState> =
                     dataList: action.payload,
                     summary: state.summary,
                     owner: state.owner,
-                    needToUpdate: false
+                    needToUpdate: false,
+                    needToUpdateSummary: state.needToUpdateSummary
                 };
                 return state;
             case DELETE_SUCCESS:
@@ -23,7 +24,8 @@ export const AppReducer: ActionReducer<AppState> =
                     dataList: action.payload,
                     summary: state.summary,
                     owner: state.owner,
-                    needToUpdate: false
+                    needToUpdate: false,
+                    needToUpdateSummary: state.needToUpdateSummary
                 };
                 return state;
             //Case for action type assign_owner. Action payload will be the owner username
@@ -32,7 +34,8 @@ export const AppReducer: ActionReducer<AppState> =
                     dataList: state.dataList,
                     summary: state.summary,
                     owner: action.payload,
-                    needToUpdate: true
+                    needToUpdate: true,
+                    needToUpdateSummary: true
                 };
                 return state;
             //log_out action will cause the state being reset to the initial state
@@ -41,7 +44,8 @@ export const AppReducer: ActionReducer<AppState> =
                     dataList: ['fetching data'],
                     summary: state.summary,
                     owner: 'none',
-                    needToUpdate: true
+                    needToUpdate: true,
+                    needToUpdateSummary: true
                 };
                 return state;
             //update_summary_success action will assign the action payload to the summary property of the new state
@@ -50,7 +54,8 @@ export const AppReducer: ActionReducer<AppState> =
                     dataList: state.dataList,
                     summary: action.payload,
                     owner: state.owner,
-                    needToUpdate: false
+                    needToUpdate: state.needToUpdate,
+                    needToUpdateSummary: false
                 };
                 return state;
             default:
