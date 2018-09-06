@@ -83,23 +83,6 @@ export class AddItemComponent implements OnInit {
     this.resetForm();
   }
 
-  // invoked when download button is pressed
-  onDownload() {
-    this.res = this.newService.convertToCSV(this.dataFromStore);
-    // storing the CSV string to a blob
-    var blob = new Blob([this.res], { type: 'application/history' });
-    // create a url for the blob
-    this.fileUrl = window.URL.createObjectURL(blob);
-    // create a <a> tag and set the href to the url just created
-    var aTag = document.createElement('a');
-    console.log(this.fileUrl);
-    aTag.href = this.fileUrl;
-    aTag.download = 'history.csv';
-    aTag.hidden = true;
-    //programally click the <a> tag to trigger a download action
-    aTag.click();
-  }
-
   //reset the form to initial state
   resetForm() {
     this.form.reset();
