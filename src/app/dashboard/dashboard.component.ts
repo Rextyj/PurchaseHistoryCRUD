@@ -77,12 +77,16 @@ export class DashboardComponent implements OnInit {
 
   }
 
+  onReport() {
+    this.router.navigate(['/dashboard', { outlets: { 'childrenComponents': 'report' } }]);
+  }
+
   //invoked when the user clicks logout button
   onLogout() {
     //clear the username stored in the session storage
     sessionStorage.clear();
     //dispatch a logout action to rest the state
     this.store.dispatch(new AppActionLogout());
-    this.router.navigateByUrl('/login');
+    this.router.navigateByUrl('/lozgin');
   }
 }

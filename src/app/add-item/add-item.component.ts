@@ -72,8 +72,8 @@ export class AddItemComponent implements OnInit {
     formData['avgPurchasePrice'] = (formData.purchasePrice / formData.numOfSharesBought).toFixed(2);
     formData['avgSoldPrice'] = (formData.soldPrice / formData.numOfSharesSold).toFixed(2);
 
-    formData.datePurchased = formatDate(formData.datePurchased, "short", "en-US").split(",")[0];
-    formData.dateSold = formatDate(formData.dateSold, "short", "en-US").split(",")[0]
+    // formData.datePurchased = formatDate(formData.datePurchased, "short", "en-US").split(",")[0];
+    // formData.dateSold = formatDate(formData.dateSold, "short", "en-US").split(",")[0];
 
     console.log('the modified data is ', formData);
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { formatDate } from '@angular/common';
 import { Store } from '../../../node_modules/@ngrx/store';
 import { AppActions, AppActionDel, AppActionUpdateSummary } from '../store/action';
 import { ProductInterfaceImpl } from '../productService/productInterfaceImpl.service';
@@ -54,6 +55,8 @@ export class SummaryComponent implements OnInit {
 
     //invoked when show button is clicked
     dateBetween(dateForm) {
+        // dateForm.beginningDate = formatDate(dateForm.beginningDate, "short", "en-US").split(",")[0].replace("/", "-");
+        // dateForm.endDate = formatDate(dateForm.endDate, "short", "en-US").split(",")[0].replace("/", "-");
         //get the records between the dates
         this.service.getBetweenDate(this.owner, dateForm).subscribe(data => {
             this.betweenDate = data;

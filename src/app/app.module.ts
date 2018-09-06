@@ -18,6 +18,7 @@ import { AddItemComponent } from './add-item/add-item.component';
 import { SummaryComponent } from './summary/summary.component';
 // adding animation module -cj
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReportComponent } from './report/report.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     routingComponents,
     DashboardComponent,
     AddItemComponent,
-    SummaryComponent
+    SummaryComponent,
+    ReportComponent
   ],
   imports: [
     BrowserModule, BrowserAnimationsModule, FormsModule,
