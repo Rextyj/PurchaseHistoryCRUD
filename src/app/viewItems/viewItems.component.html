@@ -52,12 +52,14 @@
                         <tr>
                             <th>Entry Number</th>
                             <th>Company Name</th>
-                            <th>Shares bought</th>
                             <th>Date Purchased</th>
+                            <th>Shares bought</th>
+                            <th>Purchase Price</th>
+                            <th>Per Share Purchase Price</th>
                             <th>Date Sold</th>
                             <th>Shares sold</th>
-                            <th>Purchase Price</th>
                             <th>Sold Price</th>
+                            <th>Per Share Sold Price</th>
                             <th>Loss/Gain Price</th>
                         </tr>
                     </thead>
@@ -73,12 +75,14 @@
               </button>
                             </td>
                             <td>{{item.companyName}}</td>
-                            <td>{{item.numOfSharesBought}}</td>
                             <td>{{item.datePurchased}}</td>
+                            <td>{{item.numOfSharesBought}}</td>
+                            <td>{{item.purchasePrice}}</td>
+                            <td>{{item.avgPurchasePrice}}</td>
                             <td>{{item.dateSold}}</td>
                             <td>{{item.numOfSharesSold}}</td>
-                            <td>{{item.purchasePrice}}</td>
                             <td>{{item.soldPrice}}</td>
+                            <td>{{item.avgSoldPrice}}</td>
                             <td>{{item.lossOrGain}}</td>
                         </tr>
                     </tbody>

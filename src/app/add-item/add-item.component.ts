@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
+import { formatDate } from '@angular/common';
 import { ProductInterfaceImpl } from '../productService/productInterfaceImpl.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/state';
@@ -67,9 +68,12 @@ export class AddItemComponent implements OnInit {
 
     console.log('formdata is ', formData);
     // Note the sold price and purchase price are total price not per share price
-    formData['lossOrGain'] = formData['soldPrice'] - formData['purchasePrice'];
-    formData['avgPurchasePrice'] = formData.purchasePrice / formData.numOfSharesBought;
-    formData['avgSoldPrice'] = formData.soldPrice / formData.numOfSharesSold;
+    formData['lossOrGain'] = (formData['soldPrice'] - formData['purchasePrice']).toFixed(2);
+    formData['avgPurchasePrice'] = (formData.purchasePrice / formData.numOfSharesBought).toFixed(2);
+    formData['avgSoldPrice'] = (formData.soldPrice / formData.numOfSharesSold).toFixed(2);
+
+    formData.datePurchased = formatDate(formData.datePurchased, "short", "en-US").split(",")[0];
+    formData.dateSold = formatDate(formData.dateSold, "short", "en-US").split(",")[0]
 
     console.log('the modified data is ', formData);
 
@@ -98,7 +102,6 @@ export class AddItemComponent implements OnInit {
 
   //reset the form to initial state
   resetForm() {
-    console.log('reset called');
     this.form.reset();
   }
 
