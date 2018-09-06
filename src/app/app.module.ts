@@ -8,7 +8,7 @@ import {AppRouterModule, routingComponents} from './router/router.module';
 import {CommonService} from './service/common.service';
 import { AppComponent } from './app.component';
 import { AppReducer } from './store/reducer';
-import { DisplayComponent } from './display/display.component';
+import { ItemDisplayComponent } from './viewItems/viewItems.component';
 import {listEffect} from './store/effect';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
@@ -22,7 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
-    DisplayComponent,
+    ItemDisplayComponent,
     LoginComponent,
     SignupComponent,
     routingComponents,

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '../../../node_modules/@ngrx/store';
+import { Store } from '@ngrx/store';
 import { AppActions, AppActionDel, AppActionUpd } from '../store/action';
 import { CommonService } from '../service/common.service';
 
@@ -9,11 +9,11 @@ import { CommonService } from '../service/common.service';
  */
 @Component({
   selector: 'app-display',
-  templateUrl: './display.component.html',
-  styleUrls: ['./display.component.css']
+  templateUrl: './viewItems.component.html',
+  styleUrls: ['./viewItems.component.css']
 
 })
-export class DisplayComponent implements OnInit {
+export class ItemDisplayComponent implements OnInit {
 
   dataToDisplay: any[];
   currentState;
