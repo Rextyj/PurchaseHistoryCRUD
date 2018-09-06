@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '../../../node_modules/@ngrx/store';
 import { AppActions, AppActionDel, AppActionUpdateSummary } from '../store/action';
-import { CommonService } from '../service/common.service';
+import { ProductInterfaceImpl } from '../productService/productInterfaceImpl.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 /**
@@ -22,7 +22,7 @@ export class SummaryComponent implements OnInit {
     needToUpdateSummary;
 
     constructor(private store: Store<AppActions>,
-        private service: CommonService,
+        private service: ProductInterfaceImpl,
         private fb: FormBuilder) {
         this.form = this.fb.group(
             {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonService } from '../service/common.service';
+import { SecurityInterfaceImpl } from '../securityService/securityInterfaceImpl.service';
 import { Router } from '@angular/router';
 
 /**
@@ -14,7 +14,7 @@ export class SignupComponent implements OnInit {
   //indication of whether the username has been used already 
   duplicate: boolean = false;
 
-  constructor(private service: CommonService,
+  constructor(private service: SecurityInterfaceImpl,
     private router: Router) { }
 
   ngOnInit() {

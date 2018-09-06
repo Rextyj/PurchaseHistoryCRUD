@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { map } from 'rxjs/operators'
-import { AppService } from './app.service';
+import { ProductInterface } from './productInterface.service';
 import { Observable } from 'rxjs';
 
 
 @Injectable()
-export class CommonService implements AppService {
+export class ProductInterfaceImpl implements ProductInterface {
 
   constructor(private http: Http) { }
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
-import { CommonService } from '../service/common.service';
+import { ProductInterfaceImpl } from '../productService/productInterfaceImpl.service';
 import { Store, State } from '@ngrx/store';
 import { AppState } from '../store/state';
 import { AppActions, AppActionLogout, AppActionAssignOwner } from '../store/action';
@@ -32,7 +32,7 @@ export class DashboardComponent implements OnInit {
   owner;
 
   constructor(private fb: FormBuilder, private domSan: DomSanitizer,
-    private newService: CommonService, private store: Store<AppState>,
+    private newService: ProductInterfaceImpl, private store: Store<AppState>,
     private router: Router) {
   }
 

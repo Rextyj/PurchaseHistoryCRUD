@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppActions, AppActionDel, AppActionUpd } from '../store/action';
-import { CommonService } from '../service/common.service';
+import { ProductInterfaceImpl } from '../productService/productInterfaceImpl.service';
 
 /**
  * @description A component to display all the records belong to the user currently logged in,
@@ -21,7 +21,7 @@ export class ItemDisplayComponent implements OnInit {
   needToUpdate;
 
   constructor(private store: Store<AppActions>,
-    private service: CommonService) {
+    private service: ProductInterfaceImpl) {
   }
 
   ngOnInit() {

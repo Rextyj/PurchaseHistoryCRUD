@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonService } from '../service/common.service';
+import { SecurityInterfaceImpl } from '../securityService/securityInterfaceImpl.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/state';
@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   // determine if the warning message for wrong login information should be displayed
   hidden = true;
 
-  constructor(private service: CommonService,
+  constructor(private service: SecurityInterfaceImpl,
     private router: Router, private store: Store<AppState>) { }
 
   ngOnInit() {

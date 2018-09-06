@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
-import { CommonService } from '../service/common.service';
+import { ProductInterfaceImpl } from '../productService/productInterfaceImpl.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/state';
 import { AppActionAdd, AppActionUpdateSummary } from '../store/action';
@@ -25,7 +25,7 @@ export class AddItemComponent implements OnInit {
   soldPricePerShare;
 
   constructor(private fb: FormBuilder, private domSan: DomSanitizer,
-    private newService: CommonService, private store: Store<AppState>,
+    private newService: ProductInterfaceImpl, private store: Store<AppState>,
     private router: Router) {
     this.form = this.fb.group({
       companyName: ['', [Validators.required]],

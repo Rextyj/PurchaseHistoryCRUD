@@ -1,10 +1,10 @@
-import { RouterModule } from './router.module';
+import { AppRouterModule } from './router.module';
 
 describe('RouterModule', () => {
-  let routerModule: RouterModule;
+  let routerModule: AppRouterModule;
 
   beforeEach(() => {
-    routerModule = new RouterModule();
+    routerModule = new AppRouterModule();
   });
 
   it('should create an instance', () => {

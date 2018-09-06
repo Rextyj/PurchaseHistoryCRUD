@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
  */
 
 @Injectable()
-export abstract class AppService {
+export abstract class ProductInterface {
   abstract getUser(T): Observable<any>;
 
   abstract saveUser(T): Observable<any>;

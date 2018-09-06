@@ -1,6 +1,6 @@
 import { Injectable } from "../../../node_modules/@angular/core";
 import { UPDATE_LIST, DELETE_ITEM, UPDATE_SUMM, ADD_ITEM, AppActions, AppActionUpd, AppActionUpdateSuccess, AppActionUpdateSummarySuccess, AppActionDeleteSuccess, AppActionUpdateSummary } from "./action";
-import { CommonService } from "../service/common.service";
+import { ProductInterfaceImpl } from "../productService/productInterfaceImpl.service";
 import { Effect, Actions, ofType } from "../../../node_modules/@ngrx/effects";
 import { switchMap, map, withLatestFrom } from "../../../node_modules/rxjs/operators";
 import { Observable } from "../../../node_modules/rxjs";
@@ -14,7 +14,7 @@ import { AppState } from "./state";
 export class listEffect {
     constructor(
         private action: Actions,
-        private service: CommonService,
+        private service: ProductInterfaceImpl,
         private store: Store<AppState>
     ) { }
 
