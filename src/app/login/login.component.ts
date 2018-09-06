@@ -31,7 +31,8 @@ export class LoginComponent implements OnInit {
       // heck if the information verification at the back end is successful
       if (data.data === 'verified') {
         // // store the verified user's username in sessionStorage
-        // localStorage.setItem('user', formValue.username);
+        // sessionStorage.setItem('user', formValue.username);
+
         // change the owner of the state to whoever is logged in
         this.store.dispatch(new AppActionAssignOwner(formValue.username));
         // navigate to the dashboard component when user is verified
