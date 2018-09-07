@@ -14,7 +14,8 @@
             </div>
             <div class="form-group row">
                 <button type="submit" class="btn btn-outline-success btn-rounded my-2 mx-1">Show</button>
-                <div *ngIf='betweenDate !== undefined && betweenDate.length == 0' class="alert alert-danger my-auto mx-1">No records to show</div>
+                <div *ngIf='betweenDate !== undefined && betweenDate.length == 0' class="alert alert-danger my-auto mx-1">No
+                    records to show</div>
             </div>
         </form>
 
@@ -23,23 +24,26 @@
                 <td>Entry Number</td>
                 <td>Company Name</td>
                 <td>Date Purchased</td>
-
-                <td>Date Sold</td>
                 <td>Number Of Shares Bought</td>
-                <td>Number Of Shares Sold</td>
                 <td>Purchase Price</td>
+                <td>Per Share Purchase Price</td>
+                <td>Date Sold</td>
+                <td>Number Of Shares Sold</td>
                 <td>Sold Price</td>
+                <td>Per Share Sold Price</td>
                 <td>Loss Gain Price</td>
             </tr>
             <tr *ngFor='let item of betweenDate; let i = index'>
                 <td>{{i+1}}</td>
                 <td>{{item[5]}}</td>
-                <td>{{item[6]}}</td>
-                <td>{{item[7]}}</td>
+                <td>{{dateFormat(item[6])}}</td>
                 <td>{{item[9]}}</td>
-                <td>{{item[10]}}</td>
                 <td>{{item[11]}}</td>
+                <td>{{item[3]}}</td>
+                <td>{{dateFormat(item[7])}}</td>
+                <td>{{item[10]}}</td>
                 <td>{{item[12]}}</td>
+                <td>{{item[4]}}</td>
                 <td>{{item[8]}}</td>
             </tr>
         </table>
@@ -54,8 +58,8 @@
                     <tr>
                         <th>Entry Number</th>
                         <th>Company Name</th>
-                        <th>Average Number Bought</th>
-                        <th>Average Number Sold</th>
+                        <th>Total Quantity Bought</th>
+                        <th>Total Quantity Sold</th>
                         <th>Average Purchase Price</th>
                         <th>Average Sold Price</th>
                         <th>Average Loss or Gain</th>
@@ -74,7 +78,8 @@
                 </tr>
             </table>
             <div class="text-center">
-                <button [disabled]='dataToDisplay === undefined || dataToDisplay.length == 0' type='button' (click)='onDownload()' class="btn btn-primary"> <i class="fa fa-download m-1" aria-hidden="true"></i>Download as .csv</button>
+                <button [disabled]='dataToDisplay === undefined || dataToDisplay.length == 0' type='button' (click)='onDownload()' class="btn btn-primary">
+                    <i class="fa fa-download m-1" aria-hidden="true"></i>Download as .csv</button>
             </div>
         </div>
     </div>

@@ -22,4 +22,12 @@ public class RecordService {
 	public List<?> getBetweenDate(String beginDate, String endDate,Long Id){
 		return recordRepository.getBetweenDate(beginDate,endDate, Id);
 	}
+	
+	public List<?> getMonthlyData(String year,Long Id){
+		return recordRepository.getMonthlyData(year, Id);
+	}
+	
+	public List<?> getCompanyData(Long Id){
+		return recordRepository.getCompanyData(Id);
+	}
 }

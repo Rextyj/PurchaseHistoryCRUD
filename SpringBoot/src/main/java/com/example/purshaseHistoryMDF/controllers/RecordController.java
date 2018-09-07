@@ -137,5 +137,16 @@ public class RecordController {
 				}).orElseThrow(() -> new ResourceNotFoundException("User not found when trying to get record"));
 		return recordService.getBetweenDate(beginDate, endDate, userId);
 	}
-
+	
+	@GetMapping("/records/api/{username}/getPurchase/getMonthlyData/{year}")
+	public List<?> getMonthlyData( @PathVariable String year,@PathVariable String username) {
+		User user = userRepository.findByUsername(username);
+		return recordService.getMonthlyData(year, user.getId());
+	}
+	
+	@GetMapping("/records/api/{username}/getPurchase/getCompanyData")
+	public List<?> getCompanyData(@PathVariable String username) {
+		User user = userRepository.findByUsername(username);
+		return recordService.getCompanyData(user.getId());
+	}
 }

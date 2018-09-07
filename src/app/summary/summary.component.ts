@@ -76,4 +76,8 @@ export class SummaryComponent implements OnInit {
         aTag.hidden = true;
         aTag.click();
     }
+
+    dateFormat(date) {
+        return formatDate(date, "short", "en-US").split(",")[0];
+      }
 }

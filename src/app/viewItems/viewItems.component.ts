@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppActions, AppActionDel, AppActionUpd } from '../store/action';
 import { ProductInterfaceImpl } from '../productService/productInterfaceImpl.service';
-
+import { formatDate } from '@angular/common';
 /**
  * @description A component to display all the records belong to the user currently logged in,
  * in a table. Also privides filtering functionalities through company name and month
@@ -112,4 +112,7 @@ export class ItemDisplayComponent implements OnInit {
     aTag.click();
   }
 
+  dateFormat(date) {
+    return formatDate(date, "short", "en-US").split(",")[0];
+  }
 }

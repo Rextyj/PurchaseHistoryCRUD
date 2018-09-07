@@ -4,6 +4,7 @@ import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { ChartsModule } from 'ng2-charts';
 import { AppRouterModule, routingComponents } from './router/router.module';
 import { ProductInterfaceImpl } from './productService/productInterfaceImpl.service';
 import { SecurityInterfaceImpl } from './securityService/securityInterfaceImpl.service';
@@ -38,7 +39,7 @@ import { ReportComponent } from './report/report.component';
     ReactiveFormsModule, HttpModule,
     StoreModule.forRoot({ AppReducer }),
     EffectsModule.forRoot([listEffect]),
-    AppRouterModule
+    AppRouterModule, ChartsModule
   ],
   providers: [ProductInterfaceImpl, SecurityInterfaceImpl],
   bootstrap: [AppComponent]

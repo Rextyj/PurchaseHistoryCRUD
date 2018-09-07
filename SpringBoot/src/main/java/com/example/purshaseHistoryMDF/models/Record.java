@@ -1,5 +1,7 @@
 package com.example.purshaseHistoryMDF.models;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -40,10 +42,10 @@ public class Record extends AuditModel{
 	private Long numOfSharesBought;
 	
 	@Column(name = "Date_purchased")
-	private String datePurchased;
+	private Date datePurchased;
 	
 	@Column(name = "Date_sold")
-	private String dateSold;
+	private Date dateSold;
 	
 	@Column(name = "Number_of_shares_sold")
 	private Long numOfSharesSold;
@@ -95,19 +97,19 @@ public class Record extends AuditModel{
 		this.numOfSharesBought = numOfSharesBought;
 	}
 
-	public String getDatePurchased() {
+	public Date getDatePurchased() {
 		return datePurchased;
 	}
 
-	public void setDatePurchased(String datePurchased) {
+	public void setDatePurchased(Date datePurchased) {
 		this.datePurchased = datePurchased;
 	}
 
-	public String getDateSold() {
+	public Date getDateSold() {
 		return dateSold;
 	}
 
-	public void setDateSold(String dateSold) {
+	public void setDateSold(Date dateSold) {
 		this.dateSold = dateSold;
 	}
 

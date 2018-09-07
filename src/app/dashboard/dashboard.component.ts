@@ -87,6 +87,6 @@ export class DashboardComponent implements OnInit {
     sessionStorage.clear();
     //dispatch a logout action to rest the state
     this.store.dispatch(new AppActionLogout());
-    this.router.navigateByUrl('/lozgin');
+    this.router.navigateByUrl('/login');
   }
 }
