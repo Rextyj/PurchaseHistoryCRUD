@@ -54,6 +54,7 @@ export class DashboardComponent implements OnInit {
 
     //If the owner information of the current state is empty, redirect user to the login page
     this.store.select("AppReducer").subscribe(state => {
+      this.owner = state.owner;
       if (state.owner === "none"){
         this.router.navigateByUrl("/login");
       }

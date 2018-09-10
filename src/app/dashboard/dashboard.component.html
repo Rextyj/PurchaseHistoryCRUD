@@ -31,7 +31,14 @@
             </li>
         </ul>
 
-        <button class="btn btn-spc ml-auto" (click)='onLogout()'>Log Out</button>
+        <div class="dropdown ml-auto">
+            <button class="btn btn-spc dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">{{owner}}</button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" (click)='onLogout()'>Log out</a>
+            </div>
+
+        </div>
     </div>
 </div>
 
