@@ -1,9 +1,8 @@
 <div class="container">
-
     <div class="card">
         <div class="card-body text-center">
             <div class="m-auto" style="margin-bottom: 10px">
-                <input #yearField type="number">
+                <input #yearField type="number" placeholder="Enter a year">
                 <button (click)=onShowMonthly(yearField.value)>Show</button>
             </div>
             <div class="row">
@@ -15,14 +14,13 @@
                 </div>
             </div>
         </div>
-        </div>
-
+    </div>
     </div>
     <div class="card m-3">
         <div class="card-body row">
             <div class="col-md-6 m-auto">
                 <div style="display: block">
-                    <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
+                    <canvas baseChart width="400" height="400" [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
                         [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
                 </div>
             </div>
@@ -31,7 +29,4 @@
             </div> -->
         </div>
     </div>
-
-
-
 </div>
