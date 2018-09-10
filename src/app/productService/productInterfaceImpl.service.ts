@@ -3,11 +3,11 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { map } from 'rxjs/operators'
 import { ProductInterface } from './productInterface.service';
 import { Observable } from 'rxjs';
-
+import { path } from '../path';
 
 @Injectable()
 export class ProductInterfaceImpl implements ProductInterface {
-
+  url = path.recordUrl;
   constructor(private http: Http) { }
 
   /** 
@@ -19,7 +19,7 @@ export class ProductInterfaceImpl implements ProductInterface {
   getUser(user) {
     console.log('getuser');
     //use post to handle login
-    return this.http.post('http://localhost:8080/users/api/getUser/', user)
+    return this.http.post(this.url + 'getUser/', user)
       //pipe map will return the response as a JSON object
       .pipe(map((response: Response) => response.json()));
   }
@@ -33,7 +33,7 @@ export class ProductInterfaceImpl implements ProductInterface {
               Otherwise,it will return an JSON object with "successful" message
   */
   saveUser(user) {
-    return this.http.post('http://localhost:8080/users/api/saveUser/', user)
+    return this.http.post(this.url + 'saveUser/', user)
       .pipe(map((response: Response) => response.json()));
   }
 
@@ -43,7 +43,8 @@ export class ProductInterfaceImpl implements ProductInterface {
     @returns observable that has an array of record JSON objects
   */
   GetPurchase(owner) {
-    var url = "http://localhost:8080/records/api/";
+    var url = "";
+    url += this.url;
     url += owner.owner;
     url += "/getPurchase";
     console.log("the get purchase url is ", url);
@@ -58,7 +59,8 @@ export class ProductInterfaceImpl implements ProductInterface {
    */
   savePurchase(formdata) {
     console.log('saving');
-    var url = "http://localhost:8080/records/api/";
+    var url = "";
+    url += this.url;
     url += formdata.Owner;
     url += "/SavePurchase";
     return this.http.post(url, formdata)
@@ -73,7 +75,8 @@ export class ProductInterfaceImpl implements ProductInterface {
    */
   deletePurchase(idAndOwner) {
     //idAndOwner is a JSON object
-    var url = "http://localhost:8080/records/api/";
+    var url = "";
+    url += this.url;
     url += idAndOwner.owner;
     url += "/deletePurchase/";
     url += idAndOwner.id
@@ -88,7 +91,8 @@ export class ProductInterfaceImpl implements ProductInterface {
    * @returns observable that has an array of summary JSON objects
    */
   getSummary(owner) {
-    var url = "http://localhost:8080/records/api/";
+    var url = "";
+    url += this.url;
     url += owner.owner;
     url += "/getPurchase/getAverage"
     console.log("the get Summary url is ", url);
@@ -103,7 +107,8 @@ export class ProductInterfaceImpl implements ProductInterface {
    * 
    */
   getBetweenDate(owner, date) {
-    var url = "http://localhost:8080/records/api/";
+    var url = "";
+    url += this.url;
     url += owner;
     url += "/getPurchase/getBetweenDate";
     url += "/";
@@ -116,7 +121,8 @@ export class ProductInterfaceImpl implements ProductInterface {
   }
 
   getMonthlyData(owner, year){
-    var url = "http://localhost:8080/records/api/";
+    var url = "";
+    url += this.url;
     url += owner;
     url += "/getPurchase/getMonthlyData";
     url += "/";
@@ -127,7 +133,8 @@ export class ProductInterfaceImpl implements ProductInterface {
   }
 
   getCompanyData(owner) {
-    var url = "http://localhost:8080/records/api/";
+    var url = "";
+    url += this.url;
     url += owner;
     url += "/getPurchase/getCompanyData";
     console.log("the get companydata url is ", url);

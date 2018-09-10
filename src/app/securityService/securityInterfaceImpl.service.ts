@@ -3,11 +3,11 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { map } from 'rxjs/operators'
 import { SecurityInterface } from './securityInterface.service';
 import { Observable } from 'rxjs';
-
+import {path} from '../path'
 
 @Injectable()
 export class SecurityInterfaceImpl implements SecurityInterface {
-
+  url = path.userUrl;
   constructor(private http: Http) { }
 
   /** 
@@ -19,7 +19,7 @@ export class SecurityInterfaceImpl implements SecurityInterface {
   getUser(user) {
     console.log('getuser');
     //use post to handle login
-    return this.http.post('http://localhost:8080/users/api/getUser/', user)
+    return this.http.post(this.url + 'getUser/', user)
       //pipe map will return the response as a JSON object
       .pipe(map((response: Response) => response.json()));
   }
@@ -33,7 +33,7 @@ export class SecurityInterfaceImpl implements SecurityInterface {
               Otherwise,it will return an JSON object with "successful" message
   */
   saveUser(user) {
-    return this.http.post('http://localhost:8080/users/api/saveUser/', user)
+    return this.http.post(this.url + 'saveUser/', user)
       .pipe(map((response: Response) => response.json()));
   }
 
