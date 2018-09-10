@@ -1,6 +1,6 @@
 import { ActionReducer, Action } from '@ngrx/store';
 import { initialState, AppState } from './state';
-import {AppActions,UPDATE_SUCCESS, DELETE_SUCCESS, ASSIGN_OWNER, LOG_OUT, UPDATE_SUMMARY_SUCCESS} from './action';
+import { AppActions, UPDATE_SUCCESS, DELETE_SUCCESS, ASSIGN_OWNER, LOG_OUT, UPDATE_SUMMARY_SUCCESS, ADD_FAILED, ADD_SUCCESS, CONNECTION_ERROR } from './action';
 
 /**
  * @description Ngrx reducer
@@ -16,7 +16,8 @@ export const AppReducer: ActionReducer<AppState> =
                     summary: state.summary,
                     owner: state.owner,
                     needToUpdate: false,
-                    needToUpdateSummary: state.needToUpdateSummary
+                    needToUpdateSummary: state.needToUpdateSummary,
+                    actionMessage: state.actionMessage
                 };
                 return state;
             case DELETE_SUCCESS:
@@ -25,7 +26,8 @@ export const AppReducer: ActionReducer<AppState> =
                     summary: state.summary,
                     owner: state.owner,
                     needToUpdate: false,
-                    needToUpdateSummary: state.needToUpdateSummary
+                    needToUpdateSummary: state.needToUpdateSummary,
+                    actionMessage: state.actionMessage
                 };
                 return state;
             //Case for action type assign_owner. Action payload will be the owner username
@@ -35,7 +37,8 @@ export const AppReducer: ActionReducer<AppState> =
                     summary: state.summary,
                     owner: action.payload,
                     needToUpdate: true,
-                    needToUpdateSummary: true
+                    needToUpdateSummary: true,
+                    actionMessage: state.actionMessage
                 };
                 return state;
             //log_out action will cause the state being reset to the initial state
@@ -45,7 +48,8 @@ export const AppReducer: ActionReducer<AppState> =
                     summary: state.summary,
                     owner: 'none',
                     needToUpdate: true,
-                    needToUpdateSummary: true
+                    needToUpdateSummary: true,
+                    actionMessage: state.actionMessage
                 };
                 return state;
             //update_summary_success action will assign the action payload to the summary property of the new state
@@ -55,8 +59,22 @@ export const AppReducer: ActionReducer<AppState> =
                     summary: action.payload,
                     owner: state.owner,
                     needToUpdate: state.needToUpdate,
-                    needToUpdateSummary: false
+                    needToUpdateSummary: false,
+                    actionMessage: state.actionMessage
                 };
+                return state;
+            
+            case CONNECTION_ERROR:
+            case ADD_SUCCESS:    
+            case ADD_FAILED:
+                state = {
+                    dataList: state.dataList,
+                    summary: state.summary,
+                    owner: state.owner,
+                    needToUpdate: state.needToUpdate,
+                    needToUpdateSummary: state.needToUpdateSummary,
+                    actionMessage: action.payload
+                }
                 return state;
             default:
                 //return the current state unchanged

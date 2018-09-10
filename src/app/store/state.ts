@@ -7,6 +7,7 @@ export interface AppState{
     owner: string;
     needToUpdate: boolean;
     needToUpdateSummary: boolean;
+    actionMessage: string;
 }
 
 export const initialState: AppState = {
@@ -14,5 +15,6 @@ export const initialState: AppState = {
     summary: [],
     owner: 'none',
     needToUpdate: true,
-    needToUpdateSummary: true
+    needToUpdateSummary: true,
+    actionMessage: ''
 };

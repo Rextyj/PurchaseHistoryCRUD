@@ -24,6 +24,8 @@ export class AddItemComponent implements OnInit {
   owner;
   purchasePricePerShare;
   soldPricePerShare;
+  actionMessage = ''; 
+  hideMessage: boolean;
 
   constructor(private fb: FormBuilder, private domSan: DomSanitizer,
     private newService: ProductInterfaceImpl, private store: Store<AppState>,
@@ -40,8 +42,9 @@ export class AddItemComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.hideMessage = true;
+    console.log('hide message');
     console.log('action dispatched');
-
     //reading all the records from the database
     //this.store.subscribe will return 
     /*
@@ -56,6 +59,7 @@ export class AddItemComponent implements OnInit {
       console.log('subscribed data is ', state);
       this.owner = state.owner;
       this.dataFromStore = state.dataList;
+      this.actionMessage = state.actionMessage;
     });
   }
 
@@ -79,6 +83,8 @@ export class AddItemComponent implements OnInit {
 
     // dispatch an action to save the form object to database
     this.store.dispatch(new AppActionAdd(formData));
+    //show message
+    this.hideMessage = false;
     // reset the form after the data is saved
     this.resetForm();
   }

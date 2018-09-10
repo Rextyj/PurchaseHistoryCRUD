@@ -5,6 +5,8 @@ import { Action } from "../../../node_modules/@ngrx/store";
  */
 
 export const ADD_ITEM: string = 'ADD_ITEM';
+export const ADD_FAILED: string = 'ADD_FAILED';
+export const ADD_SUCCESS: string = 'ADD_SUCCESS';
 export const DELETE_ITEM: string = 'DETELET_ITEM';
 export const UPDATE_LIST: string = 'UPDATE_LIST';
 export const UPDATE_SUCCESS: string = 'UPDATE_SUCCESS';
@@ -13,9 +15,20 @@ export const DELETE_SUCCESS: string = 'DELETE_SUCCESS';
 export const ASSIGN_OWNER: string = 'ASSIGN_OWNER';
 export const UPDATE_SUMM: string = 'UPDATE_SUMM';
 export const LOG_OUT: string = 'LOG_OUT';
+export const CONNECTION_ERROR: string = 'CONNECTION_ERROR';
 
 export class AppActionAdd implements Action {
     readonly type = ADD_ITEM;
+    constructor(public payload?: any) { }
+}
+
+export class AppActionAddSuccess implements Action {
+    readonly type = ADD_SUCCESS;
+    constructor(public payload?: any) { }
+}
+
+export class AppActionAddFailed implements Action {
+    readonly type = ADD_FAILED;
     constructor(public payload?: any) { }
 }
 
@@ -59,6 +72,12 @@ export class AppActionLogout implements Action {
     readonly type = LOG_OUT;
     constructor(public payload?: any) { }
 }
+
+export class AppActionConnectionError implements Action {
+    readonly type = CONNECTION_ERROR;
+    constructor(public payload?: any) { }
+}
+
 
 export type AppActions = AppActionAdd | AppActionDel |
     AppActionUpd | AppActionUpdateSuccess |

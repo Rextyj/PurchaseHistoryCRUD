@@ -1,8 +1,8 @@
 import { Injectable } from "../../../node_modules/@angular/core";
-import { UPDATE_LIST, DELETE_ITEM, UPDATE_SUMM, ADD_ITEM, AppActions, AppActionUpd, AppActionUpdateSuccess, AppActionUpdateSummarySuccess, AppActionDeleteSuccess, AppActionUpdateSummary } from "./action";
+import { UPDATE_LIST, DELETE_ITEM, UPDATE_SUMM, ADD_ITEM, AppActions, AppActionUpd, AppActionUpdateSuccess, AppActionUpdateSummarySuccess, AppActionDeleteSuccess, AppActionUpdateSummary, AppActionAddFailed, AppActionAddSuccess, AppActionConnectionError } from "./action";
 import { ProductInterfaceImpl } from "../productService/productInterfaceImpl.service";
 import { Effect, Actions, ofType } from "../../../node_modules/@ngrx/effects";
-import { switchMap, map, withLatestFrom } from "../../../node_modules/rxjs/operators";
+import { switchMap, map, withLatestFrom, catchError } from "../../../node_modules/rxjs/operators";
 import { Observable } from "../../../node_modules/rxjs";
 import { Action, Store } from "../../../node_modules/@ngrx/store";
 import { AppState } from "./state";
@@ -26,15 +26,42 @@ export class listEffect {
             ofType<AppActions>(ADD_ITEM),
             //the payload passed in is formdata that has Owner property
             //save the purchase record came with action by making an API call
-            switchMap(action => { username = action.payload.Owner; return this.service.savePurchase(action.payload) }),
-            //use the returned response from backend and dispatch a new update action
-            switchMap(dataReceived => {
-                alert(dataReceived.data);
-                return [
-                    new AppActionUpdateSummary({ owner: username }),
-                    new AppActionUpd({ owner: username })
-                ]
-            })
+            switchMap(action => {
+                username = action.payload.Owner;
+                //use the returned response from backend and dispatch a new update action
+                return this.service.savePurchase(action.payload).pipe(
+                    switchMap(dataReceived => {
+                        if (dataReceived.data == "Error") {
+                            return [new AppActionAddFailed('Error occured at the server side while trying to add an item.')];
+                        } else {
+                            return [
+                                new AppActionUpdateSummary({ owner: username }),
+                                new AppActionUpd({ owner: username }),
+                                new AppActionAddSuccess('Item is successfully added.')
+                            ]
+                        }
+                    }),
+                    catchError((error) => {
+                        return [new AppActionConnectionError('Cannot connect to server at this time. Please try again later.')];
+                    })
+                )
+            }),
+
+            // {
+            //     if (dataReceived.data == "Error") {
+            //         return [new AppActionAddFailed('Error occured while trying to add an item.')];
+            //     } else {
+            //         return [
+            //             new AppActionUpdateSummary({ owner: username }),
+            //             new AppActionUpd({ owner: username }),
+            //             new AppActionAddSuccess('Item is successfully added.')
+            //         ]
+            //     }
+
+            // }),
+            // catchError((error) => {
+            //     return [new AppActionConnectionError('Cannot connect to server at this time. Please try again later.')];
+            // })
         )
         return addAction;
     }

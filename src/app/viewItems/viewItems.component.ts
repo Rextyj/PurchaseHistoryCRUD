@@ -113,6 +113,11 @@ export class ItemDisplayComponent implements OnInit {
   }
 
   dateFormat(date) {
-    return formatDate(date, "short", "en-US").split(",")[0];
+    if (date != undefined){
+      return formatDate(date, "short", "en-US").split(",")[0];
+    } else {
+      return '';
+    }
+    
   }
 }
