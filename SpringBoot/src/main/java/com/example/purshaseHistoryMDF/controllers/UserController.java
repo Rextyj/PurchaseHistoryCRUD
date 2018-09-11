@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
-import javax.xml.ws.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -41,10 +40,8 @@ public class UserController {
 		if(thisUser.isPresent()) {
 			//found the user with the correct password
 			response.setData("verified");
-//			return thisUser.get();
 		} else {
 			response.setData("unsuccessful");
-//			return null;
 		}
 		return ResponseEntity.ok().body(response);
 	}
@@ -52,8 +49,6 @@ public class UserController {
 	@PostMapping("/users/api/saveUser")
 	@CrossOrigin("*")
 	public ResponseEntity<?> saveUser(@Valid @RequestBody User user) {
-//		User checkUser = getUser(user);
-		
 		ExampleMatcher matcher = ExampleMatcher.matching()
 				.withMatcher("username", ExampleMatcher.GenericPropertyMatchers.exact())
 				.withMatcher("password", ExampleMatcher.GenericPropertyMatchers.exact());

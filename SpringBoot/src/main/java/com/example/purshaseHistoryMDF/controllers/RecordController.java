@@ -41,6 +41,7 @@ public class RecordController {
 	
 	@GetMapping("/records/api/{username}/getPurchase")
 	public ResponseEntity<?> getRecords(@PathVariable String username) {
+		// -----------------------One way of finding the user based on username-----------------
 		// ExampleMatcher matcher = ExampleMatcher.matching()
 		// 		.withMatcher("username", ExampleMatcher.GenericPropertyMatchers.exact());
 
@@ -50,6 +51,9 @@ public class RecordController {
 		// 		.map(user -> {
 		// 			return user.getId();
 		// 		}).orElseThrow(() -> new ResourceNotFoundException("User not found when trying to get record"));
+		//----------------------------------------------------------------------------------------
+
+		//Much simpler way of find the user
 		User user = userRepository.findByUsername(username);
 		CustomResponse customResponse = new CustomResponse();
 		if (user == null){
@@ -70,17 +74,6 @@ public class RecordController {
 	@PostMapping("/records/api/{username}/SavePurchase")
 	public ResponseEntity<CustomResponse> saveRecord(@PathVariable String username, 
 			@Valid @RequestBody Record record) {
-		// ExampleMatcher matcher = ExampleMatcher.matching()
-		// 		.withMatcher("username", ExampleMatcher.GenericPropertyMatchers.exact());
-
-		// User tempUser = new User();
-		// tempUser.setUsername(username);
-		// userRepository.findOne(Example.of(tempUser, matcher))
-		// .map(user -> {
-		// 	record.setUser(user);
-		// 	return recordRepository.save(record);
-		// }).orElseThrow(() -> new ResourceNotFoundException("User not found when trying to save record " + username));
-		
 		User user = userRepository.findByUsername(username);
 		CustomResponse customResponse = new CustomResponse();
 		record.setUser(user);
