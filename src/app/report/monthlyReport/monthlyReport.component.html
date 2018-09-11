@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="card m-3 text-center">
+        <h5 class="card-header">
+            Report By Month
+        </h5>
+        <div class="card-body text-center">
+            <div class="m-auto" style="margin-bottom: 10px">
+                <input #yearField type="number" placeholder="Enter a year">
+                <button (click)=onShowMonthly(yearField.value)>Show</button>
+            </div>
+            <div class="row">
+                <div class="col-m-6 m-auto">
+                    <div style="display: block;">
+                        <canvas baseChart width="400" height="400" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
+                            [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" (chartHover)="chartHovered($event)"
+                            (chartClick)="chartClicked($event)"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

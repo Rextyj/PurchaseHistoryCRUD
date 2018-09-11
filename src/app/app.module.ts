@@ -19,7 +19,8 @@ import { AddItemComponent } from './add-item/add-item.component';
 import { SummaryComponent } from './summary/summary.component';
 // adding animation module -cj
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReportComponent } from './report/report.component';
+import { MonthlyReportComponent } from './report/monthlyReport/monthlyReport.component';
+import { CompanyReportComponent } from './report/companyReport/companyReport.component';
 
 
 @NgModule({
@@ -32,7 +33,9 @@ import { ReportComponent } from './report/report.component';
     DashboardComponent,
     AddItemComponent,
     SummaryComponent,
-    ReportComponent
+    MonthlyReportComponent,
+    CompanyReportComponent
+
   ],
   imports: [
     BrowserModule, BrowserAnimationsModule, FormsModule,

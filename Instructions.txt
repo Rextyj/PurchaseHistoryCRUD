@@ -1,18 +1,23 @@
 
 instructions
 ------------------
+Prerequisites: 
+1. Have PostgreSQL installed
+2. Have Apache-maven installed
+
 Setting up:
 
-1. cd into project folder, then cd into Server folder.
-2. run command line: node index.js
+1. cd into project folder, then cd into SpringBoot folder.
+2. run command line: mvn spring-boot:run
 
 	db runs locally
-	db name: StockHistory
-	url: mongodb://localhost:27017/StockHistory
+	db username: postgres
+	db password: postgres
+	url: postgresql://localhost:5432/postgres
 	
-	collections
-	url: mongodb://localhost:27017/StockHistory/users
-	url: mongodb://localhost:27017/StockHistory/recordlists
+	Tables:
+	1. users: store user information
+	2. records: store all item information
 
 3. cd appcode
 4. npm install
@@ -31,17 +36,23 @@ Setting up:
 The dashboard will display addItem pane by default.
 
 Type in all the information to add a new item to the list. 
-Download button is available if there is at least one record in the database.
 
 To navigate to other panels, click the tabs on the top left.
 
 In the view tab, it displays all the records belongs to the current user.
+Download button is available if there is at least one record in the database.
 To filter the results, use the input boxes to search by company name or month of purchase date
 
 In summary panel, the bottom table displays the summary of stock purchase history with each company.
 Use the download button to download the table into a csv file.
 
 Use the top two input boxes to specify a time period. Click the show button to get records that fall inside the period.
+
+In the record tab, two graphs will be displayed: 
+	The top line chart requires the user to specify a year. Click the show button to display the total purchase price for each month of the year specified.
+	The bottom chart displays the total purchase price for each company automatically.
+
+To log out, click the username to display the dropdown menu and select log out. 
 
 
 

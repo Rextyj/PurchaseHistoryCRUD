@@ -1,22 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductInterfaceImpl } from '../productService/productInterfaceImpl.service';
+import { ProductInterfaceImpl } from '../../productService/productInterfaceImpl.service';
 import { Store } from '@ngrx/store';
-import { AppState } from '../store/state';
+import { AppState } from '../../store/state';
 
+/**
+ * Report component to show graphs
+ */
 @Component({
   selector: 'app-report',
-  templateUrl: './report.component.html',
-  styleUrls: ['./report.component.scss']
+  templateUrl: './CompanyReport.component.html',
+  styleUrls: ['./CompanyReport.component.scss']
 })
-export class ReportComponent implements OnInit {
+export class CompanyReportComponent implements OnInit {
 
   monthlyData: number[] = [];
   companyData = [];
   owner;
 
-  // lineChart variables
-  public lineChartData: Array<any> = [{ data: [] }];
-  public lineChartLabels: Array<any> = [];
   //barchart variables
   public barChartData: Array<any> = [{ data: [] }];
   public barChartLabels: Array<any> = [];
@@ -28,56 +28,6 @@ export class ReportComponent implements OnInit {
     this.store.select('AppReducer').subscribe(state => {
       this.owner = state.owner;
       this.onShowByCompany();
-    });
-  }
-
-  //---------------------------------Configuring linechart-------------------------------------
-  public lineChartOptions: any = {
-    responsive: true,
-    scales: {
-      xAxes: [{
-        scaleLabel: {
-          display: true,
-          labelString: 'Month'
-        }
-      }],
-      yAxes: [{
-        scaleLabel: {
-          display: true,
-          labelString: 'Total Purchase Price'
-        }
-      }]
-    }
-  };
-
-  public lineChartColors: Array<any> = [
-    { // grey
-      backgroundColor: 'rgba(148,159,177,0.2)',
-      borderColor: 'rgba(148,159,177,1)',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-    }
-  ];
-  public lineChartLegend: boolean = false;
-  public lineChartType: string = 'line';
-
-  //push data returned from server to the arrays to display
-  onShowMonthly(year) {
-    this.service.getMonthlyData(this.owner, year).subscribe(_data => {
-      console.log("monthly data is ", _data);
-      this.monthlyData = [];
-      this.lineChartLabels.length = 0;
-      for (let row of _data) {
-        this.monthlyData.push(row[1]);
-        this.lineChartLabels.push(row[0]);
-      }
-      console.log("data is ", this.monthlyData);
-      console.log('label is ', this.lineChartLabels);
-      this.lineChartData = [
-        { data: this.monthlyData }
-      ];
     });
   }
 

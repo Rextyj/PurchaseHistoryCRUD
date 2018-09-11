@@ -21,5 +21,9 @@ export abstract class ProductInterface {
 
   abstract getBetweenDate(T1, T2): Observable<any>;
 
+  abstract getMonthlyData(T1, T2): Observable<any>; 
+
+  abstract getCompanyData(T1): Observable<any>;
+
   abstract convertToCSV(T): String;
 }

@@ -53,8 +53,11 @@ export class ItemDisplayComponent implements OnInit {
   //invoked when the user clicks on the trash can icon
   deleteItem(id) {
     console.log('Item id is ' + id);
-    //dispatch a delete action/ payload is the id of the item and its owner
+    // ask for confirmation first
+    if(window.confirm('Are you sure you want to delete this record?')){
+      //dispatch a delete action/ payload is the id of the item and its owner
     this.store.dispatch(new AppActionDel({ 'id': id, owner: this.owner }));
+    }
   }
 
   //invoked when user clicks search by company button

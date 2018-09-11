@@ -5,6 +5,10 @@ import { ProductInterface } from './productInterface.service';
 import { Observable } from 'rxjs';
 import { path } from '../path';
 
+
+/**
+ * Implementations of product interface
+ */
 @Injectable()
 export class ProductInterfaceImpl implements ProductInterface {
   url = path.recordUrl;

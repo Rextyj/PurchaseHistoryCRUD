@@ -30,6 +30,10 @@ export class DashboardComponent implements OnInit {
   fileUrl;
   dataFromStore;
   owner;
+  monthIsActive;
+  companyIsActive;
+  dropdownItems;
+  selectedDropdownItem;
 
   constructor(private fb: FormBuilder, private domSan: DomSanitizer,
     private newService: ProductInterfaceImpl, private store: Store<AppState>,
@@ -39,7 +43,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     // show the add component by default when user first logged in
     this.onAdd();
-
+    this.dropdownItems = ['Report by Month','Report by Company'];
     /**
     everytime the user refreshes the page, we want the owner of this session to be automatically assigned
     with the username stored in the session storage
@@ -55,11 +59,11 @@ export class DashboardComponent implements OnInit {
     //If the owner information of the current state is empty, redirect user to the login page
     this.store.select("AppReducer").subscribe(state => {
       this.owner = state.owner;
-      if (state.owner === "none"){
+      if (state.owner === "none") {
         this.router.navigateByUrl("/login");
       }
     })
-    
+
   }
 
   //invoked when the user clicks view tab
@@ -78,10 +82,30 @@ export class DashboardComponent implements OnInit {
 
   }
 
-  onReport() {
-    this.router.navigate(['/dashboard', { outlets: { 'childrenComponents': 'report' } }]);
+  onReport(message) {
+    if (message == this.dropdownItems[0]){
+      this.selectedDropdownItem = this.dropdownItems[0];
+      this.router.navigate(['/dashboard', { outlets: { 'childrenComponents': 'report/monthlyReport' } }]);
+    } else if (message == this.dropdownItems[1]){
+      this.selectedDropdownItem = this.dropdownItems[1];
+      this.router.navigate(['/dashboard', { outlets: { 'childrenComponents': 'report/companyReport' } }]);
+    }
   }
 
+  //---------another way of making dropdown items active on the fly-----------
+  // onMonthlyReport() {
+  //   this.monthIsActive = true;
+  //   this.companyIsActive = false;
+  //   this.router.navigate(['/dashboard', { outlets: { 'childrenComponents': 'report/monthlyReport' } }]);
+  // }
+
+  // onCompanyReport() {
+  //   this.monthIsActive = false;
+  //   this.companyIsActive = true;
+  //   this.router.navigate(['/dashboard', { outlets: { 'childrenComponents': 'report/companyReport' } }]);
+  // }
+  //---------------------------------------------------------------------------
+  
   //invoked when the user clicks logout button
   onLogout() {
     //clear the username stored in the session storage
