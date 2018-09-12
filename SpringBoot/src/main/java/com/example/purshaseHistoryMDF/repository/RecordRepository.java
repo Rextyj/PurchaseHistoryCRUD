@@ -29,4 +29,11 @@ public interface RecordRepository extends JpaRepository<Record, Long>{
 	
 	@Query(value="select company_name, sum(purchase_price) as totalPrice from records where user_id=?1 group by 1", nativeQuery = true)
 	List<?> getCompanyData(Long Id);
+
+	@Query(value="select company_name, sum(number_of_shares_bought - number_of_shares_sold) as sharesRemain from records where user_id=?1 group by 1", nativeQuery = true)
+	List<?> getShareData(Long Id);
+
+	@Query(value="Select sum(purchase_price) as totalPrice, sum(sold_price) as soldPrice, sum(loss_or_gain_price) as lossGain from RECORDS where user_id=?2 and to_char(date_purchased, 'YYYY') = ?1 ", nativeQuery = true)
+	List<?> getData(String year, Long Id);
+
 }

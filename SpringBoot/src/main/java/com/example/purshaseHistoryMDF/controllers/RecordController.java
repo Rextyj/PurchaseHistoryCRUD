@@ -142,4 +142,17 @@ public class RecordController {
 		User user = userRepository.findByUsername(username);
 		return recordService.getCompanyData(user.getId());
 	}
+
+	@GetMapping("/records/api/{username}/getPurchase/getShareData")
+	public List<?> getShareData(@PathVariable String username) {
+		User user = userRepository.findByUsername(username);
+		return recordService.getShareData(user.getId());
+	}
+
+	@GetMapping("/records/api/{username}/getPurchase/getData/{year}")
+	public List<?> getData(@PathVariable String year,@PathVariable String username) {
+		User user = userRepository.findByUsername(username);
+		return recordService.getData(year, user.getId());
+	}
+
 }

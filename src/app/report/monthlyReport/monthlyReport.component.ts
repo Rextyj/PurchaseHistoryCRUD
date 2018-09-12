@@ -16,6 +16,8 @@ export class MonthlyReportComponent implements OnInit {
   monthlyData: number[] = [];
   companyData = [];
   owner;
+  tableData = [];
+  yearShown = '';
 
   // lineChart variables
   public lineChartData: Array<any> = [{ data: [] }];
@@ -64,6 +66,7 @@ export class MonthlyReportComponent implements OnInit {
 
   //push data returned from server to the arrays to display
   onShowMonthly(year) {
+    this.yearShown = year;
     this.service.getMonthlyData(this.owner, year).subscribe(_data => {
       console.log("monthly data is ", _data);
       this.monthlyData = [];
@@ -77,6 +80,10 @@ export class MonthlyReportComponent implements OnInit {
       this.lineChartData = [
         { data: this.monthlyData }
       ];
+    });
+
+    this.service.getData(this.owner, year).subscribe(data => {
+      this.tableData = data;
     });
   }
 

@@ -16,6 +16,9 @@
                 <button type="submit" class="btn btn-outline-success btn-rounded my-2 mx-1">Show</button>
                 <div *ngIf='betweenDate !== undefined && betweenDate.length == 0' class="alert alert-danger my-auto mx-1">No
                     records to show</div>
+                <div class="gainLoss">
+                <div *ngIf='betweenDate !== undefined && betweenDate.length != 0'><span>Total Gain or Loss For The Period: </span> {{gainLoss}}</div>
+                </div>
             </div>
         </form>
 

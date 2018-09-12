@@ -11,6 +11,8 @@ import { SummaryComponent } from '../summary/summary.component';
 import { MonthlyReportComponent } from '../report/monthlyReport/monthlyReport.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CompanyReportComponent } from '../report/companyReport/companyReport.component';
+import { ShareReportComponent } from '../report/shareReport/shareReport.component';
+
 
 //define the routes
 const routes: Routes = [
@@ -23,7 +25,8 @@ const routes: Routes = [
       { path: 'additem', component: AddItemComponent, outlet: "childrenComponents" },
       { path: 'summary', component: SummaryComponent, outlet: "childrenComponents" },
       { path: 'report/monthlyReport', component: MonthlyReportComponent, outlet: "childrenComponents" },
-      { path: 'report/companyReport', component: CompanyReportComponent, outlet: 'childrenComponents' }
+      { path: 'report/companyReport', component: CompanyReportComponent, outlet: 'childrenComponents' },
+      { path: 'report/shareReport', component: ShareReportComponent, outlet: 'childrenComponents' }
     ]
   }
 ];

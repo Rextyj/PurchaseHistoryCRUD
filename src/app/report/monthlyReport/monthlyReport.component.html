@@ -8,15 +8,35 @@
                 <input #yearField type="number" placeholder="Enter a year">
                 <button (click)=onShowMonthly(yearField.value)>Show</button>
             </div>
+
             <div class="row">
                 <div class="col-m-6 m-auto">
-                    <div style="display: block;">
+                    <div style="display: block">
                         <canvas baseChart width="400" height="400" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
                             [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" (chartHover)="chartHovered($event)"
                             (chartClick)="chartClicked($event)"></canvas>
                     </div>
                 </div>
+                <div *ngIf='tableData.length > 0' class="col-m-6 m-auto">
+                    <table class="table table-responsive table-striped table-hover text-center table-bordered">
+                        <tbody>
+                            <tr>
+                                <th>Total Purchase Price of {{yearShown}}</th>
+                                <td>{{tableData[0][0]}}</td>
+                            </tr>
+                            <tr>
+                                <th>Total Sold Price of {{yearShown}}</th>
+                                <td>{{tableData[0][1]}}</td>
+                            </tr>
+                            <tr>
+                                <th>Total Loss and Gain of {{yearShown}}</th>
+                                <td>{{tableData[0][2]}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
+
         </div>
     </div>
 </div>

@@ -146,6 +146,27 @@ export class ProductInterfaceImpl implements ProductInterface {
       pipe(map((response: Response) => response.json()));
   }
 
+  getShareData(owner) {
+    var url = "";
+    url += this.url;
+    url += owner;
+    url += "/getPurchase/getShareData";
+    console.log("the get companydata url is ", url);
+    return this.http.get(url).
+      pipe(map((response: Response) => response.json()));
+  }
+
+  getData(owner, year) {
+    var url = "";
+    url += this.url;
+    url += owner;
+    url += "/getPurchase/getData";
+    url += "/";
+    url += year;
+    console.log("the get companydata url is ", url);
+    return this.http.get(url).
+      pipe(map((response: Response) => response.json()));
+  }
 
   /**
    * Convert JSON objects to CSV format

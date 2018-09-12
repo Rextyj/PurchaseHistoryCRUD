@@ -47,6 +47,7 @@ table {
     resize: horizontal;
     overflow: auto;
     max-width: 101%;
+    // min-width: 90%;
 }
 
 .btn-spc {
@@ -129,3 +130,7 @@ router-outlet~* {
     min-height: 100%;
 }
 
+.gainLoss {
+    margin: auto;
+    margin-right: 1em;
+}

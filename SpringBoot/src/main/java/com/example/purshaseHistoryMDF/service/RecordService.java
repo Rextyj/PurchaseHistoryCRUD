@@ -30,4 +30,13 @@ public class RecordService {
 	public List<?> getCompanyData(Long Id){
 		return recordRepository.getCompanyData(Id);
 	}
+
+	public List<?> getShareData(Long Id){
+		return recordRepository.getShareData(Id);
+	}
+
+	public List<?> getData(String year,Long Id){
+		return recordRepository.getData(year, Id);
+	}
+
 }

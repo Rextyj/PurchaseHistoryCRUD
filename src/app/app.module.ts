@@ -21,6 +21,7 @@ import { SummaryComponent } from './summary/summary.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MonthlyReportComponent } from './report/monthlyReport/monthlyReport.component';
 import { CompanyReportComponent } from './report/companyReport/companyReport.component';
+import { ShareReportComponent } from './report/shareReport/shareReport.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { CompanyReportComponent } from './report/companyReport/companyReport.com
     AddItemComponent,
     SummaryComponent,
     MonthlyReportComponent,
-    CompanyReportComponent
+    CompanyReportComponent,
+    ShareReportComponent
 
   ],
   imports: [

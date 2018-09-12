@@ -21,6 +21,7 @@ export class SummaryComponent implements OnInit {
     res;
     fileUrl;
     needToUpdateSummary;
+    gainLoss;
 
     constructor(private store: Store<AppActions>,
         private service: ProductInterfaceImpl,
@@ -47,7 +48,7 @@ export class SummaryComponent implements OnInit {
             this.needToUpdateSummary = state.needToUpdateSummary;
         });
 
-        if (this.needToUpdateSummary == true) {
+        if (this.needToUpdateSummary && this.owner != 'none') {
             //dispatch the action to update the summary table
             this.store.dispatch(new AppActionUpdateSummary({ owner: this.owner }));
         }
@@ -60,6 +61,10 @@ export class SummaryComponent implements OnInit {
         //get the records between the dates
         this.service.getBetweenDate(this.owner, dateForm).subscribe(data => {
             this.betweenDate = data;
+            this.gainLoss = 0;
+            data.forEach(element => {
+                this.gainLoss += element[8];
+            });
         });
 
     }
