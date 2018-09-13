@@ -31,7 +31,10 @@
     "ng2-charts": "^1.6.0",
     "nodemon": "^1.18.3",
     "octicons": "^8.0.0",
+    "pg": "^7.4.3",
+    "reflect-metadata": "^0.1.12",
     "rxjs": "^6.2.2",
+    "typeorm": "^0.2.7",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
@@ -41,7 +44,7 @@
     "@angular/language-service": "^6.1.0",
     "@types/jasmine": "~2.8.6",
     "@types/jasminewd2": "~2.0.3",
-    "@types/node": "~8.9.4",
+    "@types/node": "^8.9.5",
     "codelyzer": "~4.2.1",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",

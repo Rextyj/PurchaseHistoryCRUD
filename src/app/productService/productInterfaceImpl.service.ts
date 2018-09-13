@@ -65,8 +65,10 @@ export class ProductInterfaceImpl implements ProductInterface {
     console.log('saving');
     var url = "";
     url += this.url;
-    url += formdata.Owner;
-    url += "/SavePurchase";
+    // url += formdata.Owner;
+    // url += "/SavePurchase";
+    
+    url += "SavePurchase";
     return this.http.post(url, formdata)
       .pipe(map((response: Response) => response.json()))
   }

@@ -72,9 +72,9 @@ export class AddItemComponent implements OnInit {
 
     console.log('formdata is ', formData);
     // Note the sold price and purchase price are total price not per share price
-    formData['lossOrGain'] = (formData['soldPrice'] - formData['purchasePrice']).toFixed(2);
-    formData['avgPurchasePrice'] = (formData.purchasePrice / formData.numOfSharesBought).toFixed(2);
-    formData['avgSoldPrice'] = (formData.soldPrice / formData.numOfSharesSold).toFixed(2);
+    formData['lossOrGain'] = parseFloat((formData['soldPrice'] - formData['purchasePrice']).toFixed(2));
+    formData['avgPurchasePrice'] = parseFloat((formData.purchasePrice / formData.numOfSharesBought).toFixed(2));
+    formData['avgSoldPrice'] = parseFloat((formData.soldPrice / formData.numOfSharesSold).toFixed(2));
 
     // formData.datePurchased = formatDate(formData.datePurchased, "short", "en-US").split(",")[0];
     // formData.dateSold = formatDate(formData.dateSold, "short", "en-US").split(",")[0];
