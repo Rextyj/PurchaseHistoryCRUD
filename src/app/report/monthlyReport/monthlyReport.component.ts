@@ -71,9 +71,9 @@ export class MonthlyReportComponent implements OnInit {
       console.log("monthly data is ", _data);
       this.monthlyData = [];
       this.lineChartLabels.length = 0;
-      for (let row of _data) {
-        this.monthlyData.push(row[1]);
-        this.lineChartLabels.push(row[0]);
+      for (let object of _data) {
+        this.monthlyData.push(object.totalPrice);
+        this.lineChartLabels.push(object.mon);
       }
       console.log("data is ", this.monthlyData);
       console.log('label is ', this.lineChartLabels);

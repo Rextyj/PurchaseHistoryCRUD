@@ -121,12 +121,9 @@ export class ProductInterfaceImpl implements ProductInterface {
   getMonthlyData(owner, year) {
     var url = "";
     url += this.url;
-    url += owner;
-    url += "/getPurchase/getMonthlyData";
-    url += "/";
-    url += year;
+    url += "getPurchase/getMonthlyData";
     console.log("the get monthlydata url is ", url);
-    return this.http.get(url).
+    return this.http.post(url, {owner: owner, year: year}).
       pipe(map((response: Response) => response.json()));
   }
 
@@ -153,12 +150,9 @@ export class ProductInterfaceImpl implements ProductInterface {
   getData(owner, year) {
     var url = "";
     url += this.url;
-    url += owner;
-    url += "/getPurchase/getData";
-    url += "/";
-    url += year;
+    url += "getPurchase/getData";
     console.log("the get companydata url is ", url);
-    return this.http.get(url).
+    return this.http.post(url, {owner: owner, year: year}).
       pipe(map((response: Response) => response.json()));
   }
 

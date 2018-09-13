@@ -85,13 +85,57 @@ export async function getBetweenDate(request: Request, response: Response) {
     var user = await userRepository.find({ username: dataIn.owner });
     console.log(user);
     // "Select * from records where user_id = :id and date_purchased between to_date(:beginDate, 'YYYY-MM-DD') and to_date(:endDate, 'YYYY-MM-DD')"
-    var averageData = await entityManager
+    var betweenData = await entityManager
                             .createQueryBuilder()
                             // .select("records")
                             .from(Records, "records")
                             .where("user_id = :id", {id: user[0].id} )
                             .andWhere("date_purchased between to_date(:beginDate, 'YYYY-MM-DD') and to_date(:endDate, 'YYYY-MM-DD')", {beginDate: dataIn.date.beginningDate, endDate: dataIn.date.endDate})
                             .getRawMany();
-    console.log(averageData);
-    response.send(averageData);
+    console.log(betweenData);
+    response.send(betweenData);
+}
+
+export async function getMonthlyData(request: Request, response: Response) {
+    const entityManager = getManager();
+    const userRepository = entityManager.getRepository(Users);
+    var dataIn = request.body;
+    console.log(dataIn);
+    var user = await userRepository.find({ username: dataIn.owner });
+    console.log(user);
+    // Select to_char(date_purchased, 'MM') as mon, sum(purchase_price) as totalPrice from RECORDS where user_id=?2 and to_char(date_purchased, 'YYYY') = ?1 group by 1 order by mon asc
+    var monthlyData = await entityManager
+                            .createQueryBuilder()
+                            .select("to_char(date_purchased, 'MM')", "mon")
+                            .addSelect("sum(purchase_price)", "totalPrice")
+                            .from(Records, "records")
+                            .where("user_id = :id", {id: user[0].id} )
+                            .andWhere("to_char(date_purchased, 'YYYY') = :year", {year: dataIn.year})
+                            .groupBy("mon")
+                            .orderBy("mon", "ASC")
+                            .getRawMany();
+    console.log(monthlyData);
+    response.send(monthlyData);
+}
+
+
+export async function getData(request: Request, response: Response) {
+    const entityManager = getManager();
+    const userRepository = entityManager.getRepository(Users);
+    var dataIn = request.body;
+    console.log(dataIn);
+    var user = await userRepository.find({ username: dataIn.owner });
+    console.log(user);
+    // Select sum(purchase_price) as totalPrice, sum(sold_price) as soldPrice, sum(loss_or_gain_price) as lossGain from RECORDS where user_id=?2 and to_char(date_purchased, 'YYYY') = ?1 
+    var data = await entityManager
+                            .createQueryBuilder()
+                            .select("sum(purchase_price)", "totalPrice")
+                            .addSelect("sum(sold_price)", "soldPrice")
+                            .addSelect("sum(loss_or_gain_price)", "lossGain")
+                            .from(Records, "records")
+                            .where("user_id = :id", {id: user[0].id} )
+                            .andWhere("to_char(date_purchased, 'YYYY') = :year", {year: dataIn.year})
+                            .getRawMany();
+    console.log(data);
+    response.send(data);
 }
