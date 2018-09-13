@@ -49,10 +49,9 @@ export class ProductInterfaceImpl implements ProductInterface {
   GetPurchase(owner) {
     var url = "";
     url += this.url;
-    url += owner.owner;
-    url += "/getPurchase";
+    url += "getPurchase";
     console.log("the get purchase url is ", url);
-    return this.http.get(url)
+    return this.http.post(url, owner)
       .pipe(map((response: Response) => response.json()))
   }
 
@@ -83,11 +82,10 @@ export class ProductInterfaceImpl implements ProductInterface {
     //idAndOwner is a JSON object
     var url = "";
     url += this.url;
-    url += idAndOwner.owner;
-    url += "/deletePurchase/";
-    url += idAndOwner.id
+    url += "deletePurchase";
     console.log("the get purchase url is ", url);
-    return this.http.delete(url)
+    //Note: delete method does not directly take a JSON object as the body, have to use requestoptions
+    return this.http.delete(url, new RequestOptions({body: idAndOwner}))
       .pipe(map((response: Response) => response.json()))
   }
 
@@ -99,10 +97,9 @@ export class ProductInterfaceImpl implements ProductInterface {
   getSummary(owner) {
     var url = "";
     url += this.url;
-    url += owner.owner;
-    url += "/getPurchase/getAverage"
+    url += "getPurchase/getAverage"
     console.log("the get Summary url is ", url);
-    return this.http.get(url).
+    return this.http.post(url, owner).
       pipe(map((response: Response) => response.json()));
   }
 

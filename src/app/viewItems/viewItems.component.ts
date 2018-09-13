@@ -55,7 +55,7 @@ export class ItemDisplayComponent implements OnInit {
   deleteItem() {
     console.log('Item id is ' + this.itemToDelete);
       //dispatch a delete action/ payload is the id of the item and its owner
-    this.store.dispatch(new AppActionDel({ 'id': this.itemToDelete, owner: this.owner }));
+    this.store.dispatch(new AppActionDel({ id: this.itemToDelete, owner: this.owner }));
     
   }
 

@@ -59,7 +59,7 @@
             <table class="table table-responsive table-striped table-hover text-center">
                 <thead>
                     <tr>
-                        <th>Entry Number</th>
+                        <th>Number of Entries</th>
                         <th>Company Name</th>
                         <th>Total Quantity Bought</th>
                         <th>Total Quantity Sold</th>
@@ -69,15 +69,15 @@
                     </tr>
                 </thead>
                 <tr *ngFor='let item of dataToDisplay; let i = index'>
-                    <td>{{i+1}}</td>
-                    <td>{{item[1]}}</td>
+                    <td>{{item.count}}</td>
+                    <td>{{item.company_name}}</td>
 
-                    <td>{{item[2]}}</td>
+                    <td>{{item.totalNumBought}}</td>
 
-                    <td>{{item[3]}}</td>
-                    <td>{{item[4]}}</td>
-                    <td>{{item[5]}}</td>
-                    <td>{{item[6]}}</td>
+                    <td>{{item.totalNumSold}}</td>
+                    <td>{{item.avgPrice}}</td>
+                    <td>{{item.avgSoldPrice}}</td>
+                    <td>{{item.avgLossGain}}</td>
                 </tr>
             </table>
             <div class="text-center">
