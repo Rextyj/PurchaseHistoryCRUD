@@ -14,7 +14,7 @@ import { AppState } from '../../store/state';
 export class ShareReportComponent implements OnInit {
 
   monthlyData: number[] = [];
-  companyData = [];
+  shareData = [];
   owner;
 
   // lineChart variables
@@ -61,14 +61,14 @@ export class ShareReportComponent implements OnInit {
   //push data returned from server to the arrays to display
   onShowByShare() {
     this.service.getShareData(this.owner).subscribe(_data => {
-      console.log("monthly data is ", _data);
-      for (let row of _data) {
-        this.companyData.push(row[1]);
-        this.barChartLabels.push(row[0]);
+      console.log("share data is ", _data);
+      for (let object of _data) {
+        this.shareData.push(object.sharesRemain);
+        this.barChartLabels.push(object.company_name);
       }
-      console.log("data is ", this.monthlyData);
+      console.log("data is ", this.shareData);
       this.barChartData = [
-        { data: this.companyData }
+        { data: this.shareData }
       ];
     });
   }

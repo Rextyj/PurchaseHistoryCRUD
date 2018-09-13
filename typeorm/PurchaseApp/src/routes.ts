@@ -1,5 +1,5 @@
-import {GetUser, SaveUser} from './controller/userController';
-import {getRecords, saveRecord, getAverage, deleteRecord, getBetweenDate, getMonthlyData, getData} from './controller/recordController';
+import { GetUser, SaveUser } from './controller/userController';
+import { getRecords, saveRecord, getAverage, deleteRecord, getBetweenDate, getMonthlyData, getData, getCompanyData, getShareData } from './controller/recordController';
 
 /**
  * All application routes.
@@ -57,5 +57,17 @@ export const AppRoutes = [
         path: "/records/api/getPurchase/getData",
         method: "post",
         action: getData
+    },
+
+    {
+        path: "/records/api/getPurchase/getCompanyData",
+        method: "post",
+        action: getCompanyData
+    },
+
+    {
+        path: "/records/api/getPurchase/getShareData",
+        method: "post",
+        action: getShareData
     }
 ];

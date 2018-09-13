@@ -62,9 +62,9 @@ export class CompanyReportComponent implements OnInit {
   onShowByCompany() {
     this.service.getCompanyData(this.owner).subscribe(_data => {
       console.log("monthly data is ", _data);
-      for (let row of _data) {
-        this.companyData.push(row[1]);
-        this.barChartLabels.push(row[0]);
+      for (let object of _data) {
+        this.companyData.push(object.totalPrice);
+        this.barChartLabels.push(object.company_name);
       }
       console.log("data is ", this.monthlyData);
       this.barChartData = [

@@ -130,20 +130,18 @@ export class ProductInterfaceImpl implements ProductInterface {
   getCompanyData(owner) {
     var url = "";
     url += this.url;
-    url += owner;
-    url += "/getPurchase/getCompanyData";
+    url += "getPurchase/getCompanyData";
     console.log("the get companydata url is ", url);
-    return this.http.get(url).
+    return this.http.post(url, {owner: owner}).
       pipe(map((response: Response) => response.json()));
   }
 
   getShareData(owner) {
     var url = "";
     url += this.url;
-    url += owner;
-    url += "/getPurchase/getShareData";
+    url += "getPurchase/getShareData";
     console.log("the get companydata url is ", url);
-    return this.http.get(url).
+    return this.http.post(url, {owner: owner}).
       pipe(map((response: Response) => response.json()));
   }
 

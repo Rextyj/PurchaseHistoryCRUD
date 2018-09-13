@@ -139,3 +139,43 @@ export async function getData(request: Request, response: Response) {
     console.log(data);
     response.send(data);
 }
+
+export async function getCompanyData(request: Request, response: Response) {
+    const entityManager = getManager();
+    const userRepository = entityManager.getRepository(Users);
+    var dataIn = request.body;
+    console.log(dataIn);
+    var user = await userRepository.find({ username: dataIn.owner });
+    console.log(user);
+    // select company_name, sum(purchase_price) as totalPrice from records where user_id=?1 group by 1
+    var companyData = await entityManager
+                            .createQueryBuilder()
+                            .select("company_name")
+                            .addSelect("sum(purchase_price)", "totalPrice")
+                            .from(Records, "records")
+                            .where("user_id = :id", {id: user[0].id} )
+                            .groupBy("company_name")
+                            .getRawMany();
+    console.log(companyData);
+    response.send(companyData);
+}
+
+export async function getShareData(request: Request, response: Response) {
+    const entityManager = getManager();
+    const userRepository = entityManager.getRepository(Users);
+    var dataIn = request.body;
+    console.log(dataIn);
+    var user = await userRepository.find({ username: dataIn.owner });
+    console.log(user);
+    // select company_name, sum(number_of_shares_bought - number_of_shares_sold) as sharesRemain from records where user_id=?1 group by 1
+    var shareData = await entityManager
+                            .createQueryBuilder()
+                            .select("company_name")
+                            .addSelect("sum(number_of_shares_bought - number_of_shares_sold)", "sharesRemain")
+                            .from(Records, "records")
+                            .where("user_id = :id", {id: user[0].id} )
+                            .groupBy("company_name")
+                            .getRawMany();
+    console.log(shareData);
+    response.send(shareData);
+}
