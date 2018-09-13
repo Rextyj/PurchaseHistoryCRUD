@@ -38,16 +38,16 @@
             </tr>
             <tr *ngFor='let item of betweenDate; let i = index'>
                 <td>{{i+1}}</td>
-                <td>{{item[5]}}</td>
-                <td>{{dateFormat(item[6])}}</td>
-                <td>{{item[9]}}</td>
-                <td>{{item[11]}}</td>
-                <td>{{item[3]}}</td>
-                <td>{{dateFormat(item[7])}}</td>
-                <td>{{item[10]}}</td>
-                <td>{{item[12]}}</td>
-                <td>{{item[4]}}</td>
-                <td>{{item[8]}}</td>
+                <td>{{item.company_name}}</td>
+                <td>{{dateFormat(item.date_purchased)}}</td>
+                <td>{{item.number_of_shares_bought}}</td>
+                <td>{{item.purchase_price}}</td>
+                <td>{{item.average_purchase_price}}</td>
+                <td>{{dateFormat(item.date_sold)}}</td>
+                <td>{{item.number_of_shares_sold}}</td>
+                <td>{{item.sold_price}}</td>
+                <td>{{item.average_sold_price}}</td>
+                <td>{{item.loss_or_gain_price}}</td>
             </tr>
         </table>
     </div>

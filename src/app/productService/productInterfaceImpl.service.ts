@@ -66,7 +66,7 @@ export class ProductInterfaceImpl implements ProductInterface {
     url += this.url;
     // url += formdata.Owner;
     // url += "/SavePurchase";
-    
+
     url += "SavePurchase";
     return this.http.post(url, formdata)
       .pipe(map((response: Response) => response.json()))
@@ -85,7 +85,7 @@ export class ProductInterfaceImpl implements ProductInterface {
     url += "deletePurchase";
     console.log("the get purchase url is ", url);
     //Note: delete method does not directly take a JSON object as the body, have to use requestoptions
-    return this.http.delete(url, new RequestOptions({body: idAndOwner}))
+    return this.http.delete(url, new RequestOptions({ body: idAndOwner }))
       .pipe(map((response: Response) => response.json()))
   }
 
@@ -112,18 +112,13 @@ export class ProductInterfaceImpl implements ProductInterface {
   getBetweenDate(owner, date) {
     var url = "";
     url += this.url;
-    url += owner;
-    url += "/getPurchase/getBetweenDate";
-    url += "/";
-    url += date.beginningDate;
-    url += "/";
-    url += date.endDate;
+    url += "getPurchase/getBetweenDate";
     console.log("the get BetweenDate url is ", url);
-    return this.http.get(url).
-      pipe(map((response: Response) => response.json()));
+    return this.http.post(url, { date: date, owner: owner })
+    .pipe(map((response: Response) => response.json()));
   }
 
-  getMonthlyData(owner, year){
+  getMonthlyData(owner, year) {
     var url = "";
     url += this.url;
     url += owner;

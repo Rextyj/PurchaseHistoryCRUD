@@ -76,3 +76,22 @@ export async function getAverage(request: Request, response: Response) {
     console.log(averageData);
     response.send(averageData);
 }
+
+export async function getBetweenDate(request: Request, response: Response) {
+    const entityManager = getManager();
+    const userRepository = entityManager.getRepository(Users);
+    var dataIn = request.body;
+    console.log(dataIn);
+    var user = await userRepository.find({ username: dataIn.owner });
+    console.log(user);
+    // "Select * from records where user_id = :id and date_purchased between to_date(:beginDate, 'YYYY-MM-DD') and to_date(:endDate, 'YYYY-MM-DD')"
+    var averageData = await entityManager
+                            .createQueryBuilder()
+                            // .select("records")
+                            .from(Records, "records")
+                            .where("user_id = :id", {id: user[0].id} )
+                            .andWhere("date_purchased between to_date(:beginDate, 'YYYY-MM-DD') and to_date(:endDate, 'YYYY-MM-DD')", {beginDate: dataIn.date.beginningDate, endDate: dataIn.date.endDate})
+                            .getRawMany();
+    console.log(averageData);
+    response.send(averageData);
+}
