@@ -44,7 +44,7 @@ export const AppReducer: ActionReducer<AppState> =
             //log_out action will cause the state being reset to the initial state
             case LOG_OUT:
                 state = {
-                    dataList: ['fetching data'],
+                    dataList: [],
                     summary: state.summary,
                     owner: 'none',
                     needToUpdate: true,

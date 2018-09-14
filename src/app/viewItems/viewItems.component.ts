@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppActions, AppActionDel, AppActionUpd } from '../store/action';
 import { ProductInterfaceImpl } from '../productService/productInterfaceImpl.service';
 import { formatDate } from '@angular/common';
+import * as $ from 'jquery';
+import 'datatables.net';
+import 'datatables.net-bs4';
 /**
  * @description A component to display all the records belong to the user currently logged in,
  * in a table. Also privides filtering functionalities through company name and month
@@ -22,9 +25,12 @@ export class ItemDisplayComponent implements OnInit {
   res;
   fileUrl;
   itemToDelete;
+  dataTable;
 
   constructor(private store: Store<AppActions>,
-    private service: ProductInterfaceImpl) {
+    private service: ProductInterfaceImpl, private chRef: ChangeDetectorRef) {
+
+
   }
 
   ngOnInit() {
@@ -36,7 +42,29 @@ export class ItemDisplayComponent implements OnInit {
       console.log('state is', state);
       this.needToUpdate = state.needToUpdate;
       this.dataToDisplay = state.dataList;
+      console.log("datatodisplay is ", this.dataToDisplay);
       this.currentState = state.dataList;
+
+
+      if (!this.chRef['destroyed']) {
+        this.chRef.detectChanges();
+      }
+      //we only want to initialize it once
+      if (this.currentState.length != 0) {
+        const table: any = $('table');
+        console.log("initializing table");
+        if (!this.dataTable) {
+          this.dataTable = table.DataTable({
+            destroy: true,
+            paging: false,
+            searching: false,
+            order: [[0, 'desc']]
+          });
+        }
+      }
+
+
+      console.log(this.dataTable);
     });
 
     //check if we need to make an API call
@@ -49,14 +77,39 @@ export class ItemDisplayComponent implements OnInit {
       this.store.dispatch(new AppActionUpd({ owner: this.owner }));
 
     }
+
+    //--------------Directly making api calls--------------------------
+    // this.store.select('AppReducer').subscribe(state => {
+    //   this.owner = state.owner;
+    //   this.service.GetPurchase({ owner: this.owner }).subscribe(data => {
+    //     this.dataToDisplay = data;
+    //     this.currentState = data;
+    //     if (!this.chRef['destroyed']) {
+    //       this.chRef.detectChanges();
+    //     }
+
+    //     const table: any = $('table');
+    //     console.log("initializing table");
+    //     // if (!this.dataTable) {
+    //     this.dataTable = table.DataTable({
+    //       destroy: true,
+    //       paging: false,
+    //       searching: false,
+    //       order: [[0, 'desc']]
+    //     });
+    //     // }
+    //   });
+
+    // });
+
   }
 
   //invoked when the user clicks on the trash can icon
   deleteItem() {
     console.log('Item id is ' + this.itemToDelete);
-      //dispatch a delete action/ payload is the id of the item and its owner
+    //dispatch a delete action/ payload is the id of the item and its owner
     this.store.dispatch(new AppActionDel({ id: this.itemToDelete, owner: this.owner }));
-    
+
   }
 
   //invoked when user clicks search by company button
@@ -115,11 +168,11 @@ export class ItemDisplayComponent implements OnInit {
   }
 
   dateFormat(date) {
-    if (date != undefined){
+    if (date != undefined) {
       return formatDate(date, "short", "en-US").split(",")[0];
     } else {
       return '';
     }
-    
+
   }
 }

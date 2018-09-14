@@ -1,4 +1,4 @@
-import {Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, CreateDateColumn} from "typeorm";
 import {Users} from './Users';
 
 @Entity()
@@ -6,6 +6,9 @@ export class Records{
 	@PrimaryGeneratedColumn()
 	id: number;
 	
+	@CreateDateColumn()
+	dateAdded: Date
+
 	@ManyToOne(type => Users, {cascade: true, nullable: false})
 	@JoinColumn({name: "user_id"})
 	user: number;

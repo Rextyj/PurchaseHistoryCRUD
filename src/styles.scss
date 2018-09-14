@@ -16,6 +16,7 @@ $bodyTextFont:'Roboto',
 sans-serif;
 @import url('https://fonts.googleapis.com/css?family=Bitter|Roboto');
 @import url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+@import "~datatables.net-bs4/css/dataTables.bootstrap4.css";
 @font-face {
     font-family: 'Bitter';
 }
@@ -47,6 +48,7 @@ table {
     resize: horizontal;
     overflow: auto;
     max-width: 101%;
+    width: 100% !important;
     // min-width: 90%;
 }
 
