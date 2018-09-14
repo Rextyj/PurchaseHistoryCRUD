@@ -32,21 +32,5 @@ createConnection().then(async connection => {
     app.listen(3000);
 
     console.log("Express application is up and running on port 3000");
-
-
-
-
-    // console.log("Inserting a new user into the database...");
-    // const user = new Users();
-    // user.username = "admin";
-    // user.password = "admin";
-    // await connection.manager.save(user);
-    // console.log("Saved a new user with id: " + user.id);
-    
-    // console.log("Loading users from the database...");
-    // const users = await connection.manager.find(Users);
-    // console.log("Loaded users: ", users);
-     
-    // console.log("Here you can setup and run express/koa/any other framework.");
     
 }).catch(error => console.log(error));

@@ -3,12 +3,12 @@ instructions
 ------------------
 Prerequisites: 
 1. Have PostgreSQL installed
-2. Have Apache-maven installed
 
 Setting up:
 
-1. cd into project folder, then cd into SpringBoot folder.
-2. run command line: mvn spring-boot:run
+1. cd into server code folder
+2. run command line: npm install
+2. run command line: npm start
 
 	db runs locally
 	db username: postgres
@@ -19,7 +19,7 @@ Setting up:
 	1. users: store user information
 	2. records: store all item information
 
-3. cd appcode
+3. cd to frontEnd code folder
 4. npm install
 5. npm start /ng serve
 6. go to: 
@@ -41,7 +41,8 @@ To navigate to other panels, click the tabs on the top left.
 
 In the view tab, it displays all the records belongs to the current user.
 Download button is available if there is at least one record in the database.
-To filter the results, use the input boxes to search by company name or month of purchase date
+To filter the results, use the input boxes to search by company name or month of purchase date.
+Sorting is by default done over entry number. Click table headers to sort over different columns.
 
 In summary panel, the bottom table displays the summary of stock purchase history with each company.
 Use the download button to download the table into a csv file.

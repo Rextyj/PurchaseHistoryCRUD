@@ -7,13 +7,10 @@ import { Users } from "../entity/Users";
  */
 export async function GetUser(request: Request, response: Response) {
 
-    // get a post repository to perform operations with post
     const userRepository = getManager().getRepository(Users);
 
-    // load a post by a given post id
     const user = await userRepository.find(request.body);
 
-    // return loaded posts
     if (user.length != 0) {
         response.send({ data: 'verified' });
     } else {
@@ -22,7 +19,9 @@ export async function GetUser(request: Request, response: Response) {
 
 }
 
-
+/**
+ * Save the user to the database.
+ */
 export async function SaveUser(request: Request, response: Response) {
     // get a post repository to perform operations with post
     const userRepository = getManager().getRepository(Users);
